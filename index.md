@@ -490,7 +490,7 @@ See "Up \& Running Shapes"<!-- on page 2-26--> on how to create a `shape_ref`.
 
 The initial font and text format used by the `pg_ref` returned from `pgNew` will be taken from `pg_globals`. To change what font, style or paragraph format that a new `pg_ref` assumes, set the appropriate information in `pg_globals` after calling `pgNew`.
 
-![](figs/fig1.jpg)
+![](./FIGS/fig1.jpg)
 
 #### MEM_NULL Definition
 
@@ -751,7 +751,7 @@ The drawing modes `bits_emulate_copy`, `bits_emulate_or`, and `bits_emulate_xor`
 Unless you need to create a special or unusual effect, always pass `direct_or` or `bits_emulate_or` when responding to `WM_PAINT` (Windows) or an update
 event (Macintosh), and `best_way` for all other functions requiring a `draw_mode`.
 
-![](figs/fig2.jpg)
+![](./FIGS/fig2.jpg)
 
 Additional draw modes require the developer to use the custom draw hook and draw his own. See "`text_draw_proc`"<!-- on page 27-17--> for information on how to do custom drawing.
 
@@ -2182,7 +2182,7 @@ The `begin` field of a `select_pair` defines the beginning text offset and the `
 
 **FIGURE 3 SELECTION BEGIN AND END EXPLAINED**
 
-![](figs/fig3.jpg)
+![](./FIGS/fig3.jpg)
 
 **NOTE:** All offsets are byte counts. In the case of characters, they are each one byte.
 
@@ -3185,10 +3185,10 @@ Figures [6](#fig6) ("TAB BASE = `TAB_BOUNDS_RELATIVE`") and [7](#fig7) ("TAB BAS
 
 The following are some illustrations of different tab base values:
 
-![](figs/fig4.jpg)
-![](figs/fig5.jpg)
-![](figs/fig6.jpg)
-![](figs/fig7.jpg)
+![](./FIGS/fig4.jpg)
+![](./FIGS/fig5.jpg)
+![](./FIGS/fig6.jpg)
+![](./FIGS/fig7.jpg)
 
 ## 9.4 Indentation Support
 
@@ -4350,11 +4350,11 @@ If you are specifically implementing "containers", see "Containers Support"<!-- 
 
 If you are implementing any kind of exclusion shapes, see "Exclusion Areas"<!-- on page 15-1-->.
 
-![](figs/fig8.jpg)
+![](./FIGS/fig8.jpg)
 
 As stated, the simplest documents are rectangles; however, the `page_area` can be non-rectangular. A good example of this would be columns in which text must flow from one column to the other. In this case, the `page_area` would look similar to what is shown in Figure 9 *infra*.
 
-![](figs/fig9.jpg)
+![](./FIGS/fig9.jpg)
 
 ## 12.3 Coordinates \& Graphic Structures
 
@@ -4402,8 +4402,8 @@ The following rules apply to shapes with respect to the list of rectangles they 
 1. If rectangle edges are connected exactly (i.e., if two edges have the same value), they are considered as "one" even if such a union results in a non-rectangular shape (see Figure 10<!-- on page 12-216-->).
 2. If rectangle edges are not connected, they are considered separate "containers;" even if they overlap. (Overlapping would result in overlapping text if the shape definition was intended for the area where text is drawn).
 
-![](figs/fig10.jpg)
-![](figs/fig11.jpg)
+![](./FIGS/fig10.jpg)
+![](./FIGS/fig11.jpg)
 
 ## 12.6 Building Shapes
 
@@ -4437,7 +4437,7 @@ The rectangle pointed to by `rect` is added to the rectangle list in `the_shape`
 
 If `the_shape` is empty, `the_shape` gets set to the dimensions of rect (as if you had called `pgSetShapeRect` *supra*).
 
-![](figs/fig12.jpg)
+![](./FIGS/fig12.jpg)
 
 ### Disposing a Shape
 
@@ -4469,7 +4469,7 @@ Two utilities exist that make it easier to create OpenPaige rectangles:
 
 Offsets (moves) `*the_shape` by `h` (horizontal) and `v` (vertical) distances. These may be negative. Positive numbers move to the right horizontally and down vertically as appropriate.
 
-![](figs/fig13.jpg)
+![](./FIGS/fig13.jpg)
 
 ### Shrinking or expanding shape
 
@@ -4503,7 +4503,7 @@ If `sect_rect` is not `MEM_NULL`, it gets set to the intersection of `rect` and 
 
 Returns the rectangle bounds of the outermost edges of the_shape. The bounds is placed in the rectangle pointed to by bounds (which cannot be null).
 
-![](figs/fig14.jpg)
+![](./FIGS/fig14.jpg)
 
 ### Comparing Shapes
 
@@ -4525,7 +4525,7 @@ If either `shape1` or `shape2` is an empty shape, the result will be an empty sh
 
 **FUNCTION RESULT:** The function result will be TRUE if any part of `shape1` and `shape2` intersect (and `result_shape` gets set to the intersection if not `MEM_NULL`), otherwise FALSE is returned and `result_shape` gets set to an empty shape (if not `MEM_NULL`).
 
-![](figs/fig15.jpg)
+![](./FIGS/fig15.jpg)
 
 **FUNCTION RESULT:** Neither `shape1` nor `shape2` are altered by this function.
 
@@ -4537,8 +4537,8 @@ Unlike `pgSectShape`, `result_shape` cannot be `MEM_NULL`; however, it *can* be 
 
 The "difference" is computed by subtracting all portions of `shape1` from `shape2`, and the geometric difference(s) produce `result_shape`. If `shape1` is an empty shape, `result_shape` will be a mere copy of shape2; if `shape2` is empty, `result_shape` will be empty.
 
-![](figs/fig16.jpg)
-![](figs/fig17.jpg)
+![](./FIGS/fig16.jpg)
+![](./FIGS/fig17.jpg)
 
 ### Erase a Shape
 
@@ -4552,7 +4552,7 @@ If `offset_extra` is non-null, `the_shape` is temporarily offset by `offset_extr
 
 If `vis_bounds` is non-null, then only the parts of `the_shape` that intersect with `vis_bounds` get erased; otherwise, the whole shape is erased (see illustration *infra*).
 
-![](figs/fig18.jpg)
+![](./FIGS/fig18.jpg)
 
 ### Moving a Shape in a `pg_ref`
 
@@ -4724,7 +4724,7 @@ In every `pg_ref`, the following structure is maintained:
 
 NOTE: Some of the fields in `pg_doc_info` are currently unsupported, some of them are defined in `Paige.h` but not included above (but exist for future enhancements and extensions).
 
-![](figs/fig19.jpg)
+![](./FIGS/fig19.jpg)
 
 The fields that are currently supported are as follows:
 
@@ -4739,11 +4739,11 @@ The fields that are currently supported are as follows:
 	#define WINDOW_CURSOR_BIT		0x00000400	// Keep cursor in window view
 	#define COLOR_VIS_BIT			0x10000000	// Page colour covers whole vis_area
 
-![](figs/fig20.jpg)
+![](./FIGS/fig20.jpg)
 
 `V_REPEAT_BIT` or `H_REPEAT_BIT` — causes the page_area to "repeat" itself when text overflows the bottom (see "Repeating Shapes"<!-- on page 13-243-->).
 
-![](figs/fig21.jpg)
+![](./FIGS/fig21.jpg)
 
 `BOTTOM_FIXED_BIT` — forces the `page_area`'s bottom to remain the same (otherwise, the bottom is considered infinite or "variable" as text grows or shrinks).
 
@@ -4901,16 +4901,16 @@ Please note that OpenPaige cannot make the same assumptions as Word on *when* to
 
 In Figure 13<!-- on page 12-10-->, the initial `page_area` shape contains text which is within the bounds of the shape. Once text overflows the bottom, the shape is repeated and placed at `repeat_offset.v` pixels down and `repeat_offset.h` pixels across.
 
-![](figs/fig22.jpg)
+![](./FIGS/fig22.jpg)
 
 The next illustration shows what happens when `repeat_stop` is nonzero. In this example, `repeat_stop`'s value is added to the bottom of the text and, if the result overflows the shape's bottom, the shape is repeated. This provides an 'extra page' to get added before the text completely fills the page shape.
 
 ##### Figure 23. The shape when text gets below the `repeat_stop` value.
-![](figs/fig23.jpg)
+![](./FIGS/fig23.jpg)
 
 A repeating shape can actually be any shape and does not need to be a "page" rectangle. Figure 17<!-- on page 12-15--> shows an example of "columns" repeating for each "page."
 
-![](figs/fig24.jpg)
+![](./FIGS/fig24.jpg)
 
 ## 13.5 Shape Repeat Deletions
 
@@ -8527,7 +8527,7 @@ For example, if an application applied a customised style to a group of characte
 
 It is often necessary to split a `long` into two `short`s. This is a cross-platform way of doing just that. The low word returns the least significant `short`, the high word returns the most significant.
 
-![](figs/fig25.jpg)
+![](./FIGS/fig25.jpg)
 
 ## 24.16 Maths
 
@@ -8686,7 +8686,7 @@ See also “Logical vs. Physical Sizes”<!-- on page 25-444-->.
 
 **NOTE:** The `extend_size` indicates a number of *records* (each of size `rec_size` bytes), not bytes.
 
-![](figs/fig26.jpg)
+![](./FIGS/fig26.jpg)
 
 ### Deällocation
 
@@ -8740,7 +8740,7 @@ The primary purpose of `UseMemory` is to tell the Allocation Manager that a part
 
 `UseMemory` and `UseForLongTime` calls can be nested, but each must be eventually balanced with `UnuseMemory` or else the block will remain in a locked state, which in turn can cause memory difficulties such as fragmentation and the inability to change the allocation size.
 
-![](figs/fig27.jpg)
+![](./FIGS/fig27.jpg)
 
 ### Unuse memory
 
@@ -8752,7 +8752,7 @@ Essentially, `UnuseMemory` decrements `ref`'s access counter. If its access coun
 
 It is therefore important that all `UseMemory` and `UseForLongTime` calls get eventually *balanced* with UnuseMemory, otherwise unwanted locked memory fragments will result.
 
-![](figs/fig28.jpg)
+![](./FIGS/fig28.jpg)
 
 ## 25.11 "Random-Access" Pointers
 
