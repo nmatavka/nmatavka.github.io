@@ -1,3 +1,5 @@
+[toc]
+
 # 1 Introduction
 
 ## 1.1 Purpose of this document
@@ -149,7 +151,7 @@ Multilingual (will handle double-byte codes such as Kanji)
 	
 	PGML16.DLL (Main OpenPaige)
 	PGMLCT16.DLL (Custom control)
-	
+
 Non-Multilingual (no requirements for double-byte codes)
 
 	DLL Libraries
@@ -198,7 +200,7 @@ All versions for Windows 95 and NT are multilingual-compatible.
 	^^^^^^^^^^^^^
 	PAIGE32B.DLL (Main OpenPaige)
 	PGCTL32B.DLL (Custom Control)
-
+	
 	Multithread
 	^^^^^^^^^^^
 	PG32BMT.DLL (Main OpenPaige)
@@ -320,7 +322,7 @@ The best place to initialise OpenPaige in the constructor of the `CWinApp` deriv
 
 ##### EXAMPLE
 	(.H)
-
+	
 	class MyWinApp : public CWinApp
 	{
 		...
@@ -463,7 +465,7 @@ The best place to put `pgNew()` is in the `OnCreate()` member of the `CView` der
 	
 		return return_value;
 	}
-		
+
 #### All Platforms
 
 If `def_device` is `-1` then no device is assumed (which implies you will not be drawing anything and/or will specify a drawing port later). If you need to pass `-1` for the `def_device` parameter, you can use the following predefined macro:
@@ -584,7 +586,7 @@ As mentioned earlier, `pgNew` will accept certain characteristics defined in the
 	#define NO_DEFAULT_LEADING	0x00000004	// Do not add font leading
 	#define NO_EDIT_BIT			0x00000008	// No editing (display only)
 	#define EXTERNAL_SCROLL_BIT	0x00000010	// App controls scrolling
-	#define COUNT_LINES_BIT		0x00000020	// Keep track of line/para count
+	#define COUNT_LINES_BIT		0x00000020	// Keep track of line, para count
 	#define NO_HIDDEN_TEXT_BIT	0x00000040	// Do not display hidden text
 	#define SHOW_INVIS_CHAR_BIT	0x00000080	// Show control characters
 	#define SMART_QUOTES_BIT	0x00000800	// Do "smart quotes"
@@ -716,7 +718,7 @@ If `offset_extra` is `non-null`, all drawing is offset by the amounts in that co
 
 The `draw_mode` parameter defines the way text should be transferred to the target device. The `draw_mode` selections are shown below.
 
-See "Display Proc"<!-- on page 16-16--> about how to add ornaments to the text display.
+See "[Display Proc](#16-9)"<!-- on page 16-16--> about how to add ornaments to the text display.
 
 ##### NOTE
 
@@ -1046,9 +1048,9 @@ Calling this function will immediately "empty" any pending characters, inserting
 
 The display mode used when OpenPaige displays the pending buffer will be the original display mode passed to ``pgInsert``.
 
-### 2.15 Blinking Carets \& Mouse Selections
+## 2.15 Blinking Carets \& Mouse Selections
 
-#### Caret blinking (Macintosh only)
+### Caret blinking (Macintosh only)
 
 To cause the "caret" to blink in a `pg_ref`, call the following as often as possible:
 
@@ -1065,7 +1067,7 @@ The `pg` parameter must be a valid `pg_ref` (can not be a null pointer).
 ##### NOTE (Windows)
 You do not need to call `pgIdle()` since the blinking caret is maintained by the OS. Needlessly calling `pgIdle`, however, is harmless.
 
-## Clicking \& Dragging
+### Clicking \& Dragging
 
 Clicking and dragging is accomplished by using the following function:
 
@@ -1109,9 +1111,9 @@ If `auto_scroll` is "TRUE", OpenPaige will automatically scroll the document if 
 
 For "normal" mouse tracking, ignore the function result of `pgDragSelect`. The only time the function result is significant is when you have customized a style to be a "control" (information is available on "control" styles under "Customizing OpenPaige”). If you have not customized OpenPaige in any way, `pgDragSelect` will always return zero.
 
-## Modifiers
+### Modifiers
 
-The following bit settings are supported for the modifiers parameter in this release:
+The following bit settings are supported for the `modifiers` parameter in this release:
 
 	#define EXTEND_MOD_BIT		0x0001	// Extend the selection
 	#define WORD_MOD_BIT		0x0002	// Select whole words only
@@ -1154,7 +1156,7 @@ This is different than `LINE_MOD_BIT` (below) since a paragraph could contain se
 
 For additional information about highlighting and selection range(s), see "All About Selection”<!-- on page 10-1-->.
 
-### 2.16 Click & Drag using Microsoft Foundation Classes (Windows)
+## 2.16 Click & Drag using Microsoft Foundation Classes (Windows)
 
 To get Up and Running with simple mouse drag select in MFC, use the following code as a starting point:
 
@@ -1192,7 +1194,7 @@ To get Up and Running with simple mouse drag select in MFC, use the following co
 			m_Dragging = FALSE;
 		}
 	}
-				
+
 #### Responding to Windows mouse events
 
 	case WM_LBUTTONDBLCLK:
@@ -1286,7 +1288,7 @@ The `front_back_state` should be one of the following values:
 		activate_verb,	// Set to activate mode
 		deactivate_verb,	// Set to deactivate mode
 	}
-	
+
 
 The `perm_state` parameter provides an alternate highlight state setting; this parameter can also be any of the above. For getting "Up \& Running," however, pass `no_change_verb` for this parameter.
 
@@ -1345,8 +1347,9 @@ One is for regular activate/deactivate for a window; the other is to FORCE deact
 		pgSetHiliteStates(m_Paige, deactivate_verb, no_change_verb, TRUE);
 		CView::OnKillFocus(pNewWnd);
 	}
-	
-	
+
+
+​	
 
 # 3 BEYOND THE DEFAULTS
 
@@ -1436,7 +1439,7 @@ Or, if `overflow_size` is set to -1, a single carriage return is causing the ove
 	/* Call the function below after doing anything that can change the size of the document. This included insertions, deletions, style and font changes (which can cause new word wrapping) and page size changes. This function returns the number of characters that are overflowing the page area of pg. */
 	
 	/* Note: CHECK_PAGE_OVERFLOW must be set with pgSetAttributes2(pg). */
-
+	
 	long CheckPageOverflow (pg_ref pg)
 	{
 		paige_rec_ptr pg_rec;
@@ -1657,7 +1660,7 @@ To obtain the existing palette (if any), call `pgGetDevicePalette()`
 
 ## 3.6 Changing Shapes
 
-You can change the `vis_area`, the `page_area` and/or the `exclude_area` of an OpenPaige object at any time (see "Creating an OpenPaige Object"<!-- on page 2-14 about pgNew<--> for a description of each of these parameters):
+You can change the `vis_area`, the `page_area` and/or the `exclude_area` of an OpenPaige object at any time (see "reating an OpenPaige Object"<!-- on page 2-14 about pgNew<--> for a description of each of these parameters):
 
 	(void) pgSetAreas (pg_ref pg, shape_ref vis_area, shape_ref page_area, shape_ref exclude_area);
 
@@ -1681,7 +1684,7 @@ For information on constructing various shapes, see "All About Shapes"<!-- on pa
 
 If you are implementing containers, see “Containers Support”<!-- on page 14-1-->.
 
-## "Growing" The Visual Area
+### "Growing" The Visual Area
 
 If you want to change the `vis_area` (area in which text displays) in response to a user enlarging the window's width and height, call the following:
 
@@ -1910,18 +1913,18 @@ After you have called `pgInit`, the following defaults are set for all the field
 | `right_single_quote` | curly right quote – ' | 0x92 | 0xD5 |
 | `left_double_quote` | curly left quotes – “ | 0x93 | 0xD2 |
 | `right_double_quote` | curly right quotes – " | 0x94 | 0xD3 |
-| `cr_invis_symbol` | carriage return when invisibles <br> are displayed | ¶ (0xB6) | ¶ (0xA6) |
+| `cr_invis_symbol` | carriage return when invisibles are displayed | ¶ (0xB6) | ¶ (0xA6) |
 | `lf_invis_symbol` | line feed when invisibles are displayed | ¼ (0xB5) | ¼ (0xB9) |
 | `tab_invis_symbol` | tab when invisibles are displayed | 0x95 | 0x13 |
-| `end_invis_symbol` | end of document when invisibles <br> are displayed | × (0xB5) | × (0xB0) |
-| `cont_invis_symbol` | container break when invisibles <br> are displayed | `|` (0xA5) | `|` (0xAD) |
-| `space_invis_symbol` | space symbol when invisibles are <br> displayed | . (0x2E) | . (0x2E) |
-| `invis_font` | font in which invisibles are dis- <br> played | default font* | 0 (Chicago) |
+| `end_invis_symbol` | end of document when invisibles are displayed | × (0xB5) | × (0xB0) |
+| `cont_invis_symbol` | container break when invisibles are displayed | `|` (0xA5) | `|` (0xAD) |
+| `space_invis_symbol` | space symbol when invisibles are displayed | . (0x2E) | . (0x2E) |
+| `invis_font` | font in which invisibles are displayed | default font* | 0 (Chicago) |
 | `def_font` | font (name) used for `pgNew()` | “System” | Application font |
 | `def_style` | text format used for `pgNew()` | Plain, 12 point | Plain, 12 point |
-| `def_par` | paragraph format used for <br> pgNew () | Indents all zero, tab spacing 24 pixels | Indents all zero, tab spacing 24 pixels |
-| def_bk_color | background color used to fill page <br> area for all pg_refs | white | white |
-| trans_color | color assumed also to be window’s background | white | white |
+| `def_par` | paragraph format used for `pgNew()` | Indents all zero, tab spacing 24 pixels | Indents all zero, tab spacing 24 pixels |
+| `def_bk_color` | background color used to fill page area for all `pg_ref`s | white | white |
+| `trans_color` | color assumed also to be window’s background | white | white |
 
 
 If the default font is zero, then OpenPaige creates a font object using the default found in `pg_globals` record that was created with `pgNew`. If you want to change this you can change the default font in the `pg_globals`.
@@ -2048,7 +2051,7 @@ If `offset_extra` is a null pointer, everything is checked as-is.
 	#define WITHIN_RIGHT_AREA	0x0040	// Point is right of document
 	#define WITHIN_TOP_AREA		0x0080	// Point is above top of document
 	#define WITHIN_BOTTOM_AREA	0x0100 // Point is below bottom of document
-	
+
 `WITHIN_VIS_AREA` means the point is within the bounding area of `vis_area`.
 
 `WITHIN_WRAP_AREA` means the point is somewhere within the `page_area` shape.
@@ -2137,9 +2140,9 @@ The `globals` parameter is a pointer to a field in `pg_globals` (same structure 
 	{
 		FSClose(paige_rsrv.purge_ref_con);	// VM file stored here
 	}
-	
+
 ## 4.2 The scratch file
-	
+
 Assuming you will be passing a null pointer to `purge_proc`, letting OpenPaige use the built-in purge function, the steps to initialise virtual memory fully are as follows:
 
 1. First, call `pgMemStartup` to initialise the OpenPaige Memory Allocation manager, and pass the maximum memory you want OpenPaige using to `max_memory` before allocations begin purging. If you want OpenPaige to use whatever is available, pass 0 for `max_memory` (see `pgMemStartup` in the index for additional information).
@@ -2396,7 +2399,8 @@ If you are about to insert, say, 100 bytes, you would call `pgPrepareUndo` as fo
 			return function_result;
 	}
 
-	
+
+​	
 For `undo_paste`, `insert_ref` must be the `pg_ref` you are about to paste (same as before).
 
 For all other undo `verb`s, `insert_ref` is not used (so can be NULL).
@@ -3430,7 +3434,7 @@ OpenPaige automatically handles extending the selection by holding down the shif
 		
 		if (the_key == BACKSPACE_CHAR)
 			pgAdjustScrollMax(my_pg, best_way);
-
+	
 		scroll_to_cursor(my_pg);
 	}
 	
@@ -3439,7 +3443,7 @@ OpenPaige automatically handles extending the selection by holding down the shif
 ### Number of selections
 
 	(pg_short_t) pgNumSelections (pg_ref pg);
-	
+
 This returns the number of selection pairs in `pg`. A result of zero implies a single insertion point; a result of one implies a simple selection, and likewise for higher numbers.
 
 ### Caret \& Cursor
@@ -3562,7 +3566,7 @@ This function can be used to draw the selection area around text when it is deac
 	/* If you want the feature of drawing the line around the selected text when the window is deactivated, you can use this snippet from the OpenPaige demo */
 	
 	#include "pgTraps.h" 	// This draws xor-hilight outline
-
+	
 	static void outline_hilite(pg_ref the_pg)
 	{
 		shape_ref outline_shape;
@@ -3791,7 +3795,7 @@ The `draw_mode` indicates how the text should be updated. The value given is ide
 		UpdateScrollbarValues(doc);
 		return FALSE;
 	}
-			
+
 
 ### TECH NOTE: Can't scroll past end of text
 
@@ -3807,7 +3811,7 @@ To do so, you need to set `BOTTOM_FIXED_BIT` and `MAX SCROLL_ON_SHAPE` in the `p
 	pgGetDocInfo(pg, &doc_info);
 	doc_info.attributes |= (BOTTOM_FIXED_BIT | MAX_SCROLL_ON_SHAPE);
 	pgSetDocInfo(pg, &doc_info, FALSE, draw_none);
-		
+
 This will tell OpenPaige to scroll to the bottom of your page area regardless of how much (or how little) text there is.
 
 Of course doing this you must now make sure your page shape is exactly whatt you want, e.g. 640x480 (which you said it is).
@@ -4064,7 +4068,7 @@ For example, you would use `pgSetScrollValues` after the "thumb" is moved to a n
 			}
 			return (part_code != 0);
 		}
-					
+
 
 ### Maximum scroll value
 
@@ -4137,7 +4141,7 @@ For example, if `align_v` is two, vertical scrolling would always be in multiple
 ### Getting Alignment
 
 	(void) pgGetScrollAlign (pg_ref pg, short PG_FAR *align_h, short PG_FAR *align_v);
-	
+
 This function returns the current scroll alignment. The horizontal alignment is returned in `*align_h` and vertical alignment in `*align_v`.
 
 Both `align_h` and `align_v` can be NULL pointers, in which case they are ignored.
@@ -4227,7 +4231,7 @@ The above functions are documented elsewhere in this manual, but they are listed
 ### Additional Support
 
 	void pgScrollUnitsToPixels (pg_ref pg, short h_verb, short v_verb, pg_boolean add_to_position, pg_boolean window_origin_changes, long PG_FAR *h_pixels, long PG_FAR *v_pixels);
-	
+
 This function returns the amount of pixels that OpenPaige would scroll if you called `pgScroll()` with the same `h_verb` and `v_verb` values. In other words, if you are doing your own scrolling but want to know where OpenPaige would scroll if you asked it to, this is the function to use.
 
 However, this function also provides the option to change the internal scroll values in the `pg_ref`, and/or to inform OpenPaige that you will be changing the window origin.
@@ -4947,7 +4951,7 @@ This hook is also very useful for alternating "gutters," i.e. extra space on the
 For additional information, see also the chapter "Customizing OpenPaige"<!-- on page 271 -->.
 
 	void pgTextboxDisplay (pg_ref pg, paige_rec_ptr target_pg, rectangle_ptr target_box, rectangle_ptr wrap_rect, short draw_mode);
-	
+
 The above function is useful for drawing a `pg_ref` to any arbitrary location; the text will move (and optionally wrap) to a specified target location regardless of where its "normal" coordinates exist.
 
 **PURPOSE:** Since most applications that implement headers and footers use `pg_ref`s for a "header" or "footer", this new function exists for header/footer utilities.
@@ -4995,7 +4999,7 @@ The purpose of `BOTTOM_FIXED_BIT` is to keep the last rectangle from "growing" a
 ### Number of containers
 
 	(pg_short_t) pgNumContainers (pg_ref pg); 
-	
+
 Returns the number of "containers" currently in `pg`. This function actually returns the number of rectangles in the page area. Initially, after `pgNew`, the answer will be however many rectangles were contained in the initial page_area shape, which will be at least one rectangle.
 
 ### Inserting containers
@@ -5111,7 +5115,7 @@ The usual purpose of `inset_extra` is to detect a certain amount of "slop" when 
 ### Character within container
 
 	(pg_short_t) pgCharToContainer (pg_ref pg, long offset);
-	
+
 Returns the container number, from 1 to `pgNumContainers(pg)`, containing the specified text offset. The `offset` parameter is relative to the start of all text and is a byte offset; it must be between 0 and `pgTextSize(pg)`.
 
 However, `offset` can also be `CURRENT_POSITION` (`#define`d as -1) which will return the container number for the current insertion point (or the starting selection point if there is a highlight range).
@@ -5343,9 +5347,9 @@ This function returns the text position of the paragraph to which the exclusion 
 If the exclusion is attached to no paragraph, the function returns -1.
 
 
-# 16 SCALING, PRINTING \& DisPlAYING
+# 16 SCALING, PRINTING \& DISPLAYING
 
-### 16.1 Scaling
+## 16.1 Scaling
 
 An OpenPaige object can be scaled, which is to say enlarged or reduced by a specified amount.
 
@@ -5370,7 +5374,7 @@ Hence, if scale is 0x00020001, scaling is 2-to-1 (`2 / 1`); if scale is 0x000100
 
 If the scale value is zero, that is interpreted as no scaling (same as `1 / 1`).
 
-### 16.2 Scaling an OpenPaige Object
+## 16.2 Scaling an OpenPaige Object
 
 	(void) pgSetScaling (pg_ref pg, pg_scale_ptr scale_factor, short draw_mode);
 
@@ -5405,7 +5409,7 @@ The scaling factor of `pg` is returned in the `pg_scale_factor` pointed to by `s
 		bits_emulate_xor	// "Fake" offscreen in "XOR" mode
 	};
 
-### 16.3 Scaling and Vis Areas
+## 16.3 Scaling and Vis Areas
 
 A scaled `pg_ref` normally does not scale its `vis_area`. If the attribute flag `scale_vis_bit` has been set in the `pg_ref`, the `vis_area` is scaled, otherwise the `vis_area` remains unscaled.
 
@@ -5415,12 +5419,12 @@ A scaled `pg_ref` normally does not scale its `vis_area`. If the attribute flag 
 
 A general word-processor window, however, would probably not want `SCALE_VIS_BIT`; instead, it may be more desirable to leave the `vis_area` alone, as shown in the top part of the above example.
 
-### 16.4 Additional Scaling Utilities
+## 16.4 Additional Scaling Utilities
 
 	(void) pgScaleLong(long scale_factor, long origin, long PG_FAR *value);
 	(void) pgScalePt(pg_scale_ptr scale_factor, co_ordinate_ptr amount_offset, co_ordinate_ptr pt);
 	(void) pgScaleRect(pg_scale_ptr scale_factor, co_ordinate_ptr amount_offset, rectangle_ptr rect);
-	
+
 The three functions above will scale a `long`, a `co_ordinate` and a `rectangle`, respectively.
 
 For `pgScaleLong`, the `scale_factor` is only the "scale" part of a complete `pg_scale_factor` and the `origin` is the appropriate origin position. The value to scale must be pointed to by value and the value will be scaled when the function returns.
@@ -5456,7 +5460,7 @@ It's fairly easy to reverse-scale something. All you do is negate the current sc
 
 This brings up an interesting point. Although I can see that your function to find a point in a scaled shape will work, perhaps a much faster method is to reverse-scale the point instead of scaling the whole shape, then just find the point without the non-scaled shape.
 
-### 16.5 Printing Support
+## 16.5 Printing Support
 
 **IMPORTANT:** Do not confuse "pages" in the context of printing with "paging" for repeating shapes. These are two different concepts entirely. Printed pages are simply sections of text; "pages" of repeating shapes are simply repeating display of the same shape, and in fact, might not contain text at all. A printed page and repeating shape page are not necessarily the same dimensions. See "Repeating Shapes" <!-- on page 13-9 -->.
 
@@ -5550,7 +5554,7 @@ Here is an example of printing a `pg_ref` to a standard Macintosh print driver. 
 			prOpenPage(print_port, NULL);	// Prints a "page"
 			print_offset = pgPrintToPage(pg, &pg_port, print_offset, &pg_page, best_way);
 			PrClosePage(print_port);
-
+	
 			if (print_offset)	// If more to print, next offset non-zero
 				++page_num;
 			else
@@ -5654,7 +5658,7 @@ CAUTION: If you use this feature, the printer `DC` must remain valid until the `
 
 This function returns the existing printer `DC` stored in `pg`, previously set by `pgSetPrintDevice()`. If no `DC` exists, `MEM_NULL` is returned.
 
-### 16.9 Display Proc
+## 16.9 Display Proc {#16-9}
 
 	(void) pgDrawPageProc (paige_rec_ptr pg, shape_ptr page_shape, pg_short_tr_qty, pg_short_t page_num, co_ordinate_ptr vis_offset, short draw_mode_used, short call_order);
 
@@ -5737,7 +5741,7 @@ Loading a file with this extension can be accomplished in a few easy steps:
 
 		#include "pgTxrCPP.h"
 		PaigelmportObject filter;
-	
+		
 		// To import a plain ASCII text file:
 		filter = new PaigelmportFilter();
 		
@@ -5809,7 +5813,7 @@ Loading a file with this extension can be accomplished in a few easy steps:
 	 	if (!(flags = feature_flags))
 	 		flags = IMPORT_EVERYTHING_FLAG;
 	 		globals = pgGetGlobals(pg);
-
+	
 	 	switch (filetype)
 	 	{
 	 		case pg_text_type:
@@ -5828,7 +5832,7 @@ Loading a file with this extension can be accomplished in a few easy steps:
 	 	}
 	 	
 	 	if((result = filter -> pgInitImportFile
-	 	
+
 ## 17.3 Determining File Type
 
 There might be cases where the file type is unknown and/or you want to verify that a file is truly the type that you expect. There is a function you can call to determine the type:
@@ -5894,7 +5898,7 @@ You can override the defaults in one of two ways:
 		
 		filter = (PaigelmportObject) new PaigeRTFImportFilter();
 		filter -> font_cross_table = (pg_char_ptr)MyOwnFontTable;
-		
+	
 2. Override the font mapping member function. The function that maps font substitution can be overridden if you subclass the desired import structure. The font mapping function is declared as:
 
 		virtual void pgMapFont (font_info_ptr font, long importing_os, long current_os);
@@ -5950,7 +5954,7 @@ If imported font's first five characters are "Times" then substitute "Times". (H
 		"Wingdings[Zapf Dingbats]\0"
 		"\ff"
 	};
-		
+
 ### Importing to Windows (and file is from Macintosh)
 
 	static pg_char cross_font_table[] =
@@ -6337,8 +6341,8 @@ Exporting a file with this extension can be accomplished in a few easy steps:
 3. Call the initialization member function, `pgInitExportFile()`. This function prepares for exporting a file, setting up whatever is necessary to write file's native format. A file can be exported to a physical file, or to memory, differentiated by the value(s) you pass in the function parameters. The `pgInitExportFile()` function is defined as follows:
 		
 		pg_error pgInitExportFile (pg_globals_ptr globals, pg_file_unit fileref, memory_ref memory_unit, file_io_proc write_proc, long first_position);
--
-**FUNCTION RESULT:** If this function is successful, zero is returned, otherwise an error code is returned.
+	-
+	**FUNCTION RESULT:** If this function is successful, zero is returned, otherwise an error code is returned.
 
 4.  Call the member function, `pgExportFile()`. This exports the data from a `pg_ref` to the file (or `memory_ref`) specified in `pgInitExportFile()`. The `pgInitExportFile()` function is defined as follows:
 
@@ -6352,7 +6356,7 @@ Exporting a file with this extension can be accomplished in a few easy steps:
 
 * `globals` - A pointer to your OpenPaige globals. Custom control users: You can get a pointer to the OpenPaige globals as follows: 
 	1. Get the `pg_ref` from the control by
-sending a PG_GETPGREF message, and 
+	sending a PG_GETPGREF message, and 
 	2. Call the OpenPaige API, `pgGetGlobals()`.
 * `fileref` - If exporting to a disk file, this parameter must be a reference to the opened file (the `refNum` for Macintosh, or a file handle for Windows). If exporting to memory, `fileref` should be zero. If using the *Microsoft Foundation Classes* on *Windows*, the `fileref` parameter must be a "real" `HFILE` (or NULL if exporting to memory), not some other MFC-generated class member that you may assume is a file handle.
 * `memory_unit` — If exporting to a disk file, this parameter must be `MEM_NULL`. If exporting to memory, this must be a `memory_ref` of zero byte size (see "The Allocation Mgr”<!-- on page 25-1-->).
@@ -6396,7 +6400,7 @@ sending a PG_GETPGREF message, and
 	/* This function exports a file from a pg_ref, first creating an object for the appropriate file type. If all is well, NO_ERROR is returned. */
 	
 	pg_error ExportFile (pg_ref pg, pg_filetype filetype, long feature_flags, select_pair_ptr output_range, pg_boolean use_selection, pg_file_unit f_ref)
-
+	
 	{
 		PaigeExportObject filter;
 		pg_globals_ptr globals;
@@ -6601,7 +6605,7 @@ The RTF export class is derived from `PaigeExportFilter` and has some RTF-specif
 			virtual pg_error OutputFooters ();
 			virtual pg_error OutputEmbed ();
 			virtual pg_error OutputCustomParams();
-
+	
 			pg_char def_stylename[FONT_SIZE + BOM_HEADER]; // Default "normal" stylesheet name
 	}
 
@@ -6739,7 +6743,7 @@ The table member contains information for both tables and paragraph borders:
 		
 		// more members of pg_table
 	};
-	
+
 
 NOTE: The `pg_table` record, generally used for defining table formats, also contains the definition for the paragraph borders, if any. If `table.table_columns` is zero, `border_info` is applied to the whole paragraph; if `table.table_columns` is non-zero, `border_info` applies to frame of the table.
 
@@ -6984,7 +6988,7 @@ When responding to a hypertext link event you should call the default source cal
 				break;
 		}
 	}		
-	
+
 #### Callback command values
 
 * `hyperlink_mousedown_verb` — Called when link is first clicked
@@ -7037,7 +7041,7 @@ If the link is found, the function returns the text position where the link begi
 ### Finding by "ID" Number
 
 	long pgFindHyperlinkSourceByID (pg_ref pg, long starting_position, long PG_FAR *end_position, long id_num, pg_boolean scroll_to);
-
+	
 	long pgFindHyperlinkTargetByID (pg_ref pg, long starting_position, long PG_FAR *end_position, long id_num, pg_boolean scroll_to);
 
 These functions can be used to perform a "search" that locates a specific link based on its value in `id_num`. The link's `id_num` is usually set when you set the original source or target link. The `pgFindHyperlinkTargetByID` function searches for a target link while `pgFindHyperlinkSourceByID` searches for a source link.
@@ -7249,7 +7253,7 @@ Table attributes are part of `par_info.table` represented by the following recor
 		long unique_id;				// Unique table ID
 		long cell_h_extra;			// Extra inset inside cells
 	};
-	
+
 #### Parameters
 
 * `table_columns` — Number of columns in the table. If this is zero, the paragraph is not a table.
@@ -7495,9 +7499,9 @@ Since the information in this chapter can be somewhat complex in its entirety, t
 			_lclose(file_ref);
 		}
 	}
-	
+
 ### Up & Running I/O Example (Mac)
-	
+
 	/* In this file saving example, the ref_num parameter is a file reference created and opened using File OS functions. If there is a problem, an error result is returned. */
 	
 	static OSErr save_file (pg_ref pg, short ref_num)
@@ -7506,7 +7510,7 @@ Since the information in this chapter can be somewhat complex in its entirety, t
 		file_ref filemap;
 		long file_position;
 		short *filemap_ptr;
-
+	
 		filemap = MemoryAlloc(&mem_globals, sizeof(short), 1, 0);
 		filemap_ptr = UseMemory(filemap);
 		*filemap_ptr = ref_num;
@@ -7532,7 +7536,7 @@ The "save" code is quite small. If you aren't saving anything special, writing a
 		file_ref filemap;
 		long file_position;
 		short *filemap_ptr;
-
+	
 		pg = pgNewShell(&paige_rsrv);	// Creates empty OpenPaige object
 		filemap = MemoryAlloc(&paige_rsrv.mem_globals, sizeof(short), 1, 0);
 		filemap_ptr = UseMemory(filemap);
@@ -7555,14 +7559,14 @@ The "save" code is quite small. If you aren't saving anything special, writing a
 ### Reading an OpenPaige file on Windows
 
 	/* DoFileOpen opens an OpenPaige file which has already been specified by user. */
-
+	
 	void DoFileOpen (HWND hWnd, OPENFILENAME far *file_stuff)
 	{
 		int file_ref, far *f_ptr;
 		long position;
 		RECT view_area;
 		memory_ref file_map;
-
+	
 		if ((file_ref = _lopen(file_stuff -> lpstrFile, OF_READ)) != -1)
 		{
 			file_map = MemoryAlloc(&mem_globals, sizeof(int), 1, 0);
@@ -7677,7 +7681,7 @@ Upon entry, `pg`, `file_position`, and `write_proc` should all be the same param
 To read a document previously saved with `pgSaveDoc`, call the following:
 
 	(pg_error) pgReadDoc (pg_ref pg, long PG_FAR *file_position, pg_file_key_ptr keys, pg_short_t num_keys, file_io_proc read_proc, file_ref filemap);
-	
+
 In this function, `pg` must be a valid OpenPaige object reference for which all data that is read can be placed; `pg`, however, can be completely empty. If it does contain data (text, styles, etc.), those items get replaced with data that is read from the file; items that are not processed from the file (i.e., data components not recognized or components that don't even exist in the file) will leave that component in `pg` unchanged.
 
 **NOTE:** It may be helpful to know that a function exists to create a completely "empty" `pg_ref` for purposes of `pgReadDoc` — see "A Quick & Easy Empty OpenPaige Object"<!-- on page 34-728-->.
@@ -7771,7 +7775,7 @@ Retrieving the data in the read handler: the data, as originally written to the 
 NOTE: be sure to do `UnuseMemory` after accessing the data in `ptr`. To learn how large the data is, do:—
 
 	data_size = GetMemorySize(key_data);
-	
+
 ### The Hybrid
 
 Sometimes you need to save file data in some specific format, bypassing the OpenPaige file I/O system altogether, yet you want OpenPaige to save most of the `pg_ref` data items.
@@ -7854,7 +7858,7 @@ Identical to `pgUnpackNum` except an array of numbers are unpacked. The `ptr` pa
 **NOTE:** You *do not* call `pgFinishPack` for unpacking—that function is only used to terminate data after using the "pack" functions.
 
 ### Additional Pack/Unpack Utilities
-	
+
 	#include "pgFiles.h"
 	(void) pgPackBytes (pack_walk_ptr out_data, pg_char_ptr the_bytes, long length);
 
@@ -8323,7 +8327,7 @@ Returns the total number of lines in `pg`. This function will return zero if `CO
 **NOTE:** OpenPaige will always take the fastest approach wherever possible, e.g. if the document has already been fully paginated this function will return a relatively instant response.
 
 	(long) pgOffsetToLineNum (pg_ref pg, long offset, pg_boolean line_end_has_precedence);
-	
+
 Returns the line number that contains `offset` text position. The line number is *one-indexed* (i.e., the first line in `pg` is `1`). The `offset` parameter can be any position from 0 to `pgTextSize(pg)`, or `CURRENT_POSITION` for the current insertion point.
 
 This function will always return at least one line even if the document has no text (since an empty document still has one line, albeit blank).
@@ -8516,7 +8520,7 @@ For example, if an application applied a customised style to a group of characte
 
 	#include "MemMgr.h"
 	(void) pgFillBlock (void PG_FAR *block, long block_size, pg_char value);
-	
+
 `pgFillBlock` fills a memory block of `block_size` byte size with byte value in `pg_char` parameter.
 
 ## 24.15 Splitting a long byte
@@ -8643,7 +8647,7 @@ To allocate memory through the Allocation Manager, call one of the following:
 
 	(memory_ref) MemoryAlloc (pgm_globals_ptr globals, pg_short_t rec_size, long num_recs, short extend_size);
 	(memory_ref) MemoryAllocClear (pgm_globals_ptr globals, pg_short_t rec_size, long num_recs, short extend_size);
-	
+
 `MemoryAlloc` allocates a block of memory and returns a `memory_ref` that identifies that block; `MemoryAllocClear` is identical except in that it clears the block (sets all bytes to zero).
 
 By allocation is meant a block of memory of some specified byte size that becomes reserved exclusively for your use, guaranteed to remain available until you deällocate that block (using `DisposeMemory`, below).
@@ -8864,7 +8868,7 @@ The reasoning behind these rules for the access counter when inserting memory is
 		my_new_record.index_number = i;
 	}
 	UnuseMemory(the_ref);
-	
+
 ### Delete
 
 	(void) DeleteMemory (memory_ref ref, long offset, long delete_size);
@@ -9315,7 +9319,7 @@ There is the possibility you might need to recover from a failed `pgNew` (also `
 		}
 		
 		/* If ALL above code succeeded, "PG_CATCH" does NOT get executed. */
-
+	
 		PG_CATCH
 		{
 			/* If it gets here, then OpenPaige did not succeed and raised an exception */
@@ -9352,7 +9356,7 @@ Suppose, for instance, all you had available is `ref`, where `ref` is a memory r
 
 	pgm_globals_ptr mem_globals;
 	mem_globals = GetGlobalsFromRef(ref);
-	
+
 Getting a `pgm_globals_ptr` from a `paige_rec_ptr`:
 
 	pgm_globals_ptr my_pgm_globals = pgp -> globals -> mem_globals;
@@ -9692,7 +9696,7 @@ The purpose of the `include_pars` parameter is to enhance the speed when walking
 	// style_walk code goes here
 	pgPrepareStyleWalk(pg, 0, NULL);
 	// tells OpenPaige I'm through
-	
+
 This function advances the styles in `walker` by amount bytes. The `amount` parameter can be negative, in which case the styles are *decremented*.
 
 All this does is reset the fields in `walker` to reflect the styles that apply to the current text position (in `walker`) + `amount`. If the same style, font and paragraph format applies to all text, you would keep getting the same answers regardless of the value in amount. The function result from `pgSetWalkStyle` returns `TRUE` if the style has changed from the previous setting. For example, if the style applied to the current text position (before `pgSetWalkStyle`) is Plain, and calling `pgSetWalkStyle` now sits on text that is **Bold**, the function returns `TRUE`.
@@ -9896,7 +9900,7 @@ The following is a list of the standard handler "key" codes; if you want to read
 	};
 	#define CUSTOM_HANDLER_KEY(PLATFORM_SPECIFIC_KEY + 1024)
 	// App can use this for keys.
-	
+
 `key` codes can be any 16-bit value but must be positive numbers.
 
 **NOTE:** Contact <!-- DataPak Software via electronic mail or fax --> regarding registering keys which you wish to make public with <!-- DataPak -->. <!-- DataPak--> will assist you in assigning numbers which will prevent duplication between applications. Those wanting to read custom data *must* use the author signature settings.
@@ -10097,7 +10101,7 @@ To read the document saved above, you must install your own read handlers to pro
 The read handler you install will contain a pointer to a function (which you create) declared as follows:
 
 	PG_PASCAL (pg_boolean) pg_handler_proc (paige_rec_ptr pg, pg_file_key key, memory_ref key_data, long PG_FAR *element_info, void* aux_data, long PG_FAR *unpacked_size);
-	
+
 In the process of reading the document (by `pgReadDoc`), when a file key is found to match one of your handlers, your function, as defined above, will get called.
 
 * `key` — parameter will be the file key that matched your handler (which could be important if you installed, say, the same function for several different data components).
@@ -10105,7 +10109,7 @@ In the process of reading the document (by `pgReadDoc`), when a file key is foun
 * `key_data` — will contain the data — the same data you wrote when you called `pgWriteKeyData`. The data size will be:
 
 		size_of_data = GetMemorySize(key_data);
-		
+	
 * `element_info` — will point to a long word containing the value you originally gave to `element_info` when calling `pgWriteKeyData`.
 
 * `aux_data` — is to be ignored (except in special cases noted elsewhere in this document).
@@ -10150,9 +10154,9 @@ The following is an example of saving a Macintosh picture to an OpenPaige file, 
 	{
 		pgSetHandler(&paige_rsrv, mac_pict_key, ReadPictHandler, NULL, NULL, NULL);
 	}
-
+	
 	/* The function below will get called by OpenPaige sometime during the pgReadDoc */
-
+	
 	PG_PASCAL (void) ReadPictHandler (paige_rec_ptr pg, pg_file_key key, memory_ref key_data, long PG_FAR *element_info, void *aux_data)
 	{
 		PicHandle read_pict;
@@ -10327,7 +10331,7 @@ The intended purpose for using `pgVerifyFile()` is to verify whether or not a fi
 		filePosition = oldPosition = 0; // Set first file pos
 		// (Note, "oldPosition" is only used for a work-around to a 1.2 bug)
 		readQty = 0;
-
+	
 		while (pgVerifyFile(fileMap, NULL, &filePosition) != NO_ERROR
 		{
 			pg = MakeNewPG(); // This would be whatever your app does for new pg_ref
@@ -10344,7 +10348,7 @@ The intended purpose for using `pgVerifyFile()` is to verify whether or not a fi
 		DisposeMemory(fileMap);
 		return readQty;
 	}
-		
+
 ## 34.13 Bypassing Standard I/O
 
 There are certain cases when you need to write your own data structure directly to the file.
@@ -10462,7 +10466,7 @@ The way you can do this is to set your own handler function for the data you wis
 Although a unique function can be set for any handler key, OpenPaige only uses one function for handling all standard keys for reading and one for all writing. The function for handling all standard keys, which is made public in `defprocs.h` is declared as follows:
 
 	#include "defprocs.h"
-
+	
 	(pg_boolean) pgReadHandlerProc (paige_rec_ptr pg, pg_file_key key, memory_ref key_data, long PG_FAR *element_info, void *aux_data, long PG_FAR *unpacked_size);
 
 From your own handler function, you could first call `pgReadHandler` to bring in the information then you could examine the resulting contents within `pg`.
@@ -10619,7 +10623,7 @@ Every block of text in a `pg_ref` is represented by the following record:
 		memory_ref	isam_end_ref;	// Used by DSI (do not co-opt)
 		tb_append_t	user_var;	// Can be used for anything
 	}
-		
+
 
 Each field, from top to bottom, has the following meaning:
 
@@ -10743,12 +10747,12 @@ The function result of `pgGetTextBlock` is the record number (element number fro
 When speed is a critical issue and you have the need to look at OpenPaige text, you are best off looking at these structures directly. The following code sample shows various "hacks" to do this:
 
 	/* To look at the text_block records, we need to get access to the paige_rec within the pg_ref: */
-
+	
 	paige_rec_ptr pg_rec;
 	text_block_ptr blocks;
 	long num_blocks, num_bytes;
 	char *text;
-
+	
 	pg_rec = UseMemory(pg);
 	// Then get the pointer to the text_block array:
 	blocks = UseMemory(pg_rec -> t_blocks);
@@ -10918,7 +10922,7 @@ The following is a list of very useful low-level utility functions that you can 
 
 	#include "pgShapes.h"
 	pg_short_t pgGetWrapRect (paige_rec_ptr pg, long r_num, co_ordinate_ptr offset_extra);
-	
+
 This function returns sufficient information to construct the exact "page" rectangle for a given line of text. (**NOTE:** it is prototyped in `pgShapes.h` and is intended to be called from low-level hooks such as `adjust_proc`).
 
 The `r_num` field must be the value in `r_num` from the first `point_start` of the line. When this function returns, `offset_extra` gets set to the amount to adjust the original page rectangle to obtain the actual, physical page location (remember we are dealing with "repeating shapes", which means the `pg_ref` has only one page shape which repeats; this function computes the physical page position based on that information).
@@ -10947,15 +10951,15 @@ If your application implements page break characters, you can determine if the l
 
 `BREAK_PAGE_BIT` only gets set if the line terminates with a physical page-break character (it does not get set just because more lines won't fit on the page.
 
-## 38 UNICODE SUPPORT
+# 38 UNICODE SUPPORT
 
 Using the appropriate OpenPaige library (or compiling OpenPaige with `#define UNICODE`) will help you create a Unicode-aware application.
 
-### 38.1 Compiler Settings
+## 38.1 Compiler Settings
 
 To compile an application using the OpenPaige Unicode library (or to build the OpenPaige Unicode library) you must provide the pre-definitions `UNICODE` and `_UNICODE`. It is best to use the preprocessor settings in your compiler for these definitions (not `CPUDEFS.H`) because your Windows headers require these definitions to resolve various macros.
 
-### 38.2 Absolute Unicode
+## 38.2 Absolute Unicode
 
 OpenPaige Unicode expects absolute Unicode in every respect. This includes anything whatsoever that has previously been declared as a `char` or `unsigned char`.
 
@@ -10980,6 +10984,8 @@ If you need to declare a true byte (8-bit value), OpenPaige provides the followi
 
 	typedef unsigned char pg_bits8, *pg_bits8_ptr;
 
+## 38.4 I/O and Text Files
+
 Most of the file I/O supported by OpenPaige Unicode will be transparent to your application. If an older OpenPaige file is opened and/or if an OpenPaige Unicode-aware program opens a non-Unicode OpenPaige file, the text will be translated appropriately with no required intervention from your application.
 
 Even if you are running the non-Unicode version of OpenPaige, reading OpenPaige Unicode files will still be converted to 8-bit ASCII text.
@@ -10996,20 +11002,26 @@ Exporting text and RTF, however, will export non-Unicode ASCII by default. If yo
 
 After you have created the export object, set `EXPORT_UNICODE_FLAG` in the `export_bits` member.
 
-	filter = (PaigeExportObject) new PaigeRTFExportFilter(); 
-	filter -> feature_bits |= EXPORT_UNICODE_FLAG;
+```c
+filter = (PaigeExportObject) new PaigeRTFExportFilter(); 
+filter -> feature_bits |= EXPORT_UNICODE_FLAG;
+```
 
 ## 38.6 Unicode Support Utilities
 
 **NOTE:** Unless specified otherwise, these support utilities can be called even if the runtime OpenPaige library is non-Unicode (version 2.0 or above).
 
-	pg_boolean pglsPaigeUnicode (void);
+```c
+pg_boolean pgIsPaigeUnicode (void);
+```
 
 Returns `TRUE` if the current runtime OpenPaige library supports Unicode. This function works for all 2.0b1+ versions, with or without Unicode support.
 
 **NOTE:** A "TRUE" merely means that the library — not necessarily the OS — supports Unicode.
 
-	pg_boolean pgInsertBytes (pg_ref pg, const pg_bits8_ptr data, long length, long position, short insert_mode, short modifiers, short draw_mode);
+```c
+pg_boolean pgInsertBytes (pg_ref pg, const pg_bits8_ptr data, long length, long position, short insert_mode, short modifiers, short draw_mode);
+```
 
 This function is identical to `pgInsert()` except the data to be inserted is considered to be 8-bit characters. The purpose of this function is to provide a way for a Unicode application to (still) be able to insert 8-bit ASCII if necessary (calling `pgInsert()` assumes Unicode characters).
 
@@ -11027,7 +11039,9 @@ Both of these functions are `style_info` hooks, i.e. they apply to individual te
 
 ## 38.9 Non-Unicode to Unicode
 
-	long bytes_to_unicode_proc (pg_bits8_ptr input_bytes, pg_short_t PG_FAR *output_chars, font_info_ptr font, long input_byte_size);
+```c
+long bytes_to_unicode_proc (pg_bits8_ptr input_bytes, pg_short_t PG_FAR *output_chars, font_info_ptr font, long input_byte_size);
+```
 
 Upon entry, `input_bytes` is a pointer to a buffer of bytes (8 bit characters); `input_byte_size` defines the number of bytes.
 
@@ -11113,7 +11127,7 @@ The following error codes are defined in `pgErrors.h`.
 	DEBUG_NZ_ERR			0x0209			0x0209 // Access is non-zero debug check
 	NO_ERR_HANDLER_ERR		0x020A			0x020A // No exception handler
 	PG_PSTRING_TOO_BIG_ERR	0x020B			0x020B // Conversion to Pascal string error
-	
+
 ### 3xx File i/o errors
 
 	//						Mac				Windows
@@ -11129,7 +11143,7 @@ The following error codes are defined in `pgErrors.h`.
 	UNICODE_ERR				0x0309			0x0309 // File is Unicode, platform can't handle
 	NO_FILE_ERR				0x03FE			0x03FF // File not found
 	SOFT_EOF_ERR			0x03FF			0x03FF // Logical end-of-file "error" abort
-	
+
 ### 4xx Runtime debugging errors (not Allocation Manager related)
 
 	LOCKED_PG_ERROR			0x0400 // Attempt to change a locked pg_ref
