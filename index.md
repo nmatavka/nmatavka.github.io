@@ -32,6 +32,8 @@ Although originally intended as an open-source project in the conventional sense
 
 ## Paige
 
+![](paige-wordmark.svg)
+
 Apps that manipulate text in some form are *everywhere*; this does not mean only "text editors" *in sensu stricto*, but also things like word processors, Web editors, Markdown editors, desktop publishing apps, and even the message composer embedded in your eMail client (which, on a technical level, is nothing more than a Web editor of a highly specialised form).
 
 If you are producing an app in that (very broad) category, you need a *text engine*. If your background is in development for Windows, you will most likely be familiar with `CRichEdit` from the Microsoft Foundation Classes; if, by any chance, you do not use `CRichEdit` in your project, you are most likely writing your own text engine from scratch or using a cross-platform toolkit (Qt or GTK). 
@@ -46,6 +48,8 @@ With Paige, *the sky is the limit*. While we'd never condone using it to produce
 
 ## WireShare
 
+![](wireshare-wordmark.svg)
+
 Arguably, WireShare was the first app we ever developed; in fact, it predates the founding of Team HERMES by many years, having seen its first version in 2010.
 
 WireShare is a relatively difficult program to explain; in technical terms, it is a combined Gnutella and BitTorrent *servent*. Gnutella and BitTorrent are both ways for computers to transfer high-supply, high-demand files to each other. (Gnutella is older, but has certain advantages, such as a search function.) Because neither Gnutella nor BitTorrent make any distinctions between *server* and *client*, and people can and do serve files from their homes or offices, we call the type of file transfer that they do *peer-to-peer*. The advantage of this is *much* higher resilience; it's naturally harder to take down a file that's served from two hundred locations at once.
@@ -55,3 +59,9 @@ The problem, such as it is, is that peer-to-peer file sharing is abusable, and p
 During negotiations, Lime Group introduced a backdoor into their product, and actioned it (disabling recent—but *not* older—versions of their software) subsequent to U.S. Federal Court Justice Kimba Wood's order. Fortunately, Team HERMES is not a U.S. company; it is **proudly headquartered in Canada**, and in any case, the terms of the consent decree only apply to Lime Group LLC and the software known as LimeWire. We distribute **WireShare**. Whether it is, or is not, functionally and graphically identical to LimeWire is **immaterial**.
 
 **There are two minor snags: firstly, because of some deprecated code, many mouse-click events (such as dialogue boxes that open on click) don't occur on Macintosh, and secondly, the entire BitTorrent system doesn't function on at least Mac and Linux. We will not distribute the software in such a state, so until this is fixed, watch this space!**
+
+## Links
+
+* For assistance in setting up OAuth2 with Eudoramail, please visit [oauth2.html](./oauth2.html) on this server.
+* For the complete Paige manual, please visit [paigemanual.html](./paigemanual.html) on this server.
+* The Paige manual is also available as a PDF [here](./paigemanual.pdf).
