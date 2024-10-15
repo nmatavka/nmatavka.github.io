@@ -22,102 +22,102 @@
 <li>Click <em>App registrations</em>.</li>
 
 </ol>
-<p><img src="./figs/fig29.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig29.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='3' >
 <li>To register the Eudoramail application, click the <strong>+</strong> symbol next to <em>New Registration</em> on the <em>App registrations</em> screen.</li>
 
 </ol>
-<p><img src="./figs/fig30.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig30.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='4' >
 <li>On the <em>Register an application</em> screen, in the <em>Name</em> textbox, enter the name <code>Eudoramail</code> or some other memorable value.</li>
 
 </ol>
-<p><img src="./figs/fig31.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig31.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='5' >
 <li>Under <em>Supported account types</em>, select the option labelled <em>Accounts in any organizational directory (Any Microsoft Entra ID tenant – Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)</em>.</li>
 
 </ol>
-<p><img src="./figs/fig32.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig32.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='6' >
 <li>Click the <em>Register</em> button to save the changes. You will be redirected to a screen containing the <em>Application (client) ID</em>. <strong>IMPORTANT:</strong> Note the Client ID as it will be needed while setting up OAuth.</li>
 
 </ol>
-<p><img src="./figs/fig33.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig33.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='7' >
 <li>Navigate to <em>Manage</em> &gt; <em>Certificates &amp; secrets</em>. Click on the <strong>+</strong> symbol located next to <em>New client secret</em>.</li>
 
 </ol>
-<p><img src="./figs/fig34.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig34.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='8' >
 <li>In the <em>Add a client secret</em> window, enter a suitable description (for example, <em>Eudoramail proxy client secret</em>). Then, specify the client secret&#39;s expiration date according to taste (we, like Microsoft, recommend six months).</li>
 
 </ol>
-<p><img src="./figs/fig35.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig35.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='9' >
 <li>Click the <em>Add</em> button to save the changes.</li>
 <li>Note the value associated with the <em>Secret Value</em>. <strong>NOTE:</strong> You will need this value later.</li>
 
 </ol>
-<p><img src="./figs/fig36.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig36.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='11' >
 <li>Navigate to <em>Manage</em> &gt; <em>API permissions</em>. Click on the <strong>+</strong> symbol next to <em>Add a permission</em>.</li>
 
 </ol>
-<p><img src="./figs/fig37.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig37.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='12' >
 <li>On the <em>Request API permissions</em> screen, select the <em>Microsoft Graph API</em>.</li>
 
 </ol>
-<p><img src="./figs/fig38.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig38.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='13' >
 <li>Click on <em>Delegated permissions</em>.</li>
 <li>On the <em>Request API permissions</em> screen, under <em>Select permissions</em>, search for <code>offline_access</code>. Click the checkbox next to <em>offline_access</em>.</li>
 
 </ol>
-<p><img src="./figs/fig39.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig39.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='15' >
 <li>On the <em>Request API permissions</em>, under <em>Select permissions</em>, search for <code>SMTP</code>. Click the checkbox next to <em>SMTP.Send</em>.</li>
 
 </ol>
-<p><img src="./figs/fig40.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig40.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='16' >
 <li>Click the <em>Add permissions</em> button to save the changes. All the permissions you selected are displayed on the screen.</li>
 
 </ol>
-<p><img src="./figs/fig41.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig41.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='17' >
 <li>Navigate to <em>Manage</em> &gt; <em>Authentication</em>.</li>
 <li>Click on the <strong>+</strong> symbol next to <em>Add a platform</em>.</li>
 
 </ol>
-<p><img src="./figs/fig42.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig42.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='19' >
 <li>On the <em>Configure platforms</em> screen, choose <em>Web</em>.</li>
 
 </ol>
-<p><img src="./figs/fig43.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig43.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='20' >
 <li>In the <em>Redirect URIs</em> textbox, input the redirect URI as <a href='http://localhost' target='_blank' class='url'>http://localhost</a></li>
 
 </ol>
-<p><img src="./figs/fig44.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig44.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='21' >
 <li>Click the <em>Configure</em> button to save the changes.</li>
 <li>Log in to the <a href='https://admin.microsoft.com/'><strong>Microsoft 365 admin center</strong></a>. Navigate to <em>Users</em> &gt; <em>Active Users</em>.</li>
 <li>Select the mailbox from the list for which you have configured the <em>Client ID</em> and <em>Client Secret</em>.</li>
 
 </ol>
-<p><img src="./figs/fig45.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig45.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='24' >
 <li>Select <em>Mail</em> from the flyout menu. Click on <em>Manage email apps</em>.</li>
 
 </ol>
-<p><img src="./figs/fig46.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig46.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='25' >
 <li>On the <em>Manage email apps</em> screen, ensure the <em>Authenticated SMTP</em> setting is enabled.</li>
 
 </ol>
-<p><img src="./figs/fig47.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig47.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='26' >
 <li>Click the <em>Save changes</em> button.</li>
 
@@ -128,35 +128,35 @@
 <li>Click the <em>Select a project</em> drop-down menu on the left side of the page. A pop-up window will appear on the screen.</li>
 
 </ol>
-<p><img src="./figs/fig48.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig48.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='3' >
 <li>Click <em>New Project</em> on the right side of the pop-up window.</li>
 
 </ol>
-<p><img src="./figs/fig49.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig49.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='4' >
 <li>Fill in the <em>Project name</em> and click the <em>Create</em> button. For memorability, call it  <strong>Eudoramail OAuth</strong> or the like.</li>
 
 </ol>
-<p><img src="./figs/fig50.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig50.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='5' >
 <li>Once the project is created, click the menu icon on the left side of the page. Select the project you created.</li>
 
 </ol>
-<p><img src="./figs/fig51.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig51.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='6' >
 <li>Click the ≡ icon on the left side of the page. Select <em>APIs &amp; Services</em> &gt; <em>OAuth consent</em> screen.</li>
 
 </ol>
-<p><img src="./figs/fig52.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig52.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='7' >
 <li>Under <em>User Type</em>, select <em>External</em>. Click the <em>Create</em> button.</li>
 
 </ol>
-<p><img src="./figs/fig53.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig53.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='8' >
 <li><p>On the OAuth consent screen, provide the below inputs.</p>
-<ol>
+<ol start='' >
 <li><strong>App name</strong> – Provide the name of the app for which you are provisioning OAuth authentication. In this case, it will be Eudoramail.</li>
 <li><strong>User support eMail</strong> — Provide an eMail where the users can contact you regarding their consent. If you are setting up OAuth for yourself only, this can be your own eMail.</li>
 <li><strong>Developer contact information</strong> — Provide an eMail address for Google to contact you if there are any changes to the project.</li>
@@ -166,72 +166,72 @@
 
 </ol>
 <p>Click the <em>Save and Continue</em> button to proceed to the next screen.</p>
-<p><img src="./figs/fig54.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig54.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='9' >
 <li>Click the <em>Add or Remove Scopes</em> button. A new window will appear on the right side of the screen.</li>
 
 </ol>
-<p><img src="./figs/fig55.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig55.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='10' >
 <li>Add <a href='https://mail.google.com/'><em>https://mail.google.com</em></a> under the <em>Manually add scopes</em> section. Click the <em>Add to Table</em> button.</li>
 
 </ol>
-<p><img src="./figs/fig56.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig56.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='11' >
 <li>The newly added entry is displayed on the <em>Filter</em> table. Click the <em>Update</em> button.</li>
 
 </ol>
-<p><img src="./figs/fig57.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig57.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='12' >
 <li>The newly added entry is under <em>Your restricted scopes</em> section. Click the <em>Save and Continue</em> button to proceed to the next screen.</li>
 
 </ol>
-<p><img src="./figs/fig58.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig58.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='13' >
 <li>Click the <em>Add users</em> button on the Test users screen. A pop-up window appears on the screen. Enter the email address you want to use to authenticate using the OAuth authentication. Click the <em>Add</em> button.</li>
 
 </ol>
-<p><img src="./figs/fig59.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig59.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='14' >
 <li>Click the <em>Back to Dashboard</em> button on the Summary page.</li>
 
 </ol>
-<p><img src="./figs/fig60.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig60.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='15' >
 <li>Click <em>Credentials</em> under the <em>APIs &amp; Services</em> menu. Click the <em>Create Credentials</em> menu on the right side of the page and select <em>OAuth client ID</em>.</li>
 
 </ol>
-<p><img src="./figs/fig61.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig61.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='16' >
 <li>On the <em>Create OAuth client ID</em> page, select <em>Web application</em> in the <em>Application type</em> drop-down box<strong>.</strong></li>
 
 </ol>
-<p><img src="./figs/fig62.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig62.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='17' >
 <li>In the <em>Name</em> textbox, input <code>Eudoramail</code>.</li>
 
 </ol>
-<p><img src="./figs/fig63.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig63.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='18' >
 <li>Click the <em>Add URI</em> button under the <em>Authorised Javascript origins</em> section. Input <a href='http://localhost' target='_blank' class='url'>http://localhost</a>.</li>
 
 </ol>
-<p><img src="./figs/fig64.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig64.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='19' >
 <li>Click the <em>Add URI</em> button under the <em>Authorised Redirect URIs</em> section. Input <a href='http://localhost' target='_blank' class='url'>http://localhost</a>.</li>
 
 </ol>
-<p><img src="./figs/fig65.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig65.png" referrerpolicy="no-referrer" alt="img"></p>
 <ol start='20' >
 <li>Click the <em>Create</em> button. A pop-up window appears on the screen displaying the <em>Client ID</em> and <em>Client secret</em> code.</li>
 
 </ol>
-<p><img src="./figs/fig66.png" referrerpolicy="no-referrer" alt="img"></p>
+<p><img src="./FIGS/fig66.png" referrerpolicy="no-referrer" alt="img"></p>
 <p>You need the <em>Client ID</em> and <em>Client secret</em> code while configuring the OAuth2 proxy in Eudoramail. Download the JSON and keep it handy.</p>
 <h3 id='yahoo-customers-ymail-rocketmail'>Yahoo! Customers (Ymail, Rocketmail)</h3>
 <p><strong>NOTE:</strong> This section is under construction. Compatibility with Yahoo! isn&#39;t yet supported.</p>
 <p><strong>NOTE:</strong> At this point in time, Yahoo! does not <em>mandate</em> that OAuth2 be used. Plain Auth (username and password) is completely acceptable, <em>provided that</em> you (the user) trust the application in question.</p>
-<ol>
+<ol start='' >
 <li>Visit <a href='https://developer.yahoo.com/apps/create/' target='_blank' class='url'>https://developer.yahoo.com/apps/create/</a>. If necessary, sign in.</li>
 <li>In the <em>Application Name</em> text box, enter something memorable (we suggest <code>Eudoramail</code>).</li>
 

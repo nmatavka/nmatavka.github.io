@@ -26,73 +26,73 @@ Here’s how it works: when you want to authorise Eudoramail to send or receive 
 
 2. Click *App registrations*.
 
-![img](./figs/fig29.png)
+![img](./FIGS/fig29.png)
 
 3. To register the Eudoramail application, click the **+** symbol next to *New Registration* on the *App registrations* screen.
 
-![img](./figs/fig30.png)
+![img](./FIGS/fig30.png)
 
 4. On the *Register an application* screen, in the *Name* textbox, enter the name `Eudoramail` or some other memorable value.
 
-![img](./figs/fig31.png)
+![img](./FIGS/fig31.png)
 
 5. Under *Supported account types*, select the option labelled *Accounts in any organizational directory (Any Microsoft Entra ID tenant – Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)*.
 
-![img](./figs/fig32.png)
+![img](./FIGS/fig32.png)
 
 6. Click the *Register* button to save the changes. You will be redirected to a screen containing the *Application (client) ID*. **IMPORTANT:** Note the Client ID as it will be needed while setting up OAuth.
 
-![img](./figs/fig33.png)
+![img](./FIGS/fig33.png)
 
 7. Navigate to *Manage* > *Certificates & secrets*. Click on the **+** symbol located next to *New client secret*.
 
-![img](./figs/fig34.png)
+![img](./FIGS/fig34.png)
 
 8. In the *Add a client secret* window, enter a suitable description (for example, *Eudoramail proxy client secret*). Then, specify the client secret's expiration date according to taste (we, like Microsoft, recommend six months).
 
-![img](./figs/fig35.png)
+![img](./FIGS/fig35.png)
 
 9. Click the *Add* button to save the changes.
 
 10. Note the value associated with the *Secret Value*. **NOTE:** You will need this value later.
 
-![img](./figs/fig36.png)
+![img](./FIGS/fig36.png)
 
 11. Navigate to *Manage* > *API permissions*. Click on the **+** symbol next to *Add a permission*.
 
-![img](./figs/fig37.png)
+![img](./FIGS/fig37.png)
 
 12. On the *Request API permissions* screen, select the *Microsoft Graph API*.
 
-![img](./figs/fig38.png)
+![img](./FIGS/fig38.png)
 
 13. Click on *Delegated permissions*.
 
 14. On the *Request API permissions* screen, under *Select permissions*, search for `offline_access`. Click the checkbox next to *offline_access*.
 
-![img](./figs/fig39.png)
+![img](./FIGS/fig39.png)
 
 15. On the *Request API permissions*, under *Select permissions*, search for `SMTP`. Click the checkbox next to *SMTP.Send*.
 
-![img](./figs/fig40.png)
+![img](./FIGS/fig40.png)
 
 16. Click the *Add permissions* button to save the changes. All the permissions you selected are displayed on the screen.
 
-![img](./figs/fig41.png)
+![img](./FIGS/fig41.png)
 
 17. Navigate to *Manage* > *Authentication*.
 
 18. Click on the **+** symbol next to *Add a platform*.
 
-![img](./figs/fig42.png)
+![img](./FIGS/fig42.png)
 
 19. On the *Configure platforms* screen, choose *Web*.
 
-![img](./figs/fig43.png)
+![img](./FIGS/fig43.png)
 
 20. In the *Redirect URIs* textbox, input the redirect URI as http://localhost
 
-![img](./figs/fig44.png)
+![img](./FIGS/fig44.png)
 
 21. Click the *Configure* button to save the changes.
 
@@ -100,15 +100,15 @@ Here’s how it works: when you want to authorise Eudoramail to send or receive 
 
 23. Select the mailbox from the list for which you have configured the *Client ID* and *Client Secret*.
 
-![img](./figs/fig45.png)
+![img](./FIGS/fig45.png)
 
 24. Select *Mail* from the flyout menu. Click on *Manage email apps*.
 
-![img](./figs/fig46.png)
+![img](./FIGS/fig46.png)
 
 25. On the *Manage email apps* screen, ensure the *Authenticated SMTP* setting is enabled.
 
-![img](./figs/fig47.png)
+![img](./FIGS/fig47.png)
 
 26. Click the *Save changes* button.
 
@@ -118,27 +118,27 @@ Here’s how it works: when you want to authorise Eudoramail to send or receive 
 
 2. Click the *Select a project* drop-down menu on the left side of the page. A pop-up window will appear on the screen.
 
-![img](./figs/fig48.png)
+![img](./FIGS/fig48.png)
 
 3. Click *New Project* on the right side of the pop-up window.
 
-![img](./figs/fig49.png)
+![img](./FIGS/fig49.png)
 
 4. Fill in the *Project name* and click the *Create* button. For memorability, call it  **Eudoramail OAuth** or the like.
 
-![img](./figs/fig50.png)
+![img](./FIGS/fig50.png)
 
 5. Once the project is created, click the menu icon on the left side of the page. Select the project you created.
 
-![img](./figs/fig51.png)
+![img](./FIGS/fig51.png)
 
 6. Click the ≡ icon on the left side of the page. Select *APIs & Services* > *OAuth consent* screen.
 
-![img](./figs/fig52.png)
+![img](./FIGS/fig52.png)
 
 7. Under *User Type*, select *External*. Click the *Create* button.
 
-![img](./figs/fig53.png)
+![img](./FIGS/fig53.png)
 
 8. On the OAuth consent screen, provide the below inputs.
    1. **App name** – Provide the name of the app for which you are provisioning OAuth authentication. In this case, it will be Eudoramail.
@@ -148,55 +148,55 @@ Here’s how it works: when you want to authorise Eudoramail to send or receive 
 
 Click the *Save and Continue* button to proceed to the next screen.
 
-![img](./figs/fig54.png)
+![img](./FIGS/fig54.png)
 
 9. Click the *Add or Remove Scopes* button. A new window will appear on the right side of the screen.
 
-![img](./figs/fig55.png)
+![img](./FIGS/fig55.png)
 
 10. Add [*https://mail.google.com*](https://mail.google.com/) under the *Manually add scopes* section. Click the *Add to Table* button.
 
-![img](./figs/fig56.png)
+![img](./FIGS/fig56.png)
 
 11. The newly added entry is displayed on the *Filter* table. Click the *Update* button.
 
-![img](./figs/fig57.png)
+![img](./FIGS/fig57.png)
 
 12. The newly added entry is under *Your restricted scopes* section. Click the *Save and Continue* button to proceed to the next screen.
 
-![img](./figs/fig58.png)
+![img](./FIGS/fig58.png)
 
 13. Click the *Add users* button on the Test users screen. A pop-up window appears on the screen. Enter the email address you want to use to authenticate using the OAuth authentication. Click the *Add* button.
 
-![img](./figs/fig59.png)
+![img](./FIGS/fig59.png)
 
 14. Click the *Back to Dashboard* button on the Summary page.
 
-![img](./figs/fig60.png)
+![img](./FIGS/fig60.png)
 
 15. Click *Credentials* under the *APIs & Services* menu. Click the *Create Credentials* menu on the right side of the page and select *OAuth client ID*.
 
-![img](./figs/fig61.png)
+![img](./FIGS/fig61.png)
 
 16. On the *Create OAuth client ID* page, select *Web application* in the *Application type* drop-down box**.**
 
-![img](./figs/fig62.png)
+![img](./FIGS/fig62.png)
 
 17. In the *Name* textbox, input `Eudoramail`.
 
-![img](./figs/fig63.png)
+![img](./FIGS/fig63.png)
 
 18. Click the *Add URI* button under the *Authorised Javascript origins* section. Input http://localhost.
 
-![img](./figs/fig64.png)
+![img](./FIGS/fig64.png)
 
 19. Click the *Add URI* button under the *Authorised Redirect URIs* section. Input http://localhost.
 
-![img](./figs/fig65.png)
+![img](./FIGS/fig65.png)
 
 20. Click the *Create* button. A pop-up window appears on the screen displaying the *Client ID* and *Client secret* code.
 
-![img](./figs/fig66.png)
+![img](./FIGS/fig66.png)
 
 You need the *Client ID* and *Client secret* code while configuring the OAuth2 proxy in Eudoramail. Download the JSON and keep it handy.
 
