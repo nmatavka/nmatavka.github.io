@@ -28,7 +28,7 @@ It may be remarked that Eudoramail 8.0 had a protracted development cycle by mos
 
 Although originally intended as an open-source project in the conventional sense (with everyone being able to participate in development), there are serious technical reasons that this is not the case, and potentially will not be in the medium-term; instead, it might best be described as [fair-source](https://techcrunch.com/2024/09/22/some-startups-are-going-fair-source-to-avoid-the-pitfalls-of-open-source-licensing/) (i.e. source-available with caveats). Mr Orlowski highlights one of these reasons: compilation relies on [Stingray](https://www.perforce.com/products/stingray), which went through a whole chain of acquisitions—first Rogue Wave, then QuovadX, and finally Perforce—and the binary is not enough; source code access is required. Compiling Eudoramail also demands Wintertree Software's [Sentry Spelling Checker Engine](https://www.wintertree-software.ca/dev/ssce/source/index.html); although this is available as a dynamic-link library, our sense of ethics as an organisation will not allow us to pursue any route other than full source-code access. Finally, Eudoramail also relies on HERMES Paige—but that doesn't really count, since it's *our* rich-text library, and we produce it as an Open Source project in its own right. **In short, Perforce prices Stingray's source code at $3,600 per person. Wintertree prices Sentry's source code at $5,000 per person. Development *demands* periodic compilation, meaning that each developer would need these libraries.** While Sentry is slated to be replaced with a free solution, it would be contrary to all common sense to pursue the Open Source workflow for Eudoramail right now.
 
-**NOTE: Eudoramail 8.0 is sold through a pay-what-you-want scheme; it can be yours for as little as a dollar (we suggest an inflation-adjusted price of $90). Purchase it [here](https://igg.me/hermes80/) by sending a "donation" for any amount (though this is *not* really a donation—it's a contract of sale, subject to all applicable laws in the Dominion of Canada). Be aware that the software is sent out in monthly batches and we are not responsible if you make your purchase and have to wait.** 
+**NOTE: Eudoramail 8.0 is sold through a pay-what-you-want scheme; it can be yours for as little as a dollar (we suggest an inflation-adjusted price of $90). Purchase it [here](https://igg.me/at/hermes80/) by sending a "donation" for any amount (though this is *not* really a donation—it's a contract of sale, subject to all applicable laws in the Dominion of Canada). Be aware that the software is sent out in monthly batches and we are not responsible if you make your purchase and have to wait.** 
 
 ## Paige
 
@@ -59,6 +59,51 @@ The problem, such as it is, is that peer-to-peer file sharing is abusable, and p
 During negotiations, Lime Group introduced a backdoor into their product, and actioned it (disabling recent—but *not* older—versions of their software) subsequent to U.S. Federal Court Justice Kimba Wood's order. Fortunately, Team HERMES is not a U.S. company; it is **proudly headquartered in Canada**, and in any case, the terms of the consent decree only apply to Lime Group LLC and the software known as LimeWire. We distribute **WireShare**. Whether it is, or is not, functionally and graphically identical to LimeWire is **immaterial**.
 
 **There are two minor snags: firstly, because of some deprecated code, many mouse-click events (such as dialogue boxes that open on click) don't occur on Macintosh, and secondly, the entire BitTorrent system doesn't function on at least Mac and Linux. We will not distribute the software in such a state, so until this is fixed, watch this space!**
+
+## Document Scanning Services
+
+![](./bookeye.png)
+
+As part of our digitisation suite, we own a professional-grade overhead document camera for high-speed, non-destructive scanning of bound material. We offer our services to the general public; this is not a common service due to either a) the expense of the document camera, or b) the labour associated with scanning by flatbed. Thus, the few firms specialising in this segment tend to charge exorbitant fees. We are far more reasonable.
+
+## 600 dpi Uncompressed TIFF
+
+Ideal for corporate, heritage and consumer clients who require high-quality uncompressed TIFF files. Typically used for long term archiving. 
+
+| Page Size | Page Count 1-250 | Page Count 251-1000 | Page Count 1001+ |
+| --------- | ---------------- | ------------------- | ---------------- |
+| A4        | 1.70             | 1.35                | 1.00             |
+| A3        | 1.70             | 1.35                | 1.00             |
+| A2        | 2.05             | 1.70                | 1.35             |
+| A1        | 2.40             | 2.05                | 1.70             |
+
+## Compressed 300dpi PDF/A
+
+Ideal for corporate, heritage and consumer clients who require high-quality PDF digital files. Typically used for online use.
+
+| Page Size | Page Count 1-250 | Page Count 251-1000 | Page Count 1001+ |
+| --------- | ---------------- | ------------------- | ---------------- |
+| A4        | 1.35             | 1.00                | 0.60             |
+| A3        | 1.35             | 1.00                | 0.60             |
+| A2        | 1.70             | 1.35                | 1.00             |
+| A1        | 2.05             | 1.70                | 1.35             |
+
+## Additional Services
+
+
+
+| Book Scanning                                                | Up to 600 dpi |
+| ------------------------------------------------------------ | ------------- |
+| Saving on Client's USB flash drive or external hard drive for orders **under** $500 | 10.00         |
+| Saving on Client's USB flash drive or external hard drive for orders **over** $500 | 0.00          |
+| Saving on USB flash drive or external hard drive purchased from us | 0.00          |
+| Uploading to your cloud storage (per 100 megabytes)          | 2.00          |
+| Posting results on our cloud storage (per 100 megabytes)     | 3.00          |
+| AI-assisted editable copy (per hour)                         | 20.00         |
+
+## Order here
+
+Click [here](https://forms.gle/2gEBaRnXtZcwA29u8) to order.
 
 ## Links
 
