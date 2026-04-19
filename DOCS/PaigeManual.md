@@ -298,7 +298,7 @@ This resource is not required to use HERMES Paige successfully. If it is missing
 
 See also [Changing Globals](#3.8-changing-globals).
 
-### 2.4 Software Startup
+## 2.4 Software Startup
 
 Some place early in your application you need to initialise the HERMES Paige software; the recommended place to do so is after all other initialisations have been performed for the main menu, Mac Toolbox, etc. To initialise, you need to reserve a couple blocks of memory that HERMES Paige can use to store certain global variables (HERMES Paige does not use any `globals` and therefore requires you to provide areas it can use to store required global structures).
 
@@ -372,7 +372,7 @@ It is possible to crash in `pgInit`. This is very rare however. Here are the mai
 - You are out of memory. HERMES Paige can require up to 60 kB to build itself and get ready to accept text.
 - **Windows 3.1 platform only**: you are building a DLL with a memory model mismatch. The PAIGE DLL was built for large modal; try building your DLL the same.
 
-### 2.5 HERMES Paige Shutdown
+## 2.5 HERMES Paige Shutdown
 
 For applications that require a `shutdown` of all allocations it has created, call the following functions, in the order shown, before terminating your application:
 
@@ -406,7 +406,7 @@ Be sure to call both `pgShutdown` and `pgMemShutdown`, in that order, before `EX
 
 
 
-### 2.6 Creating an HERMES Paige Object
+## 2.6 Creating an HERMES Paige Object
 
 By "HERMES Paige object" is meant a single item that can edit, display and otherwise manipulate a block of text, large or small.
 
@@ -603,7 +603,7 @@ For the purpose of getting "Up and Running", just make sure you create your wind
 
 HERMES Paige does not care what a window's origin is set to (top-left `co_ordinate` values). HERMES Paige only cares about the `area` parameters you provide for `pgNew`; remember, HERMES Paige doesn't really know what a window is and doesn't know anything about origins. HERMES Paige simply and only follows the coördinates you have set for `vis_area`, `page_area` and `exclude_area`. If your `page_area` shape passed to `pgNew`, for instance, had a top-left of -10000,-9999, the first character of the first line will be drawn at that coördinate location regardless of where the top-left of your window might physically exist. In other words, HERMES Paige coördinates are always relative to the associated window's coördinates.
 
-### 2.8 Attribute Settings
+## 2.8 Attribute Settings
 
 As mentioned earlier, `pgNew` will accept certain characteristics defined in the "attributes" parameter. The current version supports the following:
 
@@ -720,7 +720,7 @@ The best place to destroy the HERMES Paige object is in the OnDestroy() member o
 		CView::OnDestroy();
 	}
 
-### 2.10 Getting the "Globals" Pointer
+## 2.10 Getting the "Globals" Pointer
 
 If you need to obtain the pointer to `pg_globals` (originally given to `pgInit` and to `pgNew`), you can get it from a `pg_ref` using the following:
 
@@ -785,7 +785,7 @@ event (Macintosh), and `best_way` for all other functions requiring a `draw_mode
 
 ![](figs/fig2.jpg)
 
-Additional draw modes require the developer to use the custom draw hook and draw his own. See "`text_draw_proc`"<!-- on page 27-17--> for information on how to do custom drawing.
+Additional draw modes require the developer to use the custom draw hook and draw his own. For information on how to do custom drawing, *vide* "`text_draw_proc`" under section 27.6, [Function Definitions](#27.6-Function-Definitions).
 
 A value of `draw_none` will disable all drawing and visual scrolling. In other words, if the HERMES Paige document changes in some way, nothing would change on the screen until the application re-displayed the HERMES Paige text contents. The "draw nothing" feature is used only for special cases where an application wants to change without drawing anything yet.
 
@@ -1204,7 +1204,7 @@ This is different than `LINE_MOD_BIT` (below) since a paragraph could contain se
 
 `WORD_CTL_MOD_BIT` causes text between control characters to be selected. This is similar to word/paragraph/line highlighting except control codes are considered the delimiters.
 
-> **NOTE:** In HERMES Paige "control codes" or "control characters" are not necessarily limited to standard ASCII symbols. Control characters in the HERMES Paige context are defined in `pg_globals` (see "Changing Globals”<!-- on page 3-21-->).
+> **NOTE:** In HERMES Paige "control codes" or "control characters" are not necessarily limited to standard ASCII symbols. Control characters in the HERMES Paige context are defined in `pg_globals` (*vide* section 3.8, [Changing Globals](#3.8-Changing-Globals)).
 
 `NO_HALF_CHARS_BIT` controls whether or not dragging can change the selection point half way into a character. Normally, if this bit is not set, once the mouse moves half way into a character, that character is considered to be "selected" (or unselected if moving in the opposite direction). Setting this bit, however, instructs `pgDragSelect` not to select the character until it has completely crossed over its area.
 
@@ -1350,9 +1350,9 @@ The `front_back_state` should be one of the following values:
 
 The `perm_state` parameter provides an alternate highlight state setting; this parameter can also be any of the above. For getting "Up and Running," however, pass `no_change_verb` for this parameter.
 
-If `show_hilite` is `TRUE`, the highlighting (or caret) will redraw according to `pg`'s new state. A `FALSE` value will activate or deactivate `pg` internally (by setting special flags within the `pg_ref`) but the highlighting or caret will remain unchanged. For getting "Up and Running", always pass TRUE for `should_draw`.
+If `show_hilite` is `TRUE`, the highlighting (or caret) will redraw according to `pg`'s new state. A `FALSE` value will activate or deactivate `pg` internally (by setting special flags within the `pg_ref`) but the highlighting or caret will remain unchanged. For getting "Up and Running", always pass `TRUE` for `should_draw`.
 
-See also "Additional Selection Support" <!-- on page 10-4--> and "Activate/Deactivate with shape of selection still showing"<!-- on page 10-13-->.
+See also section 10.4, [Additional Selection Support](#10.4-Additional-Selection-Support) and "Activate/Deactivate with shape of selection still showing"<!-- on page 10-13-->.
 
 ### Responding to `WM_SETFOCUS` and `WM_KILLFOCUS` messages
 
@@ -1382,11 +1382,11 @@ The front/back highlight state will be returned in `front_back_state` and the al
 
 > Why two activate states?
 
-One is for regular activate/deactivate for a window; the other is to FORCE deactivation regardless of the window's front/behind state. Haven't you ever been in a situation where you want to deactivate selections but the window is still in front? Using two possible states, it becomes easier to do that. The two states are logically "AND'd" logic for activation: both must be true or the document is deactivated.
+One is for regular activate/deactivate for a window; the other is to *force* deactivation regardless of the window's front/behind state. Haven't you ever been in a situation where you want to deactivate selections but the window is still in front? Using two possible states, it becomes easier to do that. The two states are logically `AND`ed logic for activation: both must be true or the document is deactivated.
 
 #### MFC NOTE 
 
-**IMPORTANT:** You must activate and deactivate the HERMES Paige object in the MFC OnSetFocus() and OnKillFocus() before any of the functions in this chapter will work.
+**IMPORTANT:** You must activate and deactivate the HERMES Paige object in the MFC `OnSetFocus()` and `OnKillFocus()` before any of the functions in this chapter will work.
 
 #### Example:
 
@@ -1542,7 +1542,7 @@ For example, if you wanted to override the draw-text callback function always fo
 
 	pg_globals.def_style.procs.draw = myTextDrawProc;
 
-... where `myTextDrawProc` is a low-level callback to draw text (see "Setting Style Functions”<!-- on page 27-4-->). If you did this, every new `style_info` record created by HERMES Paige will contain your callback function.
+... where `myTextDrawProc` is a low-level callback to draw text (*vide* section 27.4, [Setting Style Functions](#27.4-Setting-Style-Functions)). If you did this, every new `style_info` record created by HERMES Paige will contain your callback function.
 
 The default hooks for general callbacks not related to styles or paragraph formats are in `pg_globals.def_hooks`.
 
@@ -2379,7 +2379,7 @@ The function result is typed as a `text_ref`, which is a memory allocation creat
 
 See also section 24.5, [Examine Text](#24.5-examine-text).
 
-### TECH NOTE: No zeros at the end of pgCopyText
+### TECH NOTE: No zeros at the end of `pgCopyText`
 
 > I got my text in a `text_ref` with `pgcopyText`, but there is no 0 at the end!
 > 
@@ -3107,7 +3107,7 @@ The other difference is that `pgSetParInfo` will always apply to at least one pa
 
 The `selection` and `draw_mode` parameters are functionally identical to the same parameters in `pgSetStyleInfo` (see "Changing Styles"<!-- on page 30-7--> and "Draw Modes"<!-- on page 2-30-->), except whole paragraphs are changed (even if you specify text offsets that do not fall on paragraph boundaries). (For more information, *vide* section 8.2, [Selection Range](#8.2-selection-range), and chapter 10, [All About Selection](#10-all-about-selection)).
 
-For detailed information on `par_info` records—and what fields you should set up—see "par_info"<!-- on page 30-33-->.
+For detailed information on `par_info` records—and what fields you should set up—see "`par_info`" under section 30.11, [Record Structures](#30.11-record-structures).
 
 ##### NOTE
 
@@ -3138,7 +3138,7 @@ TABLE \#3: POSSIBLE RESULTS WHEN `SET_ANY_MASK` IS SET TO `FALSE`
 | 12 | -1 | All paragraphs have spacing of 12 |
 | 12 | 0 | Some paragraphs have spacing of 12 |
 
-Setting `set_any_match` to TRUE is used to determine if only a part of the text matches a given paragraph format. This is described in "Obtaining Current Text Format(s)"<!-- on page 30-15-->. The `par_info` structure is described in "par_info"<!-- on page 30-33-->.
+Setting `set_any_match` to TRUE is used to determine if only a part of the text matches a given paragraph format. This is described in section 30.8, [Obtaining Current Text Format(s)](#30.8-obtaining-current-text-format(s)). The `par_info` structure is described in "`par_info`" under section 30.11, [Record Structures](#30.11-record-structures).
 
 # 9 TABS AND INDENTS
 
@@ -3242,7 +3242,7 @@ This provides a way to look at all the tabs within a section of text:
 
 	(void) pgGetTabList (pg_ref pg, select_pair_ptr selection, tab_ref tabs, memory_ref tab_mask, long PG_FAR *screen_offset);
 
-The `selection` parameter operates in the same way it does for `pgGetParInfo` (see "Obtaining Current Text Format(s)"<!-- on page 30-15--> for information about `pgGetStyleInfo` and `pgGetParInfo`).
+The `selection` parameter operates in the same way it does for `pgGetParInfo` (for information about `pgGetStyleInfo` and `pgGetParInfo`, *vide* section 30.8, [Obtaining Current Text Format](#30.8-obtaining-current-text-format)).
 
 The `tabs` and `tab_mask` parameters for `pgGetTabList` are memory allocations which you must create before calling this function. When the function returns, `tabs` will be set to contain an array of `tab_stop` records that apply to the selection range and `tab_mask` will be set to contain an array of `long`s containing non-zeros for every tab that is consistent (the same) throughout the selection.
 
@@ -3375,9 +3375,9 @@ To obtain the current indent settings of a selection range, call the following:
 
 	(void) pgGetIndents (pg_ref pg, select_pair_ptr selection, pg_indents_ptr indents, pg_indents_ptr_mask, long PG_FAR *left_screen_offset, long PG_FAR *right_screen_offset);
 
-The `selection` parameter operates in the same way it does for `pgGetParInfo` (see “Obtaining Current Text Format(s)"<!-- on page 30-15--> for information about `pgGetStyleInfo` and `pgGetParInfo`).
+The `selection` parameter operates in the same way it does for `pgGetParInfo` (for information about `pgGetStyleInfo` and `pgGetParInfo`, *vide* section 30.8, [Obtaining Current Text Format(s)](#30.8-obtaining-current-text-format(s))).
 
-The indents and mask parameters should point to a `pg_indents` record (described above); neither parameter can be a null pointer.
+The `indents` and `mask` parameters should point to a `pg_indents` record (described above); neither parameter can be a null pointer.
 
 **FUNCTION RESULT:** When this function returns, indents will be set to the indentation values found in the selection range, and mask will have every field that is consistent (the same) throughout the range to nonzero.
 
@@ -3659,11 +3659,11 @@ This function sets the selection range(s) in `pg` to all characters that interse
 
 For example, if the `select_shape` was one large rectangle expanding across the entire document, then every character would be selected; if the shape were smaller than the document, then only the characters that fit within that shape—whether wholly or partially—would be selected.
 
-If `show_hilite` is TRUE, the new selection region is drawn.
+If `show_hilite` is `TRUE`, the new selection region is drawn.
 
-For information about shapes and individual characters and insertion point, see "Text and Selection Positions"<!-- on page 24-23-->. For information about highlighting see section 2.17, [Activate/Deäctivate](#2.17-Activate/Deäctivate).
+For information about shapes and individual characters and insertion point, see section 24.11, [Text and Selection Positions](#24.11-text-and-selection-positions). For information about highlighting see section 2.17, [Activate/Deäctivate](#2.17-Activate/Deäctivate).
 
-### Activate/Deactivate with shape of selection still showing
+### Activate/Deäctivate with shape of selection still showing
 
 #### Macintosh
 
@@ -4798,27 +4798,27 @@ First, let's clarify the difference between three different aspects of backgroun
 * *Window background colour* is the background colour of the window itself. This can be different than the window's background colour.
 * *Text background colour* is the background colour of text characters, applied as a style (just as italic, bold, underline, etc. is applied to text characters). Text background colour applies only to the text character itself. This can be different from both window background and page background.
 
-## 12.15 Who/What Controls Colors
+## 12.15 Who/What Controls Colours
 
 When creating new HERMES Paige objects, the page area background colour is purely determined by the `def_bk_color` member of HERMES Paige globals. Afterwards, this colour can be changed by calling `pgSetPageColor()`.
 
-The window background colour is purely controlled by your application and no HERMES Paige functions alter that colour.
+The window background colour is controlled *entirely* by your application; no HERMES Paige functions alter that colour.
 
 Text background is controlled by changing the `bk_color` member of `style_info`, and that color applies only to the character(s) of that particular style.
 
-## 12.16 What is "trans_color" in HERMES Paige globals?
+## 12.16 What is `trans_color` in HERMES Paige globals?
 
 The purpose of `pg_globals.trans_color` is to define the default `WINDOW` background. Since HERMES Paige is a portable library, the `trans_color` member is provided as a platform-independent method for HERMES Paige to know what the "normal" background colour is.
 
 HERMES Paige uses `trans_color` only as a reference. Essentially, `trans_color` defines the colour that would appear if HERMES Paige left the window alone, or the colour that would be used by the operating system if the window were "erased".
 
-The value of `trans_color` becomes the most significant when you have set the page and/or text color to something different to the window color, because HERMES Paige compares the page and text colors to `trans_color` to determine whether or not to `ERASE` the background.
+The value of `trans_color` becomes the most significant when you have set the page and/or text colour to something different to the window colour, because HERMES Paige compares the page and text colours to `trans_color` to determine whether or not to `ERASE` the background.
 
 Its reasoning is, "... If the background color I am to draw *is not* the "normal" background color [`trans_color`], then I need to force-fill the background.”
 
 Conversely, "... If the background color I am to draw *is* the same as `trans_color`, then I don't have to set anything special”.
 
-Herein is most of the difficulty that HERMES Paige users encounter with background colors: they set the window to a non-white background, yet they usually leave `pg_globals.trans_color` alone. This is OK as long as `trans_color` and the page area colour are different.
+Herein is most of the difficulty that HERMES Paige users encounter with background colors: they set the window to a non-white background, yet they usually leave `pg_globals.trans_color` alone. This is okay, as long as `trans_color` and the page area colour are different.
 
 But if you want the page background and window background to be the same, make sure `pg_globals.trans_color` is the same as the page background color. The general rules are:
 
@@ -5790,17 +5790,17 @@ CAUTION: If you use this feature, the printer `DC` must remain valid until the `
 
 This function returns the existing printer `DC` stored in `pg`, previously set by `pgSetPrintDevice()`. If no `DC` exists, `MEM_NULL` is returned.
 
-## 16.9 Display Proc
+## 16.9 `DisplayProc`
 
 	(void) pgDrawPageProc (paige_rec_ptr pg, shape_ptr page_shape, pg_short_tr_qty, pg_short_t page_num, co_ordinate_ptr vis_offset, short draw_mode_used, short call_order);
 
 The purpose of `pgDrawPageProc` is to give the app a chance to draw "page stuff" such as grey outlines around page margins, and/or in the demo's case, it draws outlines around containers. Other ornaments can be drawn such as floating pictures—the demo uses this function to draw `pict`s that are anchored to document (as opposed to `pict`s embedded into text).
 
-`pgDrawPageProc` is actually the default procedure for the `draw_page_proc`, see "`draw_page_proc`"<!-- on page 27-65-->.
+`pgDrawPageProc` is actually the default procedure for the `draw_page_proc`; see "`draw_page_proc`" under section 27.6, [Function Definitions](#27.6-Function-Definitions).
 
 This function only gets called from `pgDisplay` and/or from internal display following a `ScrollRect`. It is not called when typing/display of keyboard inserts. The function is called after all text is drawn and just before returning to the app.
 
-If called from `pgDisplay`, the clip region is set to the `vis_area` of `pg`. If called from pgScroll the clip is set to the scrolled "white" space.
+If called from `pgDisplay`, the clip region is set to the `vis_area` of `pg`. If called from `pgScroll` the clip is set to the scrolled "white" space.
 
 This function can appear more complex than it is when you have irregular `page_area` shapes and/or repeating shapes. But all that is happening is that `pgDrawPageProc` gets called once for each "page" regardless of how many `rect`s are inside your `page_area` shape.
 
@@ -7749,7 +7749,7 @@ The `doc_element_info` parameter is used for identifying multiple `pg_ref` "docu
 
 **CAUTION:** HERMES Paige does not set the physical end-of-file. In other words, if you created a file 1 megabyte in size and HERMES Paige wrote only 10 K of data, your physical file size will still be 1 megabyte. If appropriate you must truncate your file once all the data is saved.
 
-### How to create an HERMES Paige filemap
+### How to create a HERMES Paige filemap
 
 	file_ref make_paige_filemap (short_f_ref)
 	{
@@ -8033,7 +8033,7 @@ Returns the size, in bytes, of the next data in `walker`. This function works fo
 
 Packs/unpacks a rectangle `r`.
 
-#### Co_ordinate
+#### Coördinate
 
 	#include "pgFiles.h"
 	(void) pgPackCoOrdinate (pack_walk_ptr walker, co_ordinate_ptr point);
@@ -8155,9 +8155,9 @@ This function sets `rgn` to the "highlight" shape for the specified range of tex
 
 The `rgn` parameter must be a valid `shape_ref` (which you create); when the function returns, that shape will contain the appropriate highlight region.
 
-The text offsets that are used to compute the region are determined as follows: if `range` is not a NULL pointer, that selection pair is used; if `range` is NULL but `select_list` is not `MEM_NULL`, then `select_list` is used as a list of selection pairs (see below). If both are NULL, the current selection range in `pg` is used.
+The text offsets that are used to compute the region are determined as follows: if `range` is not a `NULL` pointer, that selection pair is used; if `range` is `NULL` but `select_list` is not `MEM_NULL`, then `select_list` is used as a list of selection pairs (see below). If both are `NULL`, the current selection range in `pg` is used.
 
-The `select_list` parameter, if not `MEM_NULL`, must be a valid `memory_ref` containing a list of `select_pair` records. Usually, a selection list of this type is used for discontinuous selections (see "Discontinuous Selections"<!-- on page 10-161--> for information about `pgGetSelectionList` and `pgSetSelectionList`).
+The `select_list` parameter, if not `MEM_NULL`, must be a valid `memory_ref` containing a list of `select_pair` records. Usually, a selection list of this type is used for discontinuous selections (for information about `pgGetSelectionList` and `pgSetSelectionList`, *vide* section 10.3, [Discontinuous Selections](#10.3-discontinuous-selections)).
 
 **FUNCTION RESULT:** `TRUE` is returned if the resulting highlight region is not empty.
 
@@ -8404,10 +8404,9 @@ This sets `CommandCharInfo` as the "default" function for all future styles, and
 		return pgCharInfoProc(pg, style_walker, data, global_offset, local_offset, mask_bits);
 	}
 
-For more information on `char_info_proc`, see `char_info_proc`<!-- on page 27-498-->.
+For more information on `char_info_proc`, *vide* `char_info_proc` under section 27.6, [Function Definitions](#27.6-Function-Definitions).
 
-Many applications that want to display the Command Character may want to display other special characters, so I thought you
-might prefer including something like the attached code in your examples as an alternative to the above.
+Many applications that want to display the Command Character may want to display other special characters, so I thought you might prefer including something like the attached code in your examples as an alternative to the above.
 
 	#include <Fonts.h>
 	PG_PASCAL (long) CommandCharInfo(paige_rec_ptr pg, style_walk_ptr style_walker, pg_char_ptr data, long global_offset, long local_offset, long bits)
@@ -8443,9 +8442,9 @@ For `pgFindWord`, `*first_byte` and `*last_byte` will get set to the nearest wor
 
 For example, suppose the specified `offset` sat right after the word `the` and before a `.` (full stop). If `left_side` is `FALSE`, the "word" that is found would be `.` but if `left_side` is `TRUE`, the word found would be `the`.
 
-The `smart_select` parameter tells `pgFindWord` whether or not to include trailing blank characters for the word that has been found. If `smart_select` is `TRUE`, then trailing blanks ("spaces") that follow the word are included. Example: If the text contained `This is a test for find word,` if `smart_select` is `TRUE` then finding the word `test` will return the offsets for `test__` (where `_` represent spaces).
+The `smart_select` parameter tells `pgFindWord` whether or not to include trailing blank characters for the word that has been found. If `smart_select` is `TRUE`, then trailing blanks ("spaces") that follow the word are included. Example: If the text contained `This is a test for find word`, if `smart_select` is `TRUE` then finding the word `test` will return the offsets for `test__` (where `_` represent spaces).
 
-The `pgFindCtlWord` function works exactly the same as `pgFindWord` except "words," in this case, are sections of text separated by control codes such as tab and CR. ("Control codes" is used here to explain this function, but in actuality a character is considered only a "control" char by virtue of what is returned from the `char_info_proc`—see “Customising HERMES Paige”<!-- on page 27-485-->.
+The `pgFindCtlWord` function works exactly the same as `pgFindWord` except "words," in this case, are sections of text separated by control codes such as tab and CR. ("Control codes" is used here to explain this function, but in actuality a character is considered only a "control" char by virtue of what is returned from the `char_info_proc`—*vide* chapter 27, [Customising HERMES Paige](#27-customising-hermes-paige).
 
 The `pgFindPar` and `pgFindLine` return the nearest paragraph boundaries or the nearest line boundaries to offset, respectively.
 
@@ -8465,7 +8464,7 @@ Returns the total number of lines in `pg`. This function will return zero if `CO
 
 **CAUTION:** This function may consume a lot of time if the document is relatively large and has not been paginated to the end of the document. This is because HERMES Paige cannot possibly know how many word-wrapping lines exist unless it computes every line in the document from beginning to end; even if word-wrapping is disabled, HERMES Paige must still count all the line breaks (CR characters) if text has recently been inserted. 
 
-**NOTE:** HERMES Paige will always take the fastest approach wherever possible, e.g. if the document has already been fully paginated this function will return a relatively instant response.
+**NOTE:** HERMES Paige will always take the fastest approach wherever possible; *i.e.*, if the document has already been fully paginated, this function will return a relatively instant response.
 
 	(long) pgOffsetToLineNum (pg_ref pg, long offset, pg_boolean line_end_has_precedence);
 
@@ -8545,7 +8544,7 @@ I will assume that you already know the text offset position for the start of ea
 
 Another method which is not as fast (but is certainly faster than your chosen method of copying the text into a temporary `pg_ref`) is to make a temporary highlight region for the text range, then get the enclosing bounds `rect` for the highlight. To get a highlight region, use `pgGetHiliteRgn` (you also have to know the text positions for each line). The way this function works is that you first create a shape (using `pgRectToShape(&pgm_globals, NULL)`) and passing that shape to `pgGetHiliteRgn`. Then to get the "bounds" area of the shape, you use `pgShapeBounds(shape, &rectangle)`.
 
-## 24.9 Character type
+## 24.9 Character Type
 
 	(long) pgFindCharType (pg_ref pg, long char_info, long PG_FAR *offset, pg_char_ptr the_byte);
 
@@ -8561,7 +8560,7 @@ If `the_byte` pointer is non-null, the character located, if any, gets placed in
 
 **FUNCTION RESULT:** The complete character type is returned (all the appropriate `char_info_proc` bits will be set). The `offset` parameter will be updated to the byte offset for the character found. If the character in question was *not* found, this function will return `*offset` equal to the text size in `pg`.
 
-## 24.10 Change counter
+## 24.10 Change Counter
 
 	(long) pgGetChangeCtr (pg_ref pg);
 	(long) pgSetChangeCtr (pg_ref pg, long ctr);
@@ -8574,14 +8573,16 @@ This counter begins at zero when a new `pg_ref` is created; to get the counter, 
 
 > I'm using this counter to tell myself whether I need to resave the document. Why is the count different from what I expect?
 
-This counter is changed by HERMES Paige anytime **it** thinks it needs to be changed. It changes for *everything*. We use our own change counter in the demo to keep track of when we need to resave the document.
+This counter is changed by HERMES Paige any time **it** thinks it needs to be changed. It changes for *everything*. We use our own change counter in the demo to keep track of when we need to resave the document.
 
 I suggest that you may want to keep your own change counter.
 
-## 24.11 Text and selection positions
+## 24.11 Text and Selection Positions
 
-	(void) pgTextRect (pg_ref pg, select_pair_ptr range, pg_boolean want_scroll, pg_boolean want_scaled, rectangle_ptr rect);
-	(void) pgCharacterRect (pg_ref pg, long position, short want_scrolled, short want_scaled, rectangle_ptr rect);
+```C
+(void) pgTextRect (pg_ref pg, select_pair_ptr range, pg_boolean want_scroll, pg_boolean want_scaled, rectangle_ptr rect);
+(void) pgCharacterRect (pg_ref pg, long position, short want_scrolled, short want_scaled, rectangle_ptr rect);
+```
 
 These functions can be used to compute outline(s) around one or more characters.
 
@@ -9285,7 +9286,7 @@ Anywhere in your application that calls an HERMES Paige function that can fail f
 
 The above example shows the simplest form of error detection: none of the code under `PG_TRY` is necessarily required to check for errors at all since anything fatal within HERMES Paige (such as out of memory or a disk error) will throw CPU execution into the first line of code under `PG_CATCH`. This is done automatically.
 
-The parameter `mem_rsrv` after `PG_TRY` must be a pointer to the global structure given to `pgMemStartup` earlier (see "Software Startup"<!-- on page 2-10--> for information about `pgMemStartup`).
+The parameter `mem_rsrv` after `PG_TRY` must be a pointer to the global structure given to `pgMemStartup` earlier (for information about `pgMemStartup`, *vide* section 2.4, [Software Startup](#2.4-software-startup)).
 
 **NOTE:** `PG_TRY`, `PG_CATCH`, and `PG_ENDTRY` macros are automatically available by including `Paige.h` (the actual definitions for these exist in `pgExceps.h` which is `#include`d in `Paige.h`).
 
@@ -9514,15 +9515,2374 @@ Getting a `pgm_globals_ptr` from a `paige_rec_ptr`:
 		/* ... */
 	}
 
-# 27 INTENTIONALLY MISSING
+# 27 Customising HERMES Paige
 
-Because of the workload involved, chapter 27 ("Customising HERMES Paige") is intentionally missing. The issue will be rectified but for now, users are referred to `chap27.pdf` in this directory.
+This section discusses the low-level "hook" structure of HERMES Paige and general guidelines of customizing the look and feel of text display.
+
+## 27.1 Standard Procs
+
+	(void) pgSetStandardProcs (pg_globals_ptr globals);
+
+This function initialises all the standard low-level function pointers for styles, paragraph formats and general HERMES Paige hooks.
+
+The `globals` parameter should be a pointer to the same globals given to `pgInit` and `pgNew`. (Actually, `globals` can be a pointer to any `pg_global` record. For example, an application may want to set up different "versions" of globals or copies of globals; but the normal use of this function would be to reset the standard functions in the `globals` record currently in use).
+
+The intended purpose of this function is to reïnitialise all the standard functions after temporarily changing them to something else.
+
+### HERMES Paige "Add-on" Extensions
+
+<!-- TODO: something or other -->
+
+For future HERMES Paige extensions, `pgSetStandardProcs` will still work correctly even if some of the low-level functions require special function pointers from the extension(s) as the "standard."
+
+This is accomplished by the `extend_proc` which HERMES Paige will now call every time `pgSetStandardProcs` is invoked (and after the standard functions are set). For this purpose the following values are possible for the `verb` parameter when `extend_proc` is called:
+
+	typedef enum
+	{
+	pg_std_procs,	// Standard procs have been initialised
+	pg_new,			// pgNew has been called
+	pg_dispose		// About to do a pgDispose
+	};
+
+## 27.2 Style Functions
+
+If you want to do anything at all with text styles or paragraph formatting that is beyond the scope (or different) than the way HERMES Paige will normally handle formatting, you must first understand the following basic design concept on which HERMES Paige is founded:
+
+1. Every `style_info` record contains an extensive set of function pointers that, when called, perform all the associated tasks for that style, including text measurement (determining width of characters), display, height computation (ascent, descent, etc.), and information about characters (which char is a control code, which one is a line breaking char, etc.).
+2. All new `style_info` records, by default, are initialised with HERMES Paige standard functions: every function pointer gets set with the appropriate default procedure for that aspect of the style and none are null.
+3. To alter the way a style behaves or draws, you simply replace the appropriate function pointer(s) within that `style_info` record with your own.
+
+The end result of this method is that any section of text "knows how to measure and draw" itself.
+
+## 27.3 Standard Low-Level Function Access
+
+A subset of the above design concept is the public availability of HERMES Paige standard low-level style functions.
+
+An HERMES Paige user has access to all the standard low-level functions that are normally placed into a `style_info` record by default. The reason this can be important is because a custom style function, which you create, has the ability to make a call to the "standard" function any time when it becomes necessary to facilitate your feature.
+
+For example, suppose you had a requirement to create a "boxed" style which draws an outline around the text. To draw the text itself, you simply call the standard HERMES Paige low-level function that draws text for any given style; then you would draw the outlining box. A great deal of coding time can be saved with this feature. For a sample implementation, *vide* section 30.12, [Creating a Simple Custom Style](#30.12-Creating-a-simple-custom-style) .
+
+The typical use for calling one of these functions is for situations where you only want to *alter* something  slightly from the standard and you want to avoid the necessity of writing huge code to replace the standard handling.
+
+Another obvious example is using the `line_measure` function to build a line of text. As we have frankly stated in our own documentation, using this function to completely replace HERMES Paige's standard handling is a mistake due to its enormous complexity. However, this function can become useful if you replace it with your own function that *first calls the standard function* to build the line; from that point you could alter the results. For additional information on line structures, *vide* chapter 36, [Anatomy of Text Blocks](#36-anatomy-of-text-blocks).
+
+To call a standard low-level style function, simply include `defprocs.h`. The standard functions are listed with their corresponding hook below.
+
+## 27.4 Setting Style Functions
+
+Every `style_info` record contains the following structure as one of its components:
+
+	typedef struct
+	{
+		style_init_proc init;			// Initialise style_info
+		install_font_proc install;		// Set up "current" font and style
+		measure_proc measure;			// Measure char positions
+		merge_proc merge;				// Substitute other text
+		char_info_proc char_info;		// Return info about a char
+		text_draw_proc draw;			// Draw the character(s)
+		dup_style_proc duplicate;		// Style will be dupicated
+		delete_style_proc delete_style;	// Style will be deleted
+		alter_style_proc alter_style;	// Style will be altered
+		save_style_proc save_style;		// Style will be written to disc
+		copy_text_proc copy_text;		// Text of style will be copied
+		delete_text_proc delete_text;	// Text of style will be deleted
+		setup_insert_proc insert_proc;	// Set up for insert
+		track_control_proc track_ctl;	// Track "control" type style
+		style_activate_proc activate_proc;	// Activate/deactivate
+	}
+	pg_style_hooks;
+
+In each field shown above, a pointer to an appropriate function exists. Every style must contain these function pointers, but any (or all) styles can be different functions.
+
+Hence, to customize a style, you need to decide which of these functions you need to "override," then change the pointer(s) in the style record so HERMES Paige will call your function for that task.
+
+**NOTE:** On Windows 3.1, function pointers you use to override the HERMES Paige functions must be created with `MakeProcInstance()`.
+
+## 27.5 Setting / Changing Function Pointers
+
+There are three general methods of changing function pointer(s) for styles.
+
+### First method — Using `pgSetStyleInfo`
+
+The first way is to simply use `pgSetStyleInfo`; set your mask parameter to all zeros except for the style functions you wish to change, and place pointers to your functions into the new `style_info` record (for details about `pgSetStyleInfo`, see "`style_info`" under section 30.11, [Record Structures](#30.11-record-structures)). Doing it this way, you will literally apply your customisation to whatever range(s) of text you prefer.
+
+### Second method — Setting the style `proc`s
+
+The second method is to use the following function(s):
+
+```c
+void pgSetStyleProcs (pg_ref pg, pg_style_hooks PG_FAR *procs, style_info_ptr match_style, style_info_ptr mask_style, style_info_ptr AND_style, long user_data, long user_id, pg_boolean inval_text, short draw_mode);
+(void) pgSetParProcs (pg_ref pg, pg_par_hooks PG_FAR *procs, par_info_ptr match_style, par_info_ptr mask_style, par_info_ptr AND_style, long user_data, long user_id, pg_boolean inval_text, short draw_mode)
+```
+
+These function apply `proc`s to all styles that match a specified criteria, as follows: each field of a `style_info` record in `pg` is compared to the same field in `match_style` if the corresponding field in `mask_style` is non-zero; in other words, only non-zero fields in `mask_style` are compared. Before each comparison is performed, the field in `pg`'s `style_info` record is temporarily `AND`ed with the corresponding field in `AND_style` before the comparison.
+
+Any of `match_style`, `mask_style` or `AND_style` can be null, in which case the following occurs: if `match_style` is null, then all styles in `pg` are changed (no comparisons are made). If `mask_style` is null, every field is compared and must match; if `AND_style` is null, no `AND`ing is performed.
+
+Only styles that completely match the comparison criteria based on `match_style`, `mask_style` and `AND_style` are changed and, if so, all functions in `procs` are placed into that style.
+
+Additionally, for every style that is changed, `user_data` and `user_id` are placed in the `style_info` record (for more information about the `style_info` record, *vide* "`style_info`" under section 30.11, [Record Structures](#30.11-record-structures)).
+
+If `inval_text` is `TRUE`, the text for which the changed styles apply is "invalidated" (tagged to require re-calculating word wrap and line termination).
+
+If `draw_mode` is non-zero the text is redrawn (*vide* section 2.11, [Draw Modes](#2.11-draw-modes)).
+
+This function is mainly used to restore all custom function pointers for "opened" files.
+
+`pgSetParProcs` is 100% identical to `pgSetStyleProcs` except in that paragraph style records are changed.
+
+### Third method — Initialising function pointers
+
+The third method is to initialise function pointers while a file is being "read". This is done using the file handler functions as described in chapter 34, [File Handlers](#34-file-handlers) (and, in particular, section 34.9, [Special "Initialising" Handlers](#34.9-special-"initialising"-handlers)).
+
+**CAUTION:** Style functions can *never* be null; they *must* point to a valid function even if that function does nothing. As a general rule, if you don't need to change a style function, leave the default that HERMES Paige has initialised.
+
+This method should be used when you want to set one or more style functions to be used for all styles.
+
+This is done by simply setting up the default style in `pg_globals` with the appropriate function pointer(s). The default style is called `def_style` and is a `style_info` record which HERMES Paige will copy for every new style insertion.
+
+**NOTE:** For *Windows 3.1*, function pointers you use to override the HERMES Paige functions must be created with `MakeProcInstance()`.
+
+## 27.6 Function Definitions
+
+The following is a definition and description of each of these functions, what each parameter means and general comments on how you might use the function to create special features.
+
+### `style_init_proc`
+
+#### Purpose
+
+To initialize the `style_info` record.
+
+#### Standard function
+
+The default function, `pgStyleInitProc`, figures out the text ascent, descent and default leading; for the *Macintosh* version, it also figures out a 16-bit `style` word it can give to QuickDraw for the text style; for *Windows*, it builds a Font Object `HANDLE`.
+
+```C
+PG_FN_PASCAL (void, style_init_proc) (paige_rec_ptr pg, style_info_ptr style, font_info_ptr font);
+```
+
+The `style` record is to be initialised; the `font` parameter is a pointer to the `font_info` record associated with this style.
+
+#### Notes
+
+1. **IMPORTANT:** HERMES Paige determines character heights solely from the information in the `style_info` record; specifically, `style_info.ascent`, `style_info.descent`, and `style_info.leading`. Additionally, `top_extra`, `bot_extra` and `superscript`/`subscript` values will affect the height of characters. It is therefore important that you initialize these fields to reflect the appropriate vertical "bounding" areas of text drawn in that format.
+2. When computing the height for offscreen bitmap display, HERMES Paige uses only the `ascent`, `descent`, and `leading` fields. You can therefore avoid excessive memory usage for bitmap drawing by using top_extra and bot_extra to define "non-text" boundaries such as picture frames.
+
+### `install_font_proc`
+
+#### Purpose
+
+To set the font and style as the "current font" for subsequent drawing.
+
+#### Standard function
+
+The default function, `pgInstallFont`, sets the current device to the font, style, color and `char_extra` values all taken from the `style_info` and `font_info` records. If `include_offscreen` is `TRUE`, all the same values are set in the internal offscreen port as well. If scaling is enabled (*i.e.*, not one-to-one), the point size is scaled accordingly and the scaled point size is used instead.
+
+```C
+PG_FN_PASCAL (void, install_font_proc) (paige_rec_ptr pg, style_info_ptr style,font_info_ptr font, style_info_ptr composite_style, pg_boolean include_offscreen);
+```
+
+The `pg` parameter is the `paige_rec` affected by this font. The `style` and `font` parameters point to the style and font record to install, respectively; neither will ever be a null pointer.
+
+If `composite_style` is non–null, this function must copy the contents of the `style_info` it actually used to set up the device (in certain cases, the original `style_info` may be temporarily altered, in the case of "superimpose" style variations, ALL CAPS, etc.).
+
+If `include_offscreen` is `TRUE`, HERMES Paige will want to use the same format when and if it draws to an offscreen bitmap during for the next text display (*vide* "`text_draw_proc`" under section 27.6, [Function Definitions](#27.6-Function-Definitions)).
+
+### `measure_proc`
+
+#### Purpose
+
+To obtain the width of character(s).
+
+#### Standard function
+
+The default function, `pgMeasureProc`, determines the character pixel positions as if each were drawn from left to right beginning at `*position`s. Special flags are set in each corresponding element in `*types`.
+
+```c
+PG_FN_PASCAL (void, measure_proc) (paige_rec_ptr pg, style_walk_ptr walker, pg_char_ptr data, long length, pg_short_t slop, long *positions, short *types, short measure_verb, long current_offset, pg_boolean scale_widths, short call_order);
+```
+
+The `walker` parameter points to a `style_walk` record that contains pointers to the style and font to be measured.
+
+**NOTE:** The paragraph formatting pointers in walker can be `NULL` or uninitialised.
+
+* `data` and `length` — define the text and length (in bytes), respectively.
+
+* `slop` — contains the number of "extra" pixels to include in the measurement, i.e., how much extra space to add for justification purposes (as in full justification).
+
+* `positions` — parameter points to an array of `long`s; the first `long` in that array will already be set to a number, which is the starting position, in pixels, for the first character in `*data`; the remaining elements in `*positions` will be uninitialised. The job of this function is to fill in the remaining `long`s with the position for all remaining characters as
+  they would appear on the screen if drawn from `*positions` pixel position, including the ending position of the last byte.
+
+  For example, if the text has 3 bytes, each of them 8 pixels wide, and the first element in `positions` was 70, you would fill in the `long`s in `positions` as follows:
+
+  ```
+  70, 78, 86, 92
+  ```
+
+* `types` - parameter is a pointer to an array of shorts; what you must fill in into this array is the character type of each byte in data. The character type is defined by setting any (or all, or none) of the following bits:
+
+  ```C
+  #define SOFT_HYPHEN_BIT		0x00000008 // Soft hyphen char
+  #define CTL_BIT						0x00000040 // Char is a control code
+  #define PAR_SEL_BIT				0x00000100 // Char breaks a paragraph
+  #define LINE_SEL_BIT			0x00000200 // Char breaks a line (soft CR)
+  #define TAB_BIT						0x00000400 // Char performs a tab advancement
+  #define CONTAINER_BRK_BIT	0x00004000 // Break-container bit
+  #define PAGE_BRK_BIT			0x00008000 // Page breaking char
+  ```
+
+  For each character, the corresponding `*types` element should contain either zero (meaning the character is none of the above), or a combination of the foregoing bits.
+
+  For example, if there are four bytes to measure, consisting of `a`, `b`, `c`, and `<CR>`, the `*types` elements should be set to:
+
+  ```c
+  0, 0, 0, PAR_SEL_BIT | CTL_BIT
+  ```
+
+  **NOTE:** `types` uses only the lower half of these `#define`s.
+
+* `measure_verb` — indicates one of two reasons `measure_proc` is being called, which are:
+
+  ```
+  typedef enum
+  {
+  	measure_width_locs, // Measure for char widths only
+  	measure_draw_locs // Measure for relative drawing
+  }
+  ```
+
+  The difference between these two verbs is that `measure_width_locs` calls for the locations of characters to define the cascading width of each character, while `measure_draw_locs` calls for the literal locations (relative to horizontal screen `*position`s) that characters will appear on the screen. For standard Roman text, these two measurements are identical, but this is *not* true for right-to-left (Semitic) scripts.
+
+  For example, Arabic characters aligned as *abcd* in memory will display as *cdba* on the screen. Hence, if each character were 10 pixels wide, the relative screen locations should be `40`, `30`, `20`,`10`, `0`; if measuring purely for character widths, however, the `*positions` elements must be `0`, `10`, `20`, `30`, `40`.
+
+* `current_offset_parameter` — indicates the current offset into all text, which will match with the first byte of `*data`. For example, if HERMES Paige is measuring text at absolute byte offset 1200, `current_offset` will be 1200.
+
+* `scale_widths` — parameter indicates whether or not the text is currently scaled: if `TRUE`, the measured text will eventually be used to convert a screen point to a character position that is scaled to something other than one-to-one.
+
+  **NOTE:** If scale_widths is TRUE that does not mean the character position must be scaled, but rather that the function must *compensate for* potential errors in scaling. For example, suppose a document is currently scaled by 50% and the text to be measured is 24 point. However, the relative screen locations of scaled-down twelve-point text do not necessarily correspond to exactly 50% of twenty-four-point text. Hence, there will be an inaccuracy if the text were being measured to compute a character from a scaled coordinate.
+
+  If `scale_widths` is `TRUE`, the *Macintosh* function computes the same scaled text it would normally draw in scaled mode, then upscales `*position`s. For example, if scaling is currently 50% and point size is 12, then six-point text is measured, each resulting character position is multiplied by two.
+
+* `call_order` — indicates whether there will be one more `measure_proc` call for the current block of text or if this section of text is the end of the block: if `call_order` is `-1`, the text to be measured is the last part of the block.
+
+  **NOTE:** The "block" in this case is not necessarily all one style and in fact can be many styles (and potentially many different `measure_proc` functions). For *Macintosh WorldScript* measuring, it is necessary to know if `measure_proc` is being called for the last time in a sequence of bytes in order to set the last location of right-to-left script correctly. (Normally you won't care what the value of `call_order` is).
+
+#### Multibyte Characters
+
+The data given to `measure_proc` is always at a byte level, regardless of the character type. If you write your own `measure_proc`, it is your responsibility to return the correct responses anyway.
+
+For example, suppose `data` had 10 bytes, but each byte represented 1/2 of a two-byte character. If each double-byte character were 8 pixels wide, you would fill `*positions` with something like this:
+
+```
+0, 0, 8, 8, 16, 16, 24, 24, 32, 32, 32
+```
+
+###### Notes
+
+1. On *Macintosh*, the style, font and point size will have already been set in the current `GrafPort` before `measure_proc` is called.
+2. The `measure_proc` never gets called if the text is hidden (`styles[hidden_text_var]` is `TRUE` and "hide hidden text" is on).
+
+### `merge_proc`
+
+#### Purpose
+
+To substitute the text for this style temporarily with something else.
+
+#### Standard function
+
+The default function, `pgMergeProc`, does nothing. This particular function is mainly for application features for "mail merge" and similar functionality.
+
+```c
+PG_FN_PASCAL (short, merge_proc) (paige_rec_ptr pg, style_info_ptr style, pg_char_ptr text_data, pg_short_t length, text_ref merged_data, long ref_con);
+```
+
+This function gets called only when the application has called `pgMergeText` (see chapter 29, [Mail Merging](#29-Mail-Merging)).
+
+* `style` — parameter points to the style for which this call is intended; `text_data` will point to the first character affected by the style and `length` the number of bytes given in `text_data`.
+* `merged_data` — parameter will be an empty `memory_ref`. The job of this function is to fill `merged_data` with whatever new text it wishes to insert instead of the text that already exists. If `merged_data` is set to zero size, the "old" text is deleted with no new substitute.
+* `ref_con` — parameter will contain a value provided by the application.
+
+#### Function result
+
+If this function returns `FALSE`, the existing text in this style is not affected (stays the same), otherwise the existing text is replaced with the text in `merged_data` even if `merged_data` is empty.
+
+See chapter 29, [Mail Merging](#29-mail-merging).
+
+### `char_info_proc`
+
+#### Purpose
+
+To return specific information about a byte of text.
+
+#### Standard function
+
+The default function, `pgCharInfoProc`, returns the various bit settings listed below for standard ASCII, Roman and non-Roman Macintosh character sets.
+
+```C
+PG_FN_PASCAL (long, char_info_proc) (paige_rec_ptr pg, style_walk_ptr style_walker, pg_char_ptr data, long block_offset, long offset_begin, long offset_end, long char_offset, long mask_bits);
+```
+
+This function gets called at various times for HERMES Paige to determine the nature of an arbitrary byte of text. Upon entry, the `walker` parameter points to a `style_walk_ptr` containing the following information:
+
+```C
+typedef struct
+{
+	long current_offset;					// Current style offset position
+	style_info_ptr cur_style;			// Current text style
+	par_info_ptr cur_par_style;		// Current para style
+	font_info_ptr cur_font;				// Current font record
+	style_run_ptr next_style_run;	// Next style run record
+	style_run_ptr next_par_run;		// Next para run record
+	style_run_ptr prev_style_run;	// Previous style run record
+	style_run_ptr prev_par_run;		// Previous para run record
+	style_info_ptr style_base;		// Internal use only
+	par_info_ptr par_base;				// Internal use only
+	font_info_ptr font_base;			// Internal use only
+	pg_short_t last_font;					// Used internally
+	long t_length;								// Text size from original pg_ref
+	style_info superimpose;				// Composite superimpose style
+}
+style_walk;
+```
+
+The `style_walk` record is provided for this function's reference only; the `style_walk` structure is described in more detail in chapter 32, [Style Walkers](#32-style-walkers).
+
+**CAUTION:** 1) You must not alter the contents of `walker` directly. 2) The paragraph format pointers might be `NULL`.
+
+* `data` - parameter will point to one or more bytes; the byte in question is at offset `char_offset`. For example, if `char_offset` is `7`, the byte being questioned is `data[7]`. This function only gets called to learn about a single byte at a time; for multi-byte characters, you must respond with the appropriate bits set to indicate what part of a character the byte in question represents.
+
+* `block_offset` — parameter will be the absolute offset, relative to all text in `pg`, for the first byte of the `text_block` record from which the text is derived. For example, if `block_offset` were 1900, the data can be found at the `text_block` record, within `pg`, whose `begin` member is 1900; the purpose of this parameter is for special-case character testing for multiple language scripts (`block_offset` helps `char_info` find out if the text prior to data is a different script).
+
+  However, if `block_offset` is `NO_BLOCK_OFFSET` (value `-1`), the data does not belong to any text block. Some examples of when this can occur would be a byte stream that is about to be inserted but not yet part of a `pg_ref`, or a group of characters within an `undo_ref`, etc.
+
+* `offset_begin` and `offset_end` — parameters indicate the range of byte(s) within data that are valid for purposes of looking "ahead" and "before" `data[char_offset]`. Usually, `offset_begin` will be zero and `offset_end` will be some value ≥ `char_offset`. The purpose of these parameters is for checking adjacent character(s) for determining double- versus single-byte status of a character.
+
+* `mask_bits` — parameter indicates which character type(s) need to be checked; the bits set in `mask_bits` correspond one-for-one to the function result bits given below.
+
+  For example, if `mask_bits` contained BLANK_BIT and CTL_BIT, then the only characteristic that needs to be checked for data[local_offset] is whether or not the
+  character is blank and whether or not it is a control character. The purpose of mask_bits is to optimize the performance of char_info_proc by providing a hint as to which data types can be ignored.
+
+FUNCTION RESULT: The appropriate combination of the following must be the function result (but the bits don't need to be set if they were not set in mask_bits): 
+
+```C
+#define BLANK_BIT						0x00000001	// Character is blank
+#define WORD_BREAK_BIT			0x00000002	// Word breaking char
+#define WORD_SEL_BIT				0x00000004	// Word select char
+#define SOFT_HYPHEN_BIT			0x00000008	// Soft hyphen char
+#define INCLUDE_BREAK_BIT		0x00000010	// Word break but include with word
+#define INCLUDE_SEL_BIT			0x00000020	// Select break but include with word
+#define CTL_BIT							0x00000040	// Char is a control code
+#define INVIS_ACTION_BIT		0x00000080	// Char is not a display char, but arrow, bksp, etc
+#define PAR_SEL_BIT					0x00000100	// Char breaks a paragraph
+#define LINE_SEL_BIT				0x00000200	// Char breaks a line (soft CR)
+#define TAB_BIT							0x00000400	// Char performs a TAB
+#define FIRST_HALF_BIT			0x00000800	// First half of a multi-byte char
+#define LAST_HALF_BIT				0x00001000	// Last half of a multi-byte char
+#define MIDDLE_CHAR_BIT			0x00002000	// Middle of a multi-byte char run
+#define CONTAINER_BRK_BIT		0x00004000	// Break-container bit
+#define PAGE_BRK_BIT				0x00008000	// Break-repeating-shape bit
+#define NON_BREAKAFTER_BIT	0x00010000	// Char must stay with char(s) after it
+#define NON_BREAKBEFORE_BIT	0x00020000	// Char must stay with char(s) before it
+#define NUMBER_BIT					0x00040000	// Char is numeric
+#define DECIMAL_CHAR_BIT		0x00080000	// Char is decimal mark (for decimal tab)
+#define UPPER_CASE_BIT			0x00100000	// Char is MAJUSCULE
+#define LOWER_CASE_BIT			0x00200000	// Char is minuscule
+#define SYMBOL_BIT					0x00400000	// Char is a symbol
+#define EUROPEAN_BIT				0x00800000	// Char is ASCII-European
+#define NON_ROMAN_BIT				0x01000000	// Char is not Roman script
+#define NON_TEXT_BIT				0x02000000	// Char is not really text
+#define FLAT_QUOTE_BIT			0x04000000	// Char is a typewriter quote
+#define SINGLE_QUOTE_BIT		0x08000000	// Quote char is single ' quote
+#define LEFT_QUOTE_BIT			0x10000000	// Char is a left quote
+#define RIGHT_QUOTE_BIT			0x20000000	// Char is a right quote
+#define PUNCT_NORMAL_BIT		0x40000000	// Char is normal punctuation
+#define OTHER_PUNCT_BIT 		0x80000000	// Char is other punctuation in multi-byte
+	
+/* Convenient char_info macro for any quote char in globals: */
+#define QUOTE_BITS (FLAT_QUOTE_BIT | SINGLE_QUOTE_BIT | LEFT_QUOTE_BIT |RIGHT_QUOTE_BIT)
+	
+/* CharInfo/pgCharType convenient mask_bits */
+#define NON_MULTIBYTE_BITS ( (FIRST_HALF_BIT | LAST_HALF_BIT))
+#define WORDBREAK_PROC_BITS (WORD_BREAK_BIT | WORD_SEL_BIT |NON_BREAKAFTER_BIT | NON_BREAKBEFORE_BIT)
+```
+
+**NOTE:** Be aware that HERMES Paige, as a whole, knows nothing at all about "character types" and therefore relies *utterly* on the information provided by `char_info_proc`.
+
+For an example see "Control characters don’t draw”<!-- on page 24-12-->.
+
+### `text_draw_proc`
+
+#### Purpose
+
+To draw the text for a style.
+
+#### Function result
+
+The default function, `pgDrawProc`, draws the text using the standard styles and color as defined in the `style_info` record, plus any other styles that are appropriate (such as strikeout, word underline, etc.).
+
+```C
+PG_FN_PASCAL (void, text_draw_proc) (paige_rec_ptr pg, style_walk_ptr walker, pg_short_t length, draw_points_ptr draw_position, long extra, short draw_mode);
+```
+
+* `walker` —  contains information about the text style, font and paragraph formatting (for more information about the `style_walk` record, *vide* chapter 32, [Style Walkers](#32-style-walkers), as well as "`char_info_proc`" under section 27.6, [Function Definitions](#27.6-Function-definitions)).
+
+* `data`, `offset`, and `length` — provide the pointer to text, offset into that text to start, and the number of bytes to draw, respectively. All text parameters are in bytes; if the text is something other than bytes, it is this function's responsibility to work that out.
+
+  The text is guaranteed never to be zero length, and is guaranteed not to contain any "blanks" that should not be drawn (such as tabs, carriage return characters, etc.). Only text for this style will be given: the data will never cross style boundaries nor will the text ever cross line boundaries (it will always be given for a whole line or a portion of a line).
+
+* `draw_position` is a pointer to a record that defines exactly where to draw the text as follows
+
+  ```
+  typedef struct
+  {
+  	co_ordinate from;						// Draw from
+  	co_ordinate to;							// Draw to
+  	long real_offset;						// Actual offset into all text
+  	long ascent;								// Distance from baseline to top
+  	long descent;								// Distance from baseline to bottom
+  	long line_offset;						// Offset where line begins
+  	long compensate_h;					// Amount of X axis compensation
+  	point_start_ptr starts;			// Current point_start record
+  	shape_ref bitmap_exclude;		// Exclusion rects or null
+  	co_ordinate bitmap_offset;	// Offset to "real" point
+  	co_ordinate vis_offset;			// Total amount point starts were offset
+  	text_block_ptr block;				// Current text block
+  }
+  draw_points, *draw_points_ptr;
+  ```
+
+  The text is to be drawn at coördinate `draw_position -> from`; after drawing, `draw_position -> to` must be set to the ending "pen" position (ending coordinate where the text stops). The `real_offset` field contains the actual byte position (within `pg`) of the text to be drawn relative to all text in the `pg_ref`.
+
+  `ascent` and `descent` — fields define the line's height from the current vertical position (which will be `draw_position -> from.v`).
+
+* `compensate_h` — field is currently not used (but reserved for future enhancement). <!-- TODO: ... -->
+
+* `starts` — field is a pointer to the current `point_start` record. The value in `starts -> flags` can be useful for special drawing, as any of the following might be set in this field:
+
+  ```
+  #define NO_LINEFEED_BIT			0x0001 // Line does not advance vertically
+  #define LINE_HIDDEN_BIT			0x0002 // Line is invisible
+  #define BREAK_PAGE_BIT			0x0004 // Line broke for exclusion
+  #define BREAK_CONTAINER_BIT	0x0008 // Line breaks for next container
+  #define SOFT_BREAK_BIT			0x0010 // Start breaks on soft hyphen
+  #define CUSTOM_CHARS_BIT		0x0020 // Style(s) are custom, not HERMES Paige 
+  #define HAS_WORDS_BIT				0x0040 // One or more word separators exist
+  #define TAB_BREAK_BIT				0x0080 // Tab character terminates this line
+  #define WORD_HYPHEN_BIT			0x0100 // Draw a hyphen after this text
+  #define NEW_PAR_BIT					0x0200 // New paragraph starts here
+  #define NEW_LINE_BIT				0x0400 // New line starts here
+  #define LINE_GOOD_BIT				0x0800 // This line requires no re–calculation
+  #define RIGHT_DIRECTION_BIT	0x1000 // Text in this start is right-to-left
+  #define SOFT_PAR_BIT				0x2000 // Soft carriage return ends line
+  #define PAR_BREAK_BIT				0x4000 // Paragraph ends here
+  #define LINE_BREAK_BIT			0x8000 // Line ends here
+  #define TERMINATOR_BITS			0xFFFF // Flagged only as terminator record
+  
+  #define HARD_BREAK_BITS (PAR_BREAK_BIT | SOFT_PAR_BIT | BREAK_CONTAINER_BIT | BREAK_PAGE_BIT)
+  ```
+
+* `bitmap_offset` — field indicates how far the display is offset from its screen position to draw within the offscreen bitmap (if that is the drawing mode).
+
+* `vis_offset` — field indicates how much was added to the display to obtain the real screen position; usually, this is the "scroll position" of the text.
+
+* `block` — field contains a pointer to the current `text_block` record.
+
+* The two parameters in `text_draw_proc` — `extra` and `draw_mode` — define the amount of space (in pixels) to make up for justification and the current drawing mode, respectively.
+
+#### Notes
+
+* On *Macintosh*, if text is scaled, the field's `draw_position` will already reflect the scaling (i.e., the coördinates will already be scaled) and the point size will also have been scaled and set appropriately. Therefore you do not need to do anything "special" for scaling in this function.
+* **The length of text** as here defined **will always exclude "invisible" characters**, including trailing spaces. Example: If a 4-byte line of text were 3 bytes followed by a carriage return, the `length` parameter passed to `text_draw_proc` will be `3`, not `4`). Furthermore, if a line of text has embedded tab characters (or other similar controls), multiple calls to `text_draw_proc` will be made, each of which omit the tab characters. If omitting non-displaying characters results in zero `length`, *the function will not be called at all*.
+* "Invisible" characters are determined to be so as a response from `char_info_proc`. HERMES Paige knows nothing about the nature of characters. Hence, if you embed a stream of characters for special purposes, you can declare each of them as "visible" (or not) simply by writing your own `char_info_proc`.
+* Rather than actually drawing a character, sometimes all you need do is change the character attributes. See "Control characters don't draw"<!-- on page 24-12-->.
+
+### `dup_style_proc` and `delete_style_proc`
+
+#### Purpose
+
+To duplicate any structure(s) in a `style_info` record, or to delete any structure(s) in the `style_info` record.
+
+#### Standard function
+
+The default functions, `pgDupStyleProc` and `pgDeleteStyleProc`, do nothing (there are normally no allocated structures within a `style_info` record). These functions are mainly for special application features.
+
+```
+PG_FN_PASCAL (void, dup_style_proc) (paige_rec_ptr src_pg, paige_rec_ptr target_pg, short reason_verb, format_ref all_styles, style_info_ptr style);
+PG_FN_PASCAL (void, delete_style_proc) (paige_rec_ptr pg, pg_globals_ptr globals, short reason_verb, format_ref all_styles, style_info_ptr style);
+```
+
+Whenever HERMES Paige duplicates (copies) a `style_info` record internally, `dup_style_proc` is called. This would give the application a chance to duplicate any structures it may have placed in the `style_info` record. For duplication, both source and target `paige_rec`s are given. The source will be the original HERMES Paige document from which the item is being copied; the target will be the `paige_rec` for which the copy is being applied. Either might be `NULL` depending on the reason the function is being called.
+
+Whenever HERMES Paige is about to delete a `style_info` record, `delete_style_proc` is called, giving the application a chance to dispose any structures it may have placed in the `style_info` record.
+
+`globals` is sometimes used in cases where `pg` can be `NULL` if style records are getting disposed from an `undo_ref`, but Windows version must have a pointer to the globals when a style is deleted.
+
+For both duplicate and delete functions, a `verb` parameter is given to indicate the reason the function is being called, which must be one of the following:
+
+```
+enum
+{
+	prepare_undo_text_reason,
+	prepare_undo_style_reason,
+	prepare_undo_typing_reason,
+	undo_delete_reason,
+	undo_style_reason,
+	copy_reason,
+	paste_reason,
+	for_next_insert_reason,
+	new_stylesheet_reason,
+	internal_clone_reason,
+	not_used_reason,
+	pgdispose_reason,
+	disposeundo_reason,
+	delete_text_reason,
+	pg_new_reason
+}
+```
+
+A good example of this is, supposing that a picture structure is kept in one of the `style_info` fields and HERMES Paige made a copy of the style, you would also want to duplicate the picture; for deletion, you would want to delete the picture, and so forth.
+
+Neither function gets called when you "set" a style for the first time, but rather it is called for other situations such as Copy, Paste and deleting all the text for a style.
+
+The parameter `all_styles` is the `memory_ref` containing all the `style_info` records (of which the `style` parameter is part). The purpose of this parameter is to provide the array of style records for special situations where `pg` is a null pointer (see below).
+
+#### Note
+
+In these particular functions, `pg` can be a null pointer. This is because both of these functions can get called in relation to "undo" and "redo" functions that are not associated with a `pg_ref` at the time they are required. If you need to examine the array of style_info records, use the `all_styles` parameter.
+
+### TECH NOTE: Source and destination `pg_ref`s when duplicating or deleting
+
+> > > > > > > I'm doing some custom style work and I'm trying to follow the logic of how the hooks are called for duplicate and delete, etc. I understand that sometimes the `pg_ref` to these hooks is passed as `NULL`. However, it seems to me that the duplicate call should have *both* the source and destination `pg_ref`s, and *both* the source and destination style records.
+
+I can best answer all these questions by explaining what the duplicate/delete functions are all about.
+
+The only real purpose of the duplicate and delete function hooks in a style is to handle memory structures that have been embedded in the style itself. Otherwise these hooks are not needed and shouldn't be used.
+
+The `style_info` record is always "copied" or "removed" by HERMES Paige as needed, without you doing anything. However, if you have embedded some kind of Handle, Pointer, `memory_ref`, etc. inside the `style_info`, you would need to be informed of duplications/deletions, so you can handle the memory allocation(s).
+
+For example, let's say you create a custom style that contains as one of its fields a `PicHandle`. You initially created this style something like:
+
+```c
+style_info my_style;
+style_info.user_var = (long) MyPicture; // put in a Picture handle
+```
+
+As long as this `style_info` sits inside the `pg_ref` as-is, no problem. Later on, however, the user does `pgCopy`, which causes HERMES Paige to make a duplicate of this particular style_info. In such a case, you would wind up with the same `PicHandle` in each copy of the style -- which would be a disaster. Hence, you need to be told that `HERMES Paige` just made a copy of your `style_info` record and you would need to make a unique `PicHandle` to avoid this problem, something like:
+
+```
+HandToHand((Handle*) &style_info.user_var);
+```
+
+If `user_var` were not a memory allocation you *would not care* that HERMES Paige made a copy.
+
+The same is true for deletions: if HERMES Paige decides to dispose a `style_info` record (which *always* occurs during `pgDispose`) you would need to be told, so you could remove memory allocations, as:
+
+```c
+KillPicture((PicHandle) style_info.user_var);
+```
+
+That is really all there is to it.
+
+As to when and why HERMES Paige calls these functions, it doesn't matter. There are lots of reasons and I've only named the obvious ones. All you need to know is:
+
+1. The "duplicate" function gets called after HERMES Paige has made an exact copy of a `style_info` for whatever reason.
+
+2. The "delete" function gets called just before HERMES Paige removes a `style_info` record for whatever reason.
+
+Now, how can a `pg_ref` be `NULL` when these functions get called? That only occurs when the target `pg_ref` does not exist. The only situation where this exists is setting up an `undo_ref`, in which case there isn't any target `pg_ref`.
+
+### `alter_style_proc` and `alter_par_proc`
+
+#### Purpose
+
+To alter the style as necessary, given that it is about to be modified as "offspring" of some other file. For example, if the user selected text that was currently in twelve-point Helvetica regular, then changed the style to **bold**, HERMES Paige creates a new `style_info` record exactly the same as twelve-point Helvetica but with the **bold** attribute set. In this way, new styles can be "offspring" of parent styles and `alter_style_proc` gets called with the original style and offspring so that custom styles can be altered appropriately.
+
+#### Standard function
+
+The default function, `pgAlterStyleProc`, does nothing. This function is normally used for custom styles if the customised elements need to be changed before becoming offspring.
+
+```
+PG_FN_PASCAL (void, alter_style_proc) (paige_rec_ptr pg, style_info_ptr old_style, style_info_ptr new_style, style_info_ptr mask);
+PG_FN_PASCAL (void, alter_par_proc) (paige_rec_ptr pg, par_info_ptr old_par, par_info_ptr new_par);
+```
+
+Upon entry, `old_style` is the "parent" (original) style and `new_style` is the altered "offspring" (new) style.
+
+For `alter_style_proc`, the mask will indicate which field(s) of the `style_info` are actually being altered. Only the non—zero fields as indicated in `mask` will actually be changed.
+
+A typical reason for using `alter_style_proc` is the following scenario: A custom style is developed by the application that places a "box" around text. The box effect is accomplished purely by changing the `draw_proc` to draw a frame around the surrounding text. The user, however, selects a range of text to become "plain", in which case you might want to clear out your custom function pointers. The `alter_style_proc` would be best suited for this purpose: you could check the `new_style` to see if it is your custom "box" style and, if so, reïnitialise all the function pointers to their defaults (so your box doesn't draw any more).
+
+`alter_par_proc` is identical to `alter_style_proc`, except in that it does not have a `mask` parameter and is called for paragraph formats.
+
+### `copy_text_proc` and `delete_text_proc`
+
+#### Purpose
+
+To duplicate any structure(s) in within the text stream associated with a `style_info` record, or to delete any structure(s) in the text for `style_info` record.
+
+##### Note 
+
+Standard text characters are automatically copied or deleted by HERMES Paige. The purpose of this function is to copy anything that really isn't text, such as embedded picture allocations, controls, etc.
+
+#### Standard function
+
+The default functions, `pgCopyTextProc` and `pgDeleteTextProc`, do nothing (there are normally no allocated structures within the text stream). These functions are mainly for special application features.
+
+```C
+PG_FN_PASCAL (void, copy_text_proc) (paige_rec_ptr src_pg, paige_rec_ptr target_pg, short reason_verb, style_info_ptr style, long style_position, long text_position, pg_char_ptr text, long length);
+PG_FN_PASCAL (void, delete_text_proc) (paige_rec_ptr pg, short reason_verb, style_info_ptr style, long style_position, long text_position, pg_char_ptr text, long length);
+```
+
+These functions are similar to `dup_style_proc` and `delete_style_proc` except in that they are intended for structures that the application might have embedded into the text stream for the "style" in question. They get called for exactly the same reasons (and occurrences) as the `dup_style_proc` and `delete_style_proc`, but for the text stream.
+
+On entry, `style_position` is the byte offset where the style begins (byte offset relative to all text within the `pg_ref`). The `text_position` parameter is the offset of the text in relation to all text in the `pg_ref` (this is not the offset of the text given in the `text` parameter, but rather the absolute position from the first byte in `pg`). The `text` parameter is a pointer to the text to be copied or deleted and the `length` parameter is the number of bytes that text is pointing to.
+
+The `reason_verb` for both functions indicates the reason for the function call; this value will be one of the values listed above for `dup_style_proc` and `delete_style_proc`.
+
+For `copy_text_proc`, the text is being copied from `src_pg` to `target_pg`.
+
+#### Notes
+
+* Neither of these functions get called unless `REQUIRES_COPY_BIT` is set in the `class_bits` field of the `style_info` record.
+* In these particular functions, the `paige_rec_ptr` parameter(s) can be a null pointer. This is because both of these functions can get called in relation to "undo" and "redo" functions that are not associated with a `pg_ref` at the time they are required.
+
+### `setup_insert_proc`
+
+#### Purpose
+
+To set up for the next text insert. Custom style features sometimes require a "warning" before a new text insertion.
+
+#### Standard function
+
+The default function, `pgSetupInsertProc`, does nothing. This function is mainly intended for custom style features, but HERMES Paige will alter this hook if and when an `embed_ref` is inserted.
+
+```
+PG_FN_PASCAL (short, setup_insert_proc) (paige_rec_ptr pg, style_info_ptr to_be_inserted, long position);
+```
+
+The main reason for this low-level function is to avoid "extending" a style beyond the range of what makes sense. A perfect example of this is when pictures have been embedded into the text stream as a "style". If the user were to select the style at the end of the picture, you would not want the style to extend along with the text; rather, you would want to null out the "picture" part of the style and force HERMES Paige to insert a normal, non-picture format from that point forward. The `setup_insert_proc` give you a chance to do that.
+
+Upon entry, `to_be_inserted` is the style that would affect the next text, if you did nothing and `position` is the text position for the text insertion (relative to all text in `pg`).
+
+If you change anything in `t`o_be_inserted (which you are allowed to do), return `TRUE` from the function result. If `to_be_inserted` is untouched, return `FALSE`.
+
+### `track_control_proc`
+
+#### Purpose
+
+To track a "mouse" across a "control" type style.
+
+##### Note
+
+A style is considered a control simply if its `class_bits` field contains `STYLE_IS_CONTROL` setting.
+
+#### Standard function
+
+Usually, the default function, `pgTrackCtlProc`, does nothing, because this function only gets called if class_bits indicate it is a control style.
+
+```C
+PG_FN_PASCAL (long, track_control_proc) (paige_rec_ptr pg, short verb, t_select_ptr first_select, t_select_ptr last_select, style_walk_ptr styles, pg_char_ptr associated_text, point_start_ptr bounds_info, short modifiers, long track_refcon);
+```
+
+This function gets called by HERMES Paige only from within `pgDragSelect` (text click/drag) and works precisely as follows: when text is clicked for the first time (`pgDragSelect` called with `verb = mouse_down`), the `class_bits` field of the style applied to the character being "clicked" is examined for `STYLE_IS_CONTROL`; if that bit is set, `track_control_proc` gets called. Then, if `track_control` returns any non–zero result, HERMES Paige "remembers" to make subsequent calls to `track_control` during every subsequent call to `pgDragSelect` for announcers until (and including) the moment that `mouse_up` is indicated.
+
+##### Note
+
+If `track_control` returns zero from its initial (`mouse_down`) call, it will not get called again until the next time `pgDragSelect` receives a `mouse_down` and the style's `class_bits` contain `STYLE_IS_CONTROL`.
+
+Conversely, if `track_control_proc` returns a non–zero response during mouse_down (indicating that it is indeed a "control" as far as the application is concerned), `pgDragSelect` will neither track nor highlight nor "auto scroll" any text in the normal fashion. Rather, each new call to `pgDragSelect` will simply determine the location of the new selection point and pass that information to `track_control_proc`. In other words, once this function indicates the style is a "control", the *application* becomes responsible for handling the `mouse_down`, `mouse_moved`, and `mouse_up` activity.
+
+For every `track_control_proc` call, the `verb` parameter contains the same verb given to `pgDragSelect`. The `first_select` and `last_select` parameters will contain selection information for the initial and final (most recent) `mouse_down` points, respectively (see record structure below).
+
+* `styles` — parameter is a pointer to a `style_walk` record containing the style information for the first, original selection point (which will be, of course, the same style for which `track_control_proc` is being called).
+
+* `associated_text` — gives the text for which the (original) style is applied.
+
+  **NOTE:** `associated_text` is a pointer to the first byte of text for which the style applies, not necessarily the character that is being "clicked."
+
+* `bounds_info` — parameter is a pointer to a `point_start` record that defines the boundaries of the portion of line originally selected. Among the fields in `bounds_info` that is probably the most useful is `bounds_info -> bounds`, which is a rectangle defining the precise bounding area for the top and bottom of the text line and the left and right side of the character(s) enclosed by the style. However, this information is neither scrolled nor scaled.
+
+* `modifiers` and `track_refcon` — parameters are one and the same values given in the most recent call to `pgDragSelect`.
+
+#### Function result
+
+The initial call to `track_control_proc` (`pgDragSelect` got called for `mouse_down`) should return any non–zero result if the selection point is indeed a control and the application wishes to continue tracking it through more calls to `track_control_proc`.
+
+For every call to `track_control_proc`, `pgDragSelect` returns the same function result. Hence your application can detect when a "control" has been clicked by what is returned from `pgDragSelect`.
+
+#### Selection Information
+
+To obtain information about the first selection point (or most recent selection point) you can examine `first_select` or `last_select`, both of which point to the following structure:
+
+```C
+typedef struct
+{
+	long offset;							// Absolute text offset
+	select_pair word_offsets;	// Original word offsets, if applicable
+	co_ordinate original_pt;	// Original point of selection
+	pg_short_t line;					// Point start number
+	short flags;							// Internal use only
+	long control_offset;			// Offset for purposes of tracking ctrl
+	long section_num;					// Section ID (reserved for future use)
+	long primary_caret;				// Relative primary direction caret
+	long secondary_caret;			// Relative secondary direction caret
+}
+t_select;
+```
+
+Among the fields in `t_select`, probably the two of interest to the `track_control_proc` are `control_offset` and `original_pt`: the `control_offset` field contains the text position that corresponds to the selection coördinate. The `original_pt` contains the `co_ordinate` that was used to determine the selection point.
+
+**NOTE:** Normally, the `offset` field contains the selection position of text; when the `track_control_proc` is in progress, however, you should examine `control_offset` instead, as it may be different than the actual text position.
+
+**NOTE:** The `original_pt` is not necessarily one and the same value given to `pgDragSelect`, since it is backwards–adjusted to the document's current scrolled position and scaling values.
+
+By *backwards–adjusted* is meant the following: Before `pgDragSelect` determines the text selection that corresponds with the `co_ordinate` given it, the original `co_ordinate` values are first offset by the (positive) vertical and horizontal scrolled positions of the document; then, the `co_ordinate` is scaled to the *inverse* of the document's scaling factor, *e.g.*, if the document is currently scaled by `1/2`, the `co_ordinate` is upscaled by `2/1`, and if the document is currently scaled by `2/1`, the `co_ordinate` is downscaled by `1/2`, etc.
+
+Hence, to obtain the "real" co_ordinate of, say, `first_select -> original_pt` from your `track_control_proc`, perform the following:—
+
+```C
+co_ordinate real_pt;
+real_pt = first_select -> original_pt;
+pgScaleLong(-pg -> scale_factor.scale, pg -> scale_factor.origin.h, &real_pt.h);
+pgScaleLong(-pg -> scale_factor.scale, pg -> scale_factor.origin.v, &real_pt.v);
+pgOffsetPt(&real_pt, pg -> scroll_pos.h, pg -> scroll_pos.v);
+```
+
+#### Checking for Arrow Selection(s)
+
+HERMES Paige performs a "shift-arrow" selection by emulating a shift-click internally. When using the control tracking hook, your application can become confused by this action, as the hook will be called if the user performs shift-arrow over a "control" style.
+
+To avoid this problem, the `modifiers` parameter will contain the following attribute if arrow keys are causing the selection (instead of the mouse):
+
+```C
+#define ARROW_ACTIVE_BIT 0x8000	// Arrow key is actively down
+```
+
+### `style_activate_proc`
+
+#### Purpose
+
+To activate or deäctivate "control" styles when the `pg_ref` changes its highlight state.
+
+#### Standard function
+
+The standard function, `pgActivateStyleProc`, does nothing.
+
+`````
+PG_FN_PASCAL (void, style_activate_proc) (paige_rec_ptr pg, style_info_ptr style, select_pair_ptr text_range, pg_char_ptr text, short front_back_state, short perm_state, pg_boolean show_hilite);
+`````
+
+Whenever the active/inactive state changes within a `pg_ref`, this function gets called for every style that has `ACTIVATE_ENABLE_BIT` set in `class_bits`. Note that the style is usually an application-defined "control" style but does not really need to be a control.
+
+The situation that causes this function to be called is:— 
+
+1. the document changes active/inactive states by virtue of `pgSetHiliteStates`, and 
+
+2. the style's `class_bits` contain `ACTIVATE_ENABLE_BIT`.
+
+Upon entry, the `style` parameter is a pointer to the `style_info` record.
+
+* `ext_range` — parameter defines the beginning and ending range of text for which this style applies, and text is a pointer to the first byte in the text stream for which this style applies.
+* `font_back_state` and `perm_state` — are the same values as given in `pgSetHiliteStates`; note that `pgSetHiliteStates` is the only way a `pg_ref` can change from active to inactive or vice versa.
+
+If `show_hilite` is `TRUE` — the new highlight state is to be drawn; otherwise, this function should not change anything on the screen.
+
+### `save_style_proc`
+
+```C
+PG_FN_PASCAL (void, style_activate_proc) (paige_rec_ptr pg, style_info_ptr style, select_pair_ptr text_range, pg_char_ptr text, short front_back_state, short perm_state, pg_boolean show_hilite)
+```
+
+This hook gets called during `pgSaveDoc`, just before `style_to_save` gets written to the file.
+
+The intended purpose of this function is to change something in `style_to_save` before each of its fields get written to the file; when the `style_info` record is read later, the field(s) will contain the altered contents, if any.
+
+An example of using this function would be to replace a memory structure that is stored in the `style_info` record with something that can be recognized to restore that structure later when the file is opened. If a pointer to a picture were placed in one of the `style_info` fields, for instance, the application might want to change that to some type of "picture ID" reference so it can restore the appropriate picture later.
+
+#### Note
+
+The actual `style_info` record within the `pg_ref` is not altered, only the record that is written to the file is altered.
+
+#### Standard function
+
+The standard `save_style_proc` does nothing.
+
+## 27.7 Paragraph Style Functions
+
+Paragraph formats—`par_info` records—also contain their own set of low-level function pointers. For each `par_info`, HERMES Paige sets default functions in the following record:—
+
+### `line_glitter_proc`
+
+```
+typedef struct
+{
+	line_glitter_proc line_glitter;	// Draw ornaments, line
+	tab_measure_proc tab_width;			// Return the tab position
+	tab_draw_proc tab_draw;					// Draw leaders
+	dup_par_proc duplicate;					// Style will get duplicated
+	delete_par_proc delete_par;			// Style will get deleted
+	alter_par_proc alter_par;				// Style will get altered
+}
+pg_par_hooks;
+```
+
+#### Purpose
+
+To draw "ornaments" such as lines over paragraphs, line numbers, paragraph numbers, etc.
+
+```C
+PG_PASCAL (void) line_glitter_proc (paige_rec_ptr pg, style_walk_ptr walker, long line_number, long par_number, text_block_ptr block, point_start_ptr first_line, point_start_ptr last_line, point_start_ptr previous_first, point_start_ptr previous_last, co_ordinate_ptr offset_extra, rectangle_ptr vis_rect, short call_verb);
+```
+
+This function gets called after each text line is drawn; information is available from the function parameters to determine whether or not the line is the beginning of a paragraph, the ending of a paragraph, and whether or not a page breaking characters terminates the line.
+
+* `walker` — parameter points to a `style_walk` record which contains pointers to the current text and paragraph style (*vide* chapter 32, [Style Walkers](#32-style-walkers)).
+
+* `line_number` and `par_number` — will contain the line and paragraph number that just displayed, respectively. Both of these numbers are one-indexed; *i.e.*, the top line or paragraph of `pg` is `1`, the second line is `2`, etc.
+
+  **CAUTION:** The line and paragraph numbers will be incorrect unless you have set `COUNT_LINES_BIT` as one of the attributes flags in the `pg_ref`.
+
+* `block` — parameter points to the `text_block` record containing the text for the line (if you need to access the text, see "Accessing Text" *infra*<!-- on page hypertext here-->).
+
+* `first_line` and `last_line` — parameters point to the first and last point_start records that compose the line (the format of an HERMES Paige line is composed of one or more records called a `point_start`—for information on this structure, *vide* section 36.2, [Line Records](#36.2-line-records)). Most of the information your application needs to know about the line is contained in one of these two parameters—see "Determining Line Type" *infra* <!-- on page hypertext here-->).
+
+* `previous_first` and `previous_last` — parameters point to the previous line's beginning and ending `point_start` records; if there is no previous line, they are null pointers.
+
+* `offset_extra` — parameter points to a `co_ordinate` record whose `h` and `v` fields indicate the distance, in pixels, the text was adjusted when drawn; given the horizontal and vertical positions of the line as defined in its `point_start` record(s), HERMES Paige will have added `offset_extra -> h` and `offset_extra -> v` to those locations when it drew the text (see "Determining Bounding Rectangle" *infra* <!-- on page hypertext here-->).
+
+* `call_verb` — indicates the nature of the function call, which will be one of the following:—
+
+  ```
+  enum
+  {
+  		glitter_bitmap_draw,
+  		glitter_post_bitmap_draw,
+  		glitter_normal_draw
+  };
+  ```
+
+  * `glitter_bitmap_draw` — The line has been drawn through HERMES Paige's offscreen bitmap; the bits have not yet been stamped to the screen.
+  * `glitter_post_bitmap_draw` — The `line_glitter` function has been called a second time, after it stamped the bits to the screen in offscreen drawing mode.
+  * `glitter_normal_draw` — The line has been drawn directly to the screen.
+
+* **NOTE:** If `call_verb` = `glitter_post_bitmap_draw`, the function would have been called once already for the same line. The purpose of this `call_verb` is to give the application a chance to draw directly to the screen after HERMES Paige has displayed the offscreen bits. If `call_verb` = `glitter_normal_draw`, however, offscreen drawing did not occur.
+
+#### Determining Line Type
+
+`first_start` and `last_start` — parameters point to the beginning and ending records that make up a line of HERMES Paige text. Each of these are type `point_start`:
+
+```c
+typedef struct
+{
+	pg_short_t offset;	// Position into text
+	short extra;				// Tab record if &0xC000 == 0
+	short baseline;			// Distance from bottom to draw
+	pg_short_t flags;		// Various attribute flags
+	long r_num;					// Wrap rectangle record where this sits
+	rectangle bounds;		// Points that enclose text piece exactly
+}
+point_start, *point_start_ptr;
+```
+
+It is possible that `first_start` and `last_start` will be the same (both might point to the same record). For a single line of text, for example, that contains no style changes and no tab characters, HERMES Paige maintains only one `point_start`; if the line contains style changes and/or tabs, a `point_start` record separates each style or tab separation.
+
+The field you will probably need to examine the most often within a `point_start` is `flags`, which contains various bit settings that indicate almost everything you would need to know about the line, such as whether the line begins a new paragraph, whether it ends a paragraph, whether or not it breaks on a CR character or a page break character, etc.
+
+The following bit values that exist in `flags` for a `point_start` record indicate the anatomy of the line:
+
+```C
+#define NO_LINEFEED_BIT			0x0001 // Line does not advance vertically
+#define LINE_HIDDEN_BIT			0x0002 // Line is invisible
+#define BREAK_PAGE_BIT			0x0004 // Line broke for exclusion
+#define BREAK_CONTAINER_BIT	0x0008 // Line breaks for next container
+#define SOFT_BREAK_BIT			0x0010 // Start breaks on soft hyphen
+#define CUSTOM_CHARS_BIT		0x0020 // Style(s) are custom, not HERMES Paige 
+#define HAS_WORDS_BIT				0x0040 // One or more word separators exist
+#define TAB_BREAK_BIT				0x0080 // Tab character terminates this line
+#define WORD_HYPHEN_BIT			0x0100 // Draw a hyphen after this text
+#define NEW_PAR_BIT					0x0200 // New paragraph starts here
+#define NEW_LINE_BIT				0x0400 // New line starts here
+#define LINE_GOOD_BIT				0x0800 // This line requires no re–calculation
+#define RIGHT_DIRECTION_BIT	0x1000 // Text in this start is right-to-left
+#define SOFT_PAR_BIT				0x2000 // Soft carriage return ends line
+#define PAR_BREAK_BIT				0x4000 // Paragraph ends here
+#define LINE_BREAK_BIT			0x8000 // Line ends here
+#define TERMINATOR_BITS			0xFFFF // Flagged only as terminator record
+
+#define HARD_BREAK_BITS (PAR_BREAK_BIT | SOFT_PAR_BIT | BREAK_CONTAINER_BIT | BREAK_PAGE_BIT)
+```
+
+Some of these bits might be set in either `first_start` or `last_start`, while others will only be set in first_start, still others will only be in `last_start`.
+
+The following code examples demonstrate common tests for flags:—
+
+##### Testing for new paragraph
+
+```C
+if (first_start -> flags & NEW_PAR_BIT)
+{
+	// Line begins a paragraph
+}
+```
+
+##### Testing end (last line) of paragraph:
+
+````C
+if (last_start -> flags & PAR_BREAK_BIT)
+{
+	// Last line of paragraph
+}
+````
+
+##### Testing for soft page break
+
+```C
+if (last_start -> flags & BREAK_PAGE_BIT)
+{
+	// Page break comes after this line (SOFT pg brk char)
+}
+```
+
+##### Testing for hyphenated word
+
+```
+if (last_start -> flags & WORD_HYPHEN_BIT)
+{
+	// Line is hyphenated (see note below)
+}
+```
+
+Regarding `WORD_HYPHEN_BIT`: This bit will only be set if your application has provided a hyphenate hook and that hook has indicated a hyphenation break; except for "soft hyphen" characters, HERMES Paige will never automatically hyphenate.
+
+##### - or, for soft hyphens
+
+```
+if (last_start -> flags & SOFT_BREAK_BIT)
+{
+	// Line ends on soft hyphen character
+}
+```
+
+Regarding `WORD_HYPHEN_BIT`: This bit will only be set if your application has provided a hyphenate hook and that hook has indicated a hyphenation break; except for "soft hyphen" characters, HERMES Paige will never automatically hyphenate.
+
+#### Determining Bounding Rectangle
+
+It is common to want the bounding rectangle and/or the top or bottom dimensions of a line. This is accomplished by examining the `bounds` field of either `first_start` or `last_start`, or both.
+
+When doing so, always add `offset_extra` to the side(s) of the bounding area to determine the exact drawing location. The following code examples show typical methods of determining bounding dimensions:
+
+##### Line's top
+
+```C
+lineTop = first_start->bounds.top_left.v + offset_extra->v;
+```
+
+**NOTE:** Both `first_start` and `last_start` will have the same top and the same bottom, each reflecting the line's top and bottom
+
+##### Line's bottom
+
+```C
+lineBottom = first_start -> bounds.bot_right.v + offset_extra -> v;
+```
+
+##### Line's left side
+
+```C
+lineLeftSide = first_start -> bounds.top_left.h + offset_extra -> h;
+```
+
+##### Line's right side
+
+```C
+lineRightSide = last_start -> bounds.bot_right.h + offset_extra->h;
+```
+
+#### Paragraph(s) versus line(s)
+
+Your application might use the line glitter hook to place ornaments around, or on the top of "paragraphs," yet this might not appear immediately intuitive since this hook is line-oriented (gets called for every line of text).
+
+However, since an HERMES Paige paragraph is merely composed of one or more lines, by interrogating the `flags` field in `first_start` or `last_start`, you can immediately learn what portion of the paragraph the line belongs to.
+
+For example, if `NEW_PAR_BIT` is set in `first_start -> flags`, the line is first in a paragraph, while if `last_start -> flags` has `PAR_BREAK_BIT` set, the line is last in a paragraph.
+
+**NOTE:** For one-line paragraphs only, both `NEW_PAR_BIT` and `PAR_BREAK_BIT` can be set.
+
+#### Finding "real" text position
+
+The feature you are implementing with line glitter might require you to learn the actual text position of the line, relative to the beginning of all text in the document. To do so, simply add `first_start -> offset` to the text block's `begin` field.
+
+##### Real text position
+
+```
+longtextPosition;
+textPosition = (long) first_start -> offset; // compilers often need this coercing textPosition += block -> begin; // Add the block's begin, = real text position
+```
+
+#### Line's text length (or ending position)
+
+To learn how many bytes compose the line, subtract the offset value in the element *after* `last_start` from the offset value in `first_start`.
+
+##### Line length
+
+```
+pg_short_t lineTextSize;
+lineTextSize = last_start[1].offset - first_start->offset;
+```
+
+**NOTE:** `last_start[1]` is *guaranteed* to exist even if `last_start` defines the end of the whole document, because HERMES Paige always appends at least one `point_start` defining the ending position of all text.
+
+To obtain the "real" text offset of the line's end, add the element after last_start to the block’s "begin” value:
+
+##### Offset of line end
+
+```C
+long endTextPosition;
+endTextPosition = (long) last_start[1].offset;
+endTextPosition = block -> end;
+```
+
+#### Accessing text
+
+If it is necessary to examine the actual text of a line, you can do so by getting a pointer to `block -> text` and its first byte in `first_line -> offset`:
+
+```
+// The following example shows how to look at the text in the line:
+pg_char_ptr text;
+text = UseMemory(block -> text);
+text += first_start -> offset;	// Points to FIRST BYTE of line
+// .. be sure when you are through with "text" you call:
+UnuseMemory(block -> text);
+```
+
+### `tab_measure_proc` and `tab_draw_proc`
+
+#### Purpose
+
+To measure the distance required for a tab and to draw "tab leaders."
+
+#### Standard function
+
+`pgTabMeasureProc`, the default function for `tab_measure_proc`, returns the appropriate distance for every tab; `pgTabDrawProc`, the default `tab_draw_proc`, draws tab leaders if they exist.
+
+```C
+PG_FN_PASCAL (long, tab_measure_proc) (paige_rec_ptr pg, style_walk_ptr walker, long cur_pos, long cur_text_pos, long line_left, pg_char_ptr text, pg_short_t text_length, long *char_positions, pg_short_t PG_FAR *tab_rec_info);
+PG_FN_PASCAL (void, tab_draw_proc) (paige_rec_ptr pg, style_walk_ptr walker, tab_stop_ptr tab, draw_points_ptr draw_position);
+```
+
+For `tab_measure_proc`, `walker` is the current style and paragraph format; `cur_pos` is the current text width of the characters in the line preceding the tab; `current_text_pos` is the text position within `pg` that contains the tab. The `line_left` parameter indicates the position where the line started, in pixels (which would include paragraph indentation, etc.).
+
+* `text` — parameter is a pointer to the text character immediately following the tab being measured and `text_length` holds the number of bytes remaining in that text. The `char_positions` parameter is a pointer to the character pixel positions that correspond to the text bytes (for more information about character positions, *vide* "`measure_proc`" under section 27.6, [Function Definitions](#27.6-function-definitions)).
+
+* `tab_info_rec` — parameter points to the extra field of the current `point_start` record (for information about `point_start`, *vide* "`line_glitter_proc`" under section 27.7, [Paragraph Style Definitions](#27.7-paragraph-style-functions)). If the tab position does not correspond to any physical tab_stop record, `*tab_info_rec` should get cleared to zero; otherwise, `*tab_info_rec` should be set to `tab_stop` element number ORed with `0x8000`. (Example: If tab corresponds to element 3 in the tab_stop array, `*tab_info_rec` should be set to `0x8003`). This function should return the "width" of the tab character that, if added to `cur_pos`, would hit the appropriate tab position.
+
+For `tab_draw_proc`, `walker` is the current style/paragraph info, `tab` is the `tab_stop` record, and `draw_position` will contain the screen positions for the end of the text just drawn and the start of the tab position (hence, the two points to draw a tab leader). For a description of a `draw_points` record, *vide* "`text_draw_proc`" under section 27.7, [Paragraph Style Functions](#27.7-paragraph-style-functions).
+
+### `dup_par_proc` and `delete_par_proc`
+
+#### Purpose
+
+To duplicate the memory allocations, if any, that are present in the `par_info` record.
+
+##### Note
+
+The record itself is automatically duplicated by HERMES Paige. The purpose of this function is to make copies of memory allocations that are embedded in the record.
+
+#### Standard function
+
+In `pgDupParProc`, the `memory_ref` containing a list of tabs is duplicated. In, `pgDeleteParProc`, they are deleted. Nothing else is copied or deleted (since there are no other memory structures in a standard `par_info` record).
+
+```C
+PG_FN_PASCAL (void, dup_par_proc) (paige_rec_ptr src_pg, paige_rec_ptr target_pg, short reason_verb, par_ref all_pars, par_info_ptr par_style);
+PG_FN_PASCAL (void, delete_par_proc) (paige_rec_ptr pg, short reason_verb, par_ref all_pars, par_info_ptr par_style);
+```
+
+These functions do exactly the same thing as `dup_style_proc` and `delete_style_proc`, except for `par_info` records. The `all_pars` parameter is the `memory_ref` containing all the paragraph formats (of which the style parameter is a part).
+
+**NOTE:** In this function it is possible that the `paige_rec_ptr`(s) will be null. This will happen if either function is getting called from the "undo" and "redo" function for which there is no `pg_ref` associated. If you need to examine all the `par_info` records, use `all_pars`.
+
+## 27.8 "Global" HERMES Paige Low-level Hooks
+
+HERMES Paige also has an additional set of low-level hooks that apply to all text and styles for that HERMES Paige object; you can also replace any of these to enhance customized features (or, if you want all `pg_ref`s to assume various functions other than the standard, you can change the default functions in `pg_globals`): 
+
+```
+typedef struct
+{
+	line_init_proc line_init;							// Initialise line measure
+	line_measure_proc line_proc;					// Measure a line
+	line_adjust_proc adjust_proc;					// Adjust a line
+	line_validate_proc validate_line;			// Validate a line
+	line_parse_proc parse_line;						// Change length for parsing
+  hyphenate_proc hyphenate;							// Hyphenate word
+  hilite_rgn_proc hilite_rgn;						// Make highlight region
+	draw_hilite_proc hilite_draw;					// Draw (invert) highlight
+	text_load_proc load_proc;							// Load text for text_block
+	text_break_proc break_proc; 					// Find break in text_block
+	draw_cursor_proc cursor_proc;					// Draw a caret
+	pt2_offset_proc offset_proc;					// Find offset of point
+	font_init_proc font_proc;							// Set up font_info
+	special_char_proc special_proc;				// Special character draw
+	auto_scroll_proc auto_scroll;					// Called for auto-scrolling during drag
+	scroll_adjust_proc adjust_scroll;			// Adjust for scroll
+	draw_scroll_proc draw_scroll;					// Draw for scroll
+	draw_page_proc page_proc;							// Called to draw "page"
+	bitmap_modify_proc bitmap_proc;				// Modify offscreen drawing
+	wait_process_proc wait_proc;					// Called for long crunches
+	enhance_undo_proc undo_enhance;				// Custom undos
+	par_boundary_proc boundary_proc;			// Find par/word boundary
+	change_container_proc container_proc;	// Alter container
+	smart_quotes_proc smart_quotes;				// Do smart quotes
+	post_paginate_proc paginate_proc;			// Called after a block paginates
+}
+```
+
+### Setting `pg_hooks`
+
+```
+void pgSetHooks (pg_ref pg, pg_hooks PG_FAR *hooks, pg_boolean inval_text);
+void pgGetHooks (pg_ref pg, pg_hooks PG_FAR *hooks);
+```
+
+To get the current `pg_hooks`, call `pgGetHooks` and the function pointers are copied to `hooks`.
+
+To set new ones, call `pgSetHooks` with `hooks` containing new function pointer(s). Only the hooks in `pg` are changed. If `inval_text` is `TRUE`, all text in `pg` is *invalidated* (marked to recalculated, redo word-wrap).
+
+#### Notes
+
+* On **Windows 3.1**, hooks must be set from the result of `MakeProcInstance()` unless the function exists within a DLL.
+* You can set the hook for all `pg_ref`s by changing HERMES Paige globals `def_hooks`.
+* No function pointers can be null; all must be valid. If you or HERMES Paige attempts to access a `proc` that is `NULL`, you will crash.
+
+The names of the standard functions used by HERMES Paige can be found in "Calling Standard Functions" <!-- on page hyperlink here -->.
+
+### Setting a proc
+
+The following is an example of setting a `pg` function pointer for `wait_proc`, but using the defaults for all other function pointers.
+
+```C
+/* This is an example of setting a single function pointer for a pg_ref. The parameter the_proc is a pointer to a wait_proc function. */
+
+void set_wait_proc (pg_ref pg, wait_process_proc the_proc)
+{
+	pg_hooks hooks;
+	pgGetHooks(new_doc.pg, &hooks);
+	hooks.wait_proc = the_proc;
+	pgSetHooks(new_doc.pg, &hooks, FALSE);
+}
+```
+
+#### Purpose
+
+To compute a line of text by setting up an array of `point_start` records.
+
+#### Standard function
+
+The default function, `pgLineMeasureProc`, computes a line of text, breaks on the appropriate word break and handles any "exclusion" that may exist (overlapping portions with `exclude_area`).
+
+For better understanding of this area, *vide* chapter 36, [Anatomy of Text Blocks](#36-anatomy-of-text-blocks), as well as section 27.3, [Standard Low-Level Function Access](#27.3-Standard-Low-Level-Function-Access).
+
+For alternatives to this see the next function pointer, `line_adjust_proc`, as further elaborated in the next section <!-- on page hyperlink here -->.
+
+```C
+PG_FN_PASCAL (void, line_measure_proc) (paige_rec_ptr pg, pg_measure_ptr measure);
+```
+
+#### **Note**
+
+This function requires highly complex handling and *we do not recommend you use it*. There are many alternative methods to force a line to calculate for customising effects.
+
+### `line_adjust_proc`
+
+#### Purpose
+
+To adjust a line (by adjusting an array of `point_start` records) after the line has been calculated. The intended purpose of this function is to move an entire line somewhere else, for widows and orphan, or "keep-paragraphs-together" features, for instance. (See section 37.1, [Advanced Text Placement](#37.1-advanced-text-placement)).
+
+#### Standard function
+
+The default function, `pgLineAdjustProc`, adjusts the line for non-left justification. Applications can use this function to move `point_start` records around for any purpose.
+
+##### Note
+
+The `point_start` records must only be moved: new records must not be "inserted" nor can records be "deleted."
+
+```C
+PG_FN_PASCAL (void, line_adjust_proc) (paige_rec_ptr pg, pg_measure_ptr measure, point_start_ptr starts, pg_short_t num_starts, rectangle_ptr line_fit, par_info_ptr par_format);
+```
+
+* ```measure``` — parameter contains all the information about the line that was just built.
+* `starts` — parameter is a pointer to the first `point_start` for the line just computed, and `num_starts` indicates how many `point_start`s are in that array (which represent the whole line). The `line_fit` parameter contains the maximum rectangle that the line had to fit inside, and `par_format` is the current paragraph format.
+
+##### Note
+
+If you alter the bounding dimensions or location of the line in any way, be sure to also change `measure_info -> actual_rect` to reflect the change.
+
+#### TECH NOTE: Line leading
+
+> > > > > > I need to implement the space between lines differently than HERMES Paige does it now. How can I do this?
+
+The only way I can think of to bypass line leading is to use the `line_adjust_proc` and change the physical baseline(s) of each line record once a line is figured out.
+
+The default `line_adjust_proc` hook is used to alter the line for justification, but you can also use it to change the line leading.
+
+When this gets called, you should:
+
+1. First call `pgLineAdjustProc` itself (which is prototyped in `defprocs.h`) so HERMES Paige can do its thing.
+
+2. Then, walk through `line_starts` for `num_starts` elements and make the adjustments you need.
+
+   The `line_starts` parameter points to one or more `point_start` records (it points to `num_starts` records). The line "leading" will be reflected in either `line_starts -> bounds` (which defines the enclosing rectangle for that part of the line), and/or in `line_starts -> baseline` (which defines the distance from `bounds.bot_right.v` where the text baseline sits).
+
+3. For convenience, `par_format` is the current `par_info` for this line. You can examine fields in this format if you need to.
+
+4. The `line_fit` parameter contains the overall rectangle for the whole line. *Make sure* you adjust its height to the same dimension you changed the `line_starts -> bounds`, if any. This is important, because when you return from the hook, HERMES Paige uses the bottom of `line_fit` to know where the next line begins vertically.
+
+### `line_validate_proc`
+
+#### Purpose
+
+To verify that a built line of text is "valid", requiring no change of location, dimension or any other form; if so, return `TRUE`. A result of `FALSE` tells HERMES Paige to compute the text line over again. Hence, this low-level hook can be used to alter the form of a line under various conditions.
+
+#### Standard function
+
+`pgLineValidate` verifies that the new line fits within the boundaries of the current part of the `page_area` and does not intersect with any part of the exclusion area. If line fails to meet this criteria and `line_validate_proc` can't correct the line by mere adjustment, the function alters the line's parameters as necessary (such as adjusting the maximum width, changing to a new vertical position, etc.) and tells HERMES Paige to recalculate the line by returning `FALSE`.
+
+```c
+PG_FN_PASCAL (pg_boolean, line_validate_proc) (paige_rec_ptr pg, pg_measure_ptr measure_info);
+```
+
+The typical purpose of this hook would be to alter the form of a line after the "normal" line has been calculated.
+
+For example, suppose the inclusion of a special character causes a line to dynamically change its physical location and/or its maximum allowable width. Using `validate_line_proc`, the necessary adjustments can be made, and if the function returns `FALSE`, HERMES Paige will rebuild the line with the new information.
+
+The `measure_info` parameter is a pointer to a large record structure which offers all available information about the line of text just computed; these are the fields you would alter should the line need to be recalculated from new information. The `pg_measure` record is defined as follows:
+
+```C
+typedef struct
+{
+	short previous_flags;				// Ending flags at last line's end
+	short prv_prv_flags;				// Previous flags before above
+	short wrap_dimension;				// Bits defining how complex wrap is
+	pg_boolean repeating;				// TRUE if shape is a repeater
+	rectangle extra_indents;	 	// Any extra indents for hooks to alter
+	long line_text_size;				// Total use of text in line
+	long max_text_size;					// Maximum text line can use
+	long extra_width;						// Excess width not used by line
+	style_walk_ptr styles;			// Pointer to the style_walk
+	text_block_ptr block;				// Current text block
+	point_start_ptr starts;			// Next point_start *record
+	pg_short_t starts_ctr;			// Number of starts remaining
+	pg_short_t num_starts;			// Number of starts this line
+	long PG_FAR *char_locs;			// Current character locations
+	short PG_FAR *char_types;		// Current character types
+	long PG_FAR *positions;			// Original character locations
+	short PG_FAR *types;				// Original character types
+	rectangle fit_rect;					// Rect in which line must fit
+	rectangle actual_rect;			// Actual rect enclosing line
+	rectangle wrap_bounds;			// Bounding rect for wrap area
+	line_ref starts_ref;				// Memory_ref of starts
+	memory_ref tab_info;				// Contains tab_info
+	rectangle_ptr wrap_r_base;	// Base for shape (first rect)
+	rectangle_ptr wrap_r_begin;	// Top wrap rectangle
+	rectangle_ptr wrap_r_end;		// End wrap rectangle
+	long r_num_begin;						// Current wrap-target rectangle
+	long r_num_end;							// Ending rect of line
+	long end_r;									// Ending record for wrap rects
+	memory_ref exclude_ref;			// Holds exclusion rectangles
+	long wrap_r_save;						// Saves old bottom
+	co_ordinate repeat_offset;	// Amount to add for repeat
+	rectangle prev_bounds;			// Previous start's bounds
+	long hook_refcon;						// Custom hooks can use this
+	long minimum_left;					// Minimum left side
+	long maximum_right;					// Maximum right side
+	pg_boolean quick_paginate;	// Only moving lines
+	pg_short_t old_offset;			// Ending offset from old line end
+}
+pg_measure, PG_FAR *pg_measure_ptr;
+```
+
+For the sake of simplicity and clarity we will discuss only the fields that would most likely apply to a custom `line_validate_proc`.
+
+* `repeating` — is `TRUE` if the `page_area` in `pg` is a repeating shape.
+
+* `extra_indents` — extra pixel amounts to inset to the top, left, bottom and right of the line. By default, these are all zero but can be changed by hook(s) to adjust a line's bounding dimensions. For example, to force a line to fit within a smaller width, `extra_indents.top_left.h` and/or `extra_indents.bot_right.h` could be changed.
+
+  **NOTE:** `extra_indents` are inset values, i.e. `extra_indents.top_left` is added to the potential line's top-left bounds and `extra_indents.bot_right` is subtracted from the potential line's bottom-right.
+
+* `line_text_size` — number of text bytes in this line.
+
+* `max_text_size` — the maximum number of text bytes the line can use from the main stream of text. This is not necessarily the total text bytes available; rather, it is an optional maximum for special features to restrict all lines to, say, 80 characters. The `max_text_size` field might be useful if your `line_validate_proc` decided the line should be smaller: the `max_text_size` field could be reduced and the line forced to recalculate.
+
+* `styles` — pointer to the current `style_walk` which will hold information for the current style and paragraph formats.
+
+* `block` — pointer to the current `text_block` record (for which this line belongs).
+
+* `starts` — pointer to the next `point_start` record after the line being validated.
+
+  **NOTE:** A *line* in HERMES Paige consists of one or more `point_start_records`; the `starts` field will be the next `point_start` record should the next line be calculated. (To get the first `point_start` of the line being validated, subtract `measure_info -> num_starts` from the `measure_info -> starts` pointer).
+
+* `num_starts` — number of `point_start` records in the line being validated. Since the `starts` field (above) points to the *next* (as opposed to current) `point_start`, the first `point_start` of the line in question is `measure_info -> starts - measure_info -> num_starts`.
+
+* `fit_rect`, `actual_rect` — contain the maximum rectangle for which the line must be contained and the actual bounding rectangle of the line after it was computed, respectively. These fields could prove useful in determining the potential and actual bounding rectangles for the line and/or to change the maximum dimensions and force a recalculation.
+
+* `wrap_r_base` — a pointer to the list of rectangle in the page area. For example, if the document had three "container" rectangles, `measure_info -> wrap_r_base` would point to an array of those three rectangles.
+
+* `r_num_begin` — the rectangle index of the page area this line is contained in. By *rectangle index* is meant the *n*th rectangle of the page area shape. For repeating shapes, the index is a **zero-indexed**, *modulo* value representing the rectangle number of the shape multiplied by page number (example: for a 3-column page area, a value of `0` represents the first column of the first page; a value of `3` would be the first column of the second [repeating] page, *etc.*). 
+
+  The actual rectangle that contains the line just calculated can be determined by first determining how many rectangles there are in the page area and indexing the array of rectangles:
+
+  ```C
+  measure_info -> wrap_r_base[measure_info -> r_num_begin % num_rects];
+  ```
+
+  (where `num_rects` is number of rectangles in the page area).
+
+* `hook_refcon` — can be used for anything you choose. HERMES Paige initially sets this to zero and does not alter it while lines are being calculated.
+
+##### Notes
+
+1. If you alter the bounding dimensions or location of the line in any way, be sure to also change `measure_info -> actual_rect` to reflect the change.
+2. `measure_info -> fit_rect`'s height is often undetermined, *i.e.* HERMES Paige only cares about its top, left and right sides; measure_info->actual_rect, on the other hand, will contain the true dimensions of the line.
+3. If you want to force a different maximum bounding area and/or the line's vertical position, change `pg_measure -> fit_rect` (not `pg_measure -> actual_rect`). If you return `FALSE` from `line_validate_proc`, HERMES Paige will recalculate the line based on the (new) information in `pg_measure -> fit_rect`.
+
+### `hyphenate_proc`
+
+#### Purpose
+
+To compute a word break at the end of a line.
+
+#### Standard function
+
+The default function, `pgHyphenateProc`, figures out where to break a word, including handling soft hyphen characters if they exist. (A *soft hyphen* is a control character embedded in the text stream that is normally invisible, but defines a word break if the enclosing word will wrap).
+
+```C
+PG_FN_PASCAL (pg_boolean, hyphenate_proc) (paige_rec_ptr pg, text_block_ptr block, style_walk_ptr styles, pg_char_ptr block_text, long line_begin, long *line_end, long *positions, short *char_types, long PG_FAR *line_width_extra, pg_boolean zero_length_ok);
+```
+
+This function gets called whenever a word at the end of a line will not fit. However, the term *word* in this case really means the next character, if added to the line of text, would overflow the maximum allowed width; there might not be any real "word" at all.
+
+Nonetheless, it is the responsibility of this function to return the word break whether or not there are "real words" and whether or not any hyphenation is to be implemented (see *Function Result* <!-- on page hyperlink here --> below regarding actual hyphenation).
+
+Upon entry, `block` is the current `text_block` record and `styles` is a pointer to a `style_walk` record which will be set to the style affecting the first byte following the character that overflowed the line.
+
+The `block_text` parameter is a pointer to all the text in `block`, and `line_begin` contains the offset into that text where the line begins, while `line_end` points to the offset of text after the first byte that caused the line to overflow.
+
+##### Example
+
+If the text `abcdefg` overflows the maximum line width after the `e`, then `*line_end` will contain the offset of `f` (first byte after `e`).
+
+##### Note
+
+`line_end` will always be the offset after only one byte of overflow; hence, correct word breaking and/or hyphenation can assume that `*line_end - 1` is the maximum text position for which the line can end.
+
+When this function returns, it must have set `*line_end` to the correct location.
+
+The positions and `char_types` parameters point to the character positions and the character types (both obtained from the `measure_proc`) for all character in text (the `*position` for start of the line would be `positions[line_begin]`). See "`measure_proc`" under section 27.6, [Function Definitions](#27.6-function-definitions).
+
+If `zero_length_ok` is `TRUE`, it is acceptable to return a "word break" that results in no text at all; *i.e.*, the word won't fit on a line and cannot be divided. However, if `zero_length_ok` is `FALSE`, this function **must** break the text so at least one character exists on the line.
+
+`*line_width_extra` value should be set by your function to the pixel width of the hyphenation character `-`, if any.
+
+##### Note
+
+HERMES Paige uses `pg_globals.hyphen_char` as the hyphenation character.
+
+#### Function result
+
+If you want the line to be drawn with a `-` (hyphenation char), return `TRUE`; otherwise, return `FALSE`. Note that you must still break the word by setting `*line_end`: the function result simply indicates whether or not the line must now include a hyphenation symbol to be drawn.
+
+### `hilite_rgn_proc`, `draw_hilite_proc`, and `draw_cursor_proc`
+
+#### Purpose
+
+To compute the highlight region, draw a highlight region and to draw a "caret", respectively.
+
+#### Standard function
+
+The default functions `pgHiliteProc`, `pgDrawHiliteProc`, and `pgDrawCursorProc` do each of the above.
+
+```C
+PG_FN_PASCAL (void, hilite_rgn_proc) (paige_rec_ptr pg, t_select_ptr selections, pg_short_t select_qty, shape_ref rgn);
+PG_FN_PASCAL (void, draw_hilite_proc) (paige_rec_ptr pg, shape_ref rgn);
+PG_FN_PASCAL (void, draw_cursor_proc) (paige_rec_ptr pg, t_select_ptr select, short verb);
+```
+
+For `hilite_rgn_proc`, `selections` contains an array of `select_qty t_select` record pairs from which to compute the highlight region). The region must be returned in `rgn`, which is a standard HERMES Paige shape.
+
+For `draw_hilite_proc`, the highlighting in `rgn` is to be drawn; this function must adjust the region for any scrolled positions and scaling factors (neither of those have been considered when computing `rgn`).
+
+For `draw_cursor_proc` — `selections` contains the information as to where the cursor should go and `verb` is the cursor drawing mode. The cursor position and height needs to be computed from the information in `select`.
+
+### `text_load_proc`
+
+#### Purpose
+
+To initialize the text within a `text_block`.
+
+#### Standard function
+
+The default function, `pgTextLoadProc`, does nothing. The intended purpose of this low-level hook is to implement "text paging" from a file.
+
+```C
+PG_FN_PASCAL (void, text_load_proc) (paige_rec_ptr pg, text_block_ptr text_block);
+```
+
+This function gets called any time HERMES Paige wants to do a `UseMemory` on
+`text_block -> text`. Hence, a text-paging feature is given the chance to load the text for this block.
+
+A text block record follows:
+
+```C
+typedef struct
+{
+	long begin;								// Relative offset beginning
+	long end;									// Relative offset ending
+	rectangle bounds;					// Entire area this includes
+	text_ref text;						// Actual text data
+	line_ref lines;						// Point_start run for lines
+	pg_short_t flags;					// Internal use only
+	short extra;							// Reserved for future use
+	pg_short_t num_lines;			// Number of lines
+	pg_short_t num_pars;			// Number of paras
+	long first_line_num;			// First line number
+	long first_par_num;				// First para number
+	point_start end_start;		// Copy of ending point_start in block
+	memory_ref isam_end_ref;	// Reserved for HERMES
+	tb_append_t user_var;			// Arbitrary use
+}
+text_block, *text_block_ptr;
+```
+
+For more information about text blocks, *vide* chapter 36, [Anatomy of Text Blocks](#36-anatomy-of-text-blocks).
+
+**CAUTION:** In the above record, only the text field should be changed by this function (it should be filled with the appropriate text).
+
+### `pt2_offset_proc`
+
+#### Purpose
+
+To compute a text offset belonging to a specified coördinate.
+
+#### Standard function
+
+The default function, `pgPt2OffsetProc`, computes the text offset from a point received in `pgDragSelect`.
+
+```C
+PG_FN_PASCAL (void, pt2_offset_proc) (paige_rec_ptr pg, co_ordinate_ptr point, short conversion_info, t_select_ptr selection);
+```
+
+* `point` — is the coordinate from which to compute the offset.
+
+* `conversion_info` — indicates additional attributes to apply to the logic; this value can be either (or both) of the following bits:
+
+  ```C
+  #define NO_HALFCHARS		0x0001 // Whole char only
+  #define NO_BYTE_ALIGN		0x0002 // No multibyte align
+  ```
+
+  If `NO_HALFCHARS` is set, the offset must not shift to the character's right side unless it is completely to the right of the character. In other words, if a character were 10 pixels wide, the computed offset for `NO_HALFCHARS` must equal the left side of that character until the point was at least 10 pixels to its right.
+
+  If `NO_BYTE_ALIGN` is set, possibly landing in the middle of a multibyte characters should be ignored. In other words, the text position should be computed as-is without any consideration to adjust or align for multibyte character boundaries.
+
+* `selection` — points to a `t_select` record which this function must completely initialise. The `t_select` record is defined as follows:
+
+  ```
+  typedef struct
+  {
+  	long offset;							// Absolute text offset
+  	select_pair word_offsets;	// Original word offsets, if applicable
+  	co_ordinate original_pt;	// Original point of selection
+  	pg_short_t line;					// Point start number
+  	short flags;							// Contains internal attributes
+  	long control_offset;			// Offset for purposes of tracking control
+  	long section_num;					// Section ID (reserved for future)
+  	long primary_caret;				// Relative primary direction caret
+  	long secondary_caret;			// Relative secondary caret	
+  }
+  t_select;
+  ```
+
+  Upon entry, none of the fields will be initialised. When this function returns, each field must contain the following:
+
+  * `offset` — The absolute offset, in bytes, representing the point.
+  * `word_offsets` — The function does *not* need to initialise this field.
+  * `original_pt` — Should be a copy of the `point` parameter.
+  * `line` — The `point_start` element number within the `text_block` record that applies to `offset`. (Each `text_block` record contains an array of `point_start` records. The `line` field in `t_select` should be the element number for the appropriate `text_block`, the first line for each block being zero).
+  * `flags` — Should be set to zero.
+  * `control_offset` — Should be same as `offset` or, if tracking a *control* style, this should be set to whatever is appropriate for the control-tracking feature.
+  * `primary_caret` — The pixel position relative to the `point_start`'s left bounds. In other words, caret should be the amount relative to the `point_start`'s `bounds.top_left.h` indicated above (line field).
+  * `secondary_caret` — The pixel position relative to the `point_start`'s left bounds for a "secondary" insertion point for mixed directional scripts. If one direction only, `secondary_caret` must be set to the same value as `primary_caret`.
+
+### `font_init_proc`
+
+#### Purpose
+
+To initialise a `font_info` record.
+
+#### Standard function
+
+The default function for the *Windows* version. The font name is changed to a `pascal` string (if `info -> environs` has `NAME_IS_CSTR` set). For the *Macintosh* version, `pgInitFont`, determines the font ID code, the script code (e.g., Roman, Kanji, etc.), the language and sets most other fields to zeros. It also converts the `name` field to a `pascal` string if necessary. For *32-bit Windows*, the appropriate code page and language ID is determined and the name is adjusted to a `pascal` string, if necessary.
+
+```C
+PG_FN_PASCAL (void, font_init_proc) (paige_rec_ptr pg, font_info_ptr info);
+```
+
+### `special_char_proc`
+
+#### Purpose
+
+To draw "invisible" characters.
+
+#### Standard function
+
+The default function, `pgSpecialCharProc`, draws the symbols as specified in `pg_globals` in the font specified in `pg_globals`.
+
+```
+PG_FN_PASCAL (void, special_char_proc) (paige_rec_ptr pg, style_walk_ptr walker, pg_char_ptr data, pg_short_t offset, pg_short_t length, draw_points_ptr draw_position, long extra, short draw_mode);
+```
+
+This function gets called after any text is drawn, but only if `SHOW_INVIS_CHAR_BIT` is set as an attribute in `pg` (for information on `pgSetAttributes`, *vide* chapter 3, [Changing Attributes](#3-changing-attributes)).
+
+* `walker` — contains the current format info.
+* `data` — is a pointer to the text in the current text block.
+* `offset` and `length` — are the byte position and length of the text that has just been drawn.
+* `draw_position`, `extra` and `draw_mode` — parameters are identical to the ones given to `text_draw_proc`.
+
+### `auto_scroll_proc`
+
+#### Purpose
+
+To perform an automatic scroll during `pgDragSelect()` (mouse drag).
+
+#### Standard function
+
+The default function, `pgAutoScrollProc`, performs automatic scrolling. If `EXTERNAL_SCROLL_BIT` is set in `pg`, only an internal adjustment is made (no visual scrolling occurs). If you need to autoscroll in a manner different to the default, use this hook to override it.
+
+```C
+PG_FN_PASCAL (void, auto_scroll_proc) (paige_rec_ptr pg, short h_verb, short v_verb, co_ordinate_ptr mouse_point, short draw_mode);
+```
+
+This only gets called during `pgDragSelect()`, and then, only if `auto_scroll == TRUE`. Upon entry, `h_verb` and `v_verb` indicate the direction to scroll (same possible values as given to `pgScroll` function). The `mouse_point` will be the current point given to `pgDragSelect()`.
+
+### `draw_scroll_proc`
+
+#### Purpose
+
+To draw additional items when updating a scroll region.
+
+#### Standard function
+
+The default function, `pgDrawScrollProc`, does nothing. This low-level function has been provided for special features where the application needs to update something on the screen and, since HERMES Paige can do autoscrolling, this provides a way to add "ornaments" to the scrolled area. The `draw_scroll_proc` now gets called twice: once before, and once after, updating the scrolled area.
+
+```C
+PG_FN_PASCAL (void, draw_scroll_proc) (paige_rec_ptr pg, shape_ref update_rgn, co_ordinate_ptr scroll_pos, pg_boolean post_call);
+```
+
+This only gets called immediately after a physical scroll. The `update_rgn` contains the shape that requires updating (the "blank" part of the screen after a scroll). The `scroll_pos` parameter contains the current horizontal and vertical scrolled position (which always gets subtracted from drawing coordinates when updating the screen).
+
+However, `draw_scroll_proc` gets called twice: after physical scrolling occurs and before any text is drawn inside the scrolled region, draw_scroll_proc is called and passes `FALSE` for `post_call`; then once all text is redrawn, `draw_scroll_proc` gets called again with `post_call` as `TRUE`.
+
+##### Note
+
+To understand the relationship between scrolling, display and the scrolling "hooks" further, please see "`scroll_adjust_proc`" under section 27.8, ["Global" HERMES Paige Low-Level Hooks](#27.8-"Global"-HERMES-Paige-Low-Level-Hooks).
+
+### `bitmap_modify_proc`
+
+#### Purpose
+
+To add additional graphics to the offscreen bitmap before stamping such bits to the screen.
+
+#### Standard function
+
+The default function, `pgBitmapModifyProc`, does nothing. This low-level function has been provided for special features where the application needs to display something in the "background" such as a picture for which text overlays, which normally would get "erased".
+
+```C
+PG_FN_PASCAL (void, bitmap_modify_proc) (paige_rec_ptr pg, graf_device_ptr bits_port, pg_boolean post_call, rectangle_ptr bits_rect, co_ordinate_ptr screen_offset, long text_position);
+```
+
+If HERMES Paige does offscreen drawing, this function gets called twice: once after the bitmap is set up but before any text is drawn, and once after the text is drawn into the bitmap but before transferring to the screen.
+
+* `bits_port` — the offscreen bitmap port (*vide* section 3.4, [Graphic Devices](#3.4-graphic-devices)). If `post_call` is `TRUE`, the function is getting called the second time (after the text is drawn into the bitmap but before transferring to the screen).
+* `bits_rect` — the target rectangle that the bits will eventually get copied to. In other words, the target rectangle is the bounding area on the screen for the text line being prepared for eventual bits transfer. The "local" rectangle for the bitmap area itself, whose top-left coordinate is typically (0,0), is `bits_rect` offset by `screen_offset -> h` and `screen_offset -> v`.
+* `text_position` — parameter is the text position (relative to all text in `pg`) for the line about to be drawn or just drawn.
+
+The purpose of the `bitmap_modify_proc` is to alter the contents of HERMES Paige's offscreen bitmap before it transfers those bits to the screen. Note that this only occurs when HERMES Paige is drawing in one of the "bits" draw modes: `bits_copy`, `bits_or`, `bits_xor`, etc. The bit transfer will always be targeted to the `graf_device` currently set in the `pg_ref`; there is no way to change what device will receive the bitmap other than assigning a different device to a `pg_ref` using `pgSetDefaultDevice()` before calling any function that might draw text. (The exception to this is when the function has as one of its parameters an optional `graf_device` such as `pgPrintToPage`).
+
+##### Notes
+
+* This is the hook you use to do "backgrounding", i.e. to display some kind of graphic or pattern behind editable text.
+* The `bitmap_modify` function will also get called for the whole window if `bits_emulate_or`, bits_emulate_xor or bits_emulate_copy are indicated as the drawing mode. In this case, the "bitmap" is really the entire drawing area for the `pg_ref` on the screen. For maximum performance, you should use `bits_emulate_xx` modes for backgrounding something if the entire document is repainted on an erased window.
+* On **Windows**, the device context of the bitmap (or screen if `bits_emulate_xx` drawing mode) is `device -> machine_ref`.
+* Nitmap transfer mode might still occur even if you did not explicitly pass one of the "bits" draw modes. If a function was called that suggested `best_way` for the drawing mode, HERMES Paige often decides that bitmap transfer is `best_way` and assumes that mode.
+
+### `wait_process_proc`
+
+#### Purpose
+
+To inform the application when something that can take a bit of time is being performed.
+
+#### Standard function
+
+The default function, `pgWaitProc`, does nothing. This low-level function has been provided so the application can display messages, put up "thermometers," etc. when something is going on that can take a while.
+
+```C
+PG_FN_PASCAL (void, wait_process_proc) (paige_rec_ptr pg, short wait_verb, long progress_ctr, long completion_ctr);
+```
+
+* `wait_verb` — defines what HERMES Paige is doing and will be one of the following:
+
+  ```C
+  typedef enum 
+  {
+  	paginate_wait,	// Long pagination
+  	copy_wait, 			// Long copy
+  	insert_wait, 		// Long paste or insert
+  	save_wait, 			// Save file wait
+  	open_wait				// Open file wait
+  };
+  ```
+
+* `progress_counter` - some number less than or equal to `completion_ctr`; however, the first time this function gets called, `progress_counter` will be zero; the final call (when the operation has completed) `progress_ctr` will equal `completion_ctr`.
+
+  The percentage to completion can be calculated as:
+
+  ```C
+  (progress_ctr * 100) / completion_ctr
+  ```
+
+  
+
+### `draw_page_proc`
+
+#### Purpose
+
+To inform the application when the whole screen (or part of the screen) gets repainted. The purpose of this is to draw any special page or document ornaments such as page break or "margin" lines, page numbers, container outlines, headers and footers, etc.
+
+#### Standard function
+
+The default function, `pgDrawPageProc`, does nothing. This low-level function has been provided so the application can draw "pagination" and other document items. *Vide* section 16.9, [`DisplayProc`](#16.9-`DisplayProc`).
+
+```C
+PG_FN_PASCAL (void, draw_page_proc) (paige_rec_ptr pg, shape_ptr page_shape, pg_short_t r_qty, pg_short_t page_num, co_ordinate_ptr vis_offset, short draw_mode_used, short call_order);
+```
+
+HERMES Paige calls this function only after a general display (from `pgDisplay`), after a scroll (`pgScroll` or any scrolling function), and printing (`pgPrintToPage`). This function is not called for any other display, including keyboard character insertions. The assumption is that page ornament items are "clipped" for regular typing, but require updating for general display.
+
+Upon entry, `page_shape` is a pointer to the first rectangle of the page area in `pg`. The `r_qty` parameter will contain the number of rectangles within that shape (it will always be at least one).
+
+* `page_num` — indicates the "page" you are being asked to draw, the first page being zero. For a new `pg_ref` in which only the defaults are used, `page_num` will always be zero. If `pg` is set for repeating shapes (`V_REPEAT_BIT` or `H_REPEAT_BIT` set in `pg_doc_info`), `page_num` will indicate the page number (beginning at zero) you are asked to draw which can be a multiple repeat of the original shape. The `draw_page_proc` will get called for every "page" that is visible, one at a time.
+
+* `vis_offset` — will contain horizontal and vertical pixel amounts that should offset the rectangle(s) in `page_shape` to obtain the exact screen location for the "page" that is being drawn. In other words, if `page_shape` pointed to a single rectangle, the onscreen page dimensions are precisely `*page_shape` offset horizontally by `vis_offset -> h` and offset vertically by `vis_offset -> v`.
+
+  For example, if an HERMES Paige object is set for a repeating shape resulting in five "pages" on the screen (which is to say, the original shape repeats itself five times), `draw_page_proc` would be called five consecutive times, the first time passing zero for `page_num`, the second time a 1, then 2, 3, 4 and 5. Also, for each consecutive call, `vis_offset` would contain the appropriate pixel amount to adjust the rectangles in `page_shape` so as to draw each page at the correct screen location.
+
+* The `draw_mode_used` parameter indicates which drawing mode was used for text display before `draw_page_proc` was called (note that all text is drawn to the screen first, then `draw_page_proc`).
+
+This function is not called for "pages" that fall completely out of the `vis_area` in `pg`.
+
+#### Notes
+
+* On **Windows**, the device context for drawing the page(s) is available as `pg -> globals -> current_port -> machine_ref`.
+* **Warning!** The `page_ptr` is literally a pointer to the contents of $p g$ 's `page_area` shape. Do not alter these rectangles!
+
+#### Clipping
+
+Upon entry, the "clip region" will be set to pg's vis_area boundaries. Normally, you should not need to change the clipping area.
+
+#### Printing
+
+The `draw_page_proc` also gets called for printing. In certain cases, you might not want to draw page ornaments (such as page break lines) while printing. To detect printing mode, check `pg -> flags` as follows:
+
+```
+if (pg -> flags & PRINT_MODE_BIT)
+{
+	// is in print mode if PRINT_MODE_BIT is set
+}
+```
+
+See also, `pgSetDocInfo` in section 13.2, [Getting/Setting Document Info](#13.2-Getting/Setting-Document-Info).
+
+### `text_break_proc`
+
+#### Purpose
+
+To find the best place to split apart a block of text. HERMES Paige does not hold a large continuous block of text, rather it breaks text up into smaller sections. The `text_break_proc` is used to determine where in a section of text is a good breaking point.
+
+#### Standard function
+
+`pgTextBreakProc`: if carriage return characters exist in the text block, the closest carriage return to the middle of the block is returned as the best breaking point. If no carriage returns, the function recommends breaking on a line (word-wrap) boundary. If no lines (or one huge single line), the break occurs on a word boundary; if no words, `text_break_proc` has no other recourse than to break in the middle of text.
+
+```C
+PG_FN_PASCAL (long, text_break_proc) (paige_rec_ptr pg, text_block_ptr block);
+```
+
+* `block` — a pointer to the text block that must be split apart. The function result should be the relative offset to break the text (relative to the text in the block, not to all text in `pg`).
+
+### `scroll_adjust_proc`
+
+#### Purpose
+
+To allow an application to adjust something before and after a document scrolls.
+
+#### Standard function
+
+`ScrollAdjustProc` does nothing.
+
+```C
+PG_FN_PASCAL (void, scroll_adjust_proc) (paige_rec_ptr pg, long amount_h, long amount_v, short draw_mode);
+```
+
+* `amount_h` and `amount_v` — are, upon entry, the amounts in pixels that will be scrolled horizontally and vertically, respectively. Negative amounts indicate the document contents will move upwards and/or left and positive amounts indicate the document contents will move down and/or to the right.
+
+  This function gets called twice, once before any physical scrolling occurs and once after scrolling occurs. You can detect the difference by the values in `amount_h` and `amount_v`: if `scroll_adjust_proc` is getting called after scrolling, both parameters will be zero.
+
+* `draw_mode` — indicates what the drawing mode will be. Note that it is possible for `draw_mode` to be `draw_none`; it might be wise to observe that situation since it could make a difference in how you handle a scrolling adjustment. (*Vide* "Draw Modes" under section 2.11, [Displaying](#2.11-Displaying))
+
+#### Sequence of scroll hooks and display
+
+Scrolling hooks and display occurs in the following sequence:
+
+- Application calls `pgScroll` (or any other function that causes a scroll).
+- HERMES Paige computes the amount to scroll, in pixels, and calls `adjust_scroll_proc` with those values.
+- The window is scrolled.
+- The `scroll_adjust_proc` is called again with (0, 0) for "scroll amounts."
+
+If `draw_mode` is not `draw_none`:
+
+- The `draw_scroll_proc` is called with `FALSE` for `post_call`.
+- Screen is refreshed (for scrolled area).
+- The `draw_scroll_proc` is called once more with `TRUE` for `post_call`.
+
+### `enhance_undo_proc`
+
+#### Purpose
+
+To allow for custom "undo" and/or to modify an existing undo record prepared for undo.
+
+#### Standard function
+
+`pgEnhanceUndo` does nothing.
+
+```C
+PG_FN_PASCAL (void, enhance_undo_proc) (paige_rec_ptr pg, pg_undo_ptr undo_rec, void PG_FAR *insert_ref, short action_to_take);
+```
+
+This function gets called from either `pgPrepareUndo` or `pgUndo`; the difference can be determined by the `action_to_take` `verb` which will be one of the following:
+
+```
+typedef enum
+{
+	enhance_prepared_undo,	// undo_rec is from pgPrepareUndo
+	enhance_performed_undo	// undo_rec is from pgUndo
+};
+```
+
+* `insert_ref` — will be whatever was given to the same parameter for `pgPrepareUndo` (or `NULL` if `enhance_undo_proc` is being called from `pgUndo`).
+
+* `undo_rec` — a pointer to an HERMES Paige undo record as follows:
+
+  ```
+  typedef struct
+  {
+  	short verb;										// Type of undo (for app's reference)
+  	short real_verb;							// Internal action verb
+  	pg_ref data;									// Data (different for each verb)
+  	pg_globals_ptr globals;				// Pointer to HERMES Paige globals
+  	memory_ref keyboard_ref;			// Used for backspace-key-undo
+  	format_ref keyboard_styles;		// Styles possibly backspaced
+  	format_ref keyboard_pars;			// Paragraphs possibly backspaced
+  	memory_ref applied_range;			// Range to apply Undo
+  	memory_ref shape_data;				// Data for shape undo
+  	memory_ref refcon_data;				// Used to copy refCons for containers
+  	memory_ref doc_data;					// Used for undo doc info
+  	memory_ref rsrv;							// Reserved for HERMES extensions
+  	select_pair alt_range;				// Range for Undo Paste inter alia
+  	select_pair keyboard_delete;	// Delete range for backspace undo
+  	long ref_con;									// Application-specific
+  }
+  ```
+
+The fields of interest (for custom undo) are as follows:
+
+* `verb` — Holds the original `undo` `verb` as given to `pgPrepareUndo`. However, if `verb` is negative, the record is intended for a "redo." For example: `-undo_paste` is "redo paste."
+* `globals` — A pointer to HERMES Paige globals.
+* `applied_range` — If non-`NULL`, this is a `memory_ref` containing `select_pair`s defining the selection range for which the undo/redo applies.
+* `alt_range` — Contains the range of text for which this undo/redo applies (if selection is simply two offsets). If more complex selection, the offsets will be in applied_range.
+* `ref_con` — Contains arbitrary information (which you may set yourself).
+
+The precise calling sequence of `enhance_undo_proc` in relationship to `pgPrepareUndo` and `pgUndo` is as follows:
+
+- When `pgPrepareUndo` is called, the undo record is prepared with everything HERMES Paige "knows" about. Then before returning from `pgPrepareUndo`, `enhance_undo_proc` is called passing the `pg_undo_ptr` (just prepared) and the `action_to_take` will be `enhanced_prepared_undo`.
+- When `pgUndo` is called, everything is "undone" that HERMES Paige knows about. Then, before updating anything on the screen, `enhance_undo_proc` is called, passing the undo record and `action_to_take` is `enhanced_performed_undo`.
+
+Of course you can also use `enhance_undo_proc` simply to modify existing undo operations. For example, additional information can be placed in the `ref_con` field while you let HERMES Paige handle everything else.
+
+##### Notes
+
+* Both `pgPrepareUndo` and `pgUndo` will only handle the `verb`s that they recognise. It means that a completely foreign undo `verb` causes HERMES Paige to do nothing at all — but it still calls `enhance_undo_proc`, passing your application an empty `pg_undo` record with the `verb` field set to whatever you gave). Hence, a completely custom prepare undo/redo is possible by inventing undo verbs that HERMES Paige doesn't understand.
+
+  For example, if you called `pgPrepareUndo(pg, 9000, ptr)`, HERMES Paige will have no idea what `9000` is—but it will create an empty undo record, place `9000` in the `verb` field, and call `enhance_undo_proc(pg, \&undo_rec, ptr, enhance_prepared_undo).
+
+* While it is perfectly okay for you to set up a completely custom `undo_ref`, do not call `pgDisposeUndo` if you have set any of the fields besides the `verb` and `ref_con`, even if you have set an unrecognised undo `verb`. Instead, dispose the structure(s) yourself.
+
+* There is no `verb` for *dispose undo* since there is not necessarily an associated `pg_ref` when an `undo_ref` is disposed (ergo, there is no function pointer). Therefore you must dispose your own data structures, if any, before calling `pgDisposeUndo`.
+
+### `par_boundary_proc`
+
+#### Purpose
+
+To quickly locate the text offsets of a paragraph.
+
+#### Standard function
+
+`pgParBoundaryProc` locates the beginning and ending offsets that enclose a paragraph of text.
+
+```C
+PG_FN_PASCAL (void, par_boundary_proc) (paige_rec_ptr pg, select_pair_ptr boundary);
+```
+
+This function gets called when HERMES Paige wants to know the offsets of a paragraph. Upon entry, `boundary -> begin` contains the text location in question; this function should initialise `boundary -> begin` and `boundary -> end` to the beginning and ending offsets of the paragraph.
+
+### `change_container_proc`
+
+#### Purpose
+
+To change, modify or enhance a "container" before erasing it, displaying text, calculating text or clipping its bounding region.
+
+#### Standard function
+
+`pgModifyContainerProc` erases the container if the verb parameter so designates, otherwise does nothing.
+
+```C
+PG_FN_PASCAL (void, change_container_proc) (paige_rec_ptr pg, pg_short_t container_num, rectangle_ptr container, pg_scale_ptr scaling, co_ordinate_ptr screen_extra, short verb, void PG_FAR *misc_info);
+```
+
+HERMES Paige calls this function to give the application a chance to modify something to achieve desired affects for different text "containers" or areas in the page shape.
+
+For example, HERMES Paige always calls `change_container_proc` to "erase" a container. If your application wanted to provide different background colours for different containers, it could use this function to set and erase the appropriate backgrounds.
+
+* `container_num` and `container` — are, respectively, the rectangle number of the "container" and the pointer to the rectangle. The container number is one-indexed, i.e. the first rectangle is 1 . The rectangle itself is unscaled and not scrolled.
+
+* `scaling` — indicates any scaling (or can be `NULL`).
+
+* `screen_extra` — contains the amount of offset that would be required to obtain the actual rectangle on the screen. In other words, container offset by `screen_extra -> h` and `screen_extra -> v` is the actual container position in the scrolled document.
+
+* `verb` - indicates why the function is being called, which will be one of the following:
+
+  ```C
+  typedef enum
+  {
+  	clip_container_verb,		// clip container if desired
+  	unclip_container_verb,	// restore clip region (that changed from above)
+  	erase_rect_verb,				// erase container
+  	will_draw_verb,					// about to draw text in container
+  	will_delete_verb				// about to delete container
+  };
+  ```
+
+What gets passed in `*misc_info` depends on the value of verb, as follows:
+
+* If `verb` is `clip_container_verb`, `misc_info` is a pointer to a long integer which is initially set to zero.
+* If `verb` is `unclip_container`, `misc_info` points to the same long integer as in `clip_container_verb`. The purpose of this is to let you set `*misc_info` to something (such as the previous clip region) so you can use it when you unclip the area.
+* If `verb` is `erase_rect_verb`, `will_draw_verb` or `will_delete_verb`, `misc_info` is `NULL`.
+
+##### Note
+
+The term *containers* in this description really refers to rectangles inside the page area. Complex, irregular shapes can therefore have hundreds of containers even though your application might think of the page shape as one object. Therefore do not confuse the *logical* container as a single unit shape or page with the Paige-specific meaning of a rectangle within a shape.
+
+### `smart_quotes_proc`
+
+#### Purpose
+
+To implement "smart quotes" for text insertions.
+
+#### Standard function
+
+If the next insertion is a "straight" single or double quote character, the insertion is changed by `pgSmartQuotesProc` to the appropriate left or right quote characters per definitions in `pg_globals`.
+
+```C
+PG_FN_PASCAL (void, smart_quotes_proc) (paige_rec_ptr pg, long insert_offset, long info_bits, pg_char_ptr char_to_insert, short PG_FAR *insert_length);
+```
+
+This function gets called if the byte about to be inserted into a `pg_ref` is a "quote character".
+
+**NOTE:** This is determined purely by the `char_info` hook for the insertion style returning such information about the character.
+
+Upon entry, `insert_offset` is the `byte_offset` in text that will be inserted (relative to all text) and `char_to_insert` points to the first byte to be inserted (whose first character will be at least one of the quote characters as defined in the HERMES Paige globals). The `info_bits` parameter contains the results of `char_info`, indicating which quote character will be inserted.
+
+Upon entry, `*insert_length` contains the number of bytes of the character to be inserted. To change the character to, say, an appropriate smart quote, this function should physically change `*char_to_insert` and set `*insert_length` to the new length if it is different.
+
+NOTE: `*char_to_insert` will always be big enough to hold up to four bytes.
+
+If it is decided that the character should change, `smart_quotes_proc` should literally alter `*char_to_change`.
+
+### `line_init`
+
+```C
+PG_FN_PASCAL (void, line_init_proc) (paige_rec_ptr pg, pg_measure_ptr measure_info, short init_verb);
+```
+
+This function is called once before building lines of text, once before building an individual line and once when all lines have been built.
+
+#### Purpose
+
+The intended purpose of this function is to let an application set up whatever it needs to handle subsequent calls to other hooks (such as `line_parse_proc` below).
+
+#### Standard function
+
+The default `proc` is `pgInitLineProc` which does nothing.
+
+Upon entry, the information about the line to be calculated is contained in `measure_info` (see `pg_measure_ptr` in "`line_validate_proc`" under section 27.8, ["Global" HERMES Paige Low-Level Hooks](#27.8-"global"-hermes-paige-low-level-hooks)).
+
+The `verb` parameter will be one of the following:
+
+```
+enum
+{
+	init_measure_verb,	// Called before any lines are computed
+	new_line_verb,			// Called before a line is computed
+	done_measure_verb,	// Valled when all lines have been computed
+};
+```
+
+### `line_parse`
+
+```
+PG_FN_PASCAL(long, line_parse_proc) (paige_rec_ptr pg, pg_measure_ptr measure_info, pg_char_ptr text, point_start_ptr line_start, long global_offset, long remaining_length);
+```
+
+This hook gets called repetitively when a line of text in `pg` is being built. Its intended purpose is to force a particular `point_start` record (many of which can compose a single line) to assume a certain length.
+
+One example of this would be building an array of "cells", in which an application needed to display a matrix of rows and columns for every "number" that appeared in a plain line of text. Normally, the line would be formatted as a single `point_start` record, yet a row/column display feature would require the line to break apart into one `point_start` for each "cell".
+
+#### Standard function
+
+The default function is `pgLineParse` which does nothing.
+
+When this function is called, HERMES Paige is essentially asking where the end of the current `point_start` record should break. The `measure_info` parameter is a pointer to the current position and `point_start`(s) of the line (*vide* `pg_measure_ptr` in "`line_validate_proc`" under section 27.8, ["Global" HERMES Paige Low-Level Hooks](#27.8-"global"-hermes-paige-low-level-hooks)). The `line_start` parameter is the current `point_start` record (the one being asked about). The `text` parameter is the text to be included in the current `point_start` and `remaining_length` its maximum length.
+
+What this function must do is return the new remaining length that the line builder should work with.
+
+For example, in the cell/row application, the function would examine the text, and notice that the next "number" is 6 bytes in length. In this case, this function would return `6` and the `point_start` for this portion of the line would be limited to 6 bytes.
+
+The function would then be called again, after the 6-byte `point_start` had been formatted (if there is any more text available and the maximum line width permits it).
+
+### `paginate_proc`
+
+```C
+PG_FN_PASCAL (void, post_paginate_proc) (paige_rec_ptr pg, text_block_ptr block, smart_update_ptr update_info, long lineshift_begin, long lineshift_end, short action_taken_verb);
+```
+
+This function is called each time HERMES Paige has paginated a block of text. By *pagination* is meant the computations of lines, their text widths and vertical/horizontal positions on the page.
+
+#### Standard function
+
+The default `proc`, `pgPostPaginateProc`, implements widow and orphan control and "keep-paragraphs-together" if the document is set for repeating pages.
+
+Upon entry, `block` is the `text_block` just paginated.
+
+The `update_info` parameter is provided in case this function needs to change the recommended beginning of display. If so, `update_info -> suggest_begin` and/or `update_info -> suggest_end` can be altered.
+
+**NOTE:** `update_info` might be null.
+
+The `lineshift_begin` and `lineshift_end` values indicate a range of text that has moved vertically by virtue of pagination. These two values are text-line based (operate on line boundaries) and provide valuable information for performance purposes. For example, if the user inserts a character causing no new word-wrapping, `lineshift_begin` will equal `lineshift_end`, which means none of the lines in the document have shifted vertically.
+
+The `action_taken_verb` indicates what has occurred, which will be one of the following:
+
+```C
+enum
+{
+	paginated_line_shift,			// Only shifted line locations vertically
+	paginated_empty_block,		// Built an empty block
+	paginated_hidden_block, 	// Built block whose text is all invisible.
+	paginated_fake_block, 		// Built dummy block -- sits below last container
+	paginated_partial_block,	// Rebuilt lines only partially
+	paginated_full_block			// Rebuilt everything
+};
+```
+
+### `click_proc`
+
+```C
+PG_FN_PASCAL(void, click_examine_proc) (paige_rec_ptr pg, short click_verb, short modifiers, long refcon_return, t_select_ptr begin_select, select_ptr end_select);
+```
+
+This function gets called after `pgDragSelect` has processed a "click" but before it returns control back to the application.
+
+#### Standard function
+
+The default function, `pgExamineClickProc`, does nothing.
+
+Upon entry, `click_verb` is the `verb` given to `pgDragSelect` (`mouse_down`, `mouse_moved` or `mouse_up`); `modifiers` is the same value given in `pgDragSelect` for modifiers. (See “Clicking \& Dragging”<!-- on page 2-43-->). The `refcon_return` field is the value that `pgDragSelect` is about to return.
+
+The `begin_select` and `end_select` parameters indicate the beginning and ending points of the recent selection
+
+##### Note
+
+Until `mouse_up` has occurred, these points can be "backwards," i.e. `end_select` can reflect an `offset` less than `begin_select` if the user clicked and dragged backwards.
+
+### `text_increment`
+
+```C
+PG_FN_PASCAL (void, increment_text_proc) (paige_rec_ptr pg, long base_offset, long increment_amount);
+```
+
+This function is called for every occurrence of inserting or deleting text. The intended purpose is to let HERMES Paige extensions handle external "runs" when it becomes necessary to make adjustments for text insertions and deletions.
+
+This function is always called after (not before) an insertion or deletion.
+
+#### Standard function
+
+The default proc, `pgTextIncrementProc`, does nothing.
+
+Upon entry, if the function is being called due to an insertion, `base_offset` is the text offset where the insertion occurred and `increment_amount` is positive (indicating the number of bytes inserted).
+
+If the function is being called after a deletion, `base_offset` is the text offset before the first byte that got deleted and `base_offset` is negative (the absolute value is the number of bytes that got deleted).
+
+**NOTE:** The function is called after the deletion, so the text that got deleted will no longer exist.
+
+### `set_device_proc`
+
+```C
+PG_FN_PASCAL (void, set_device_proc) (paige_rec_ptr pg, short verb, graf_device_ptr device, color_value_ptr bk_color);
+```
+
+This function is called to prepare a device for drawing, clipping, and font selection(s), etc., or to report that the device is to be released. The verb parameter indicates whether to prepare the device or release the device.
+
+#### Purpose
+
+The purpose is to "prepare" or "release" a machine-specific graphics device for general use. Your application might use this hook, for instance, to prepare a special device or device characteristics. Calls to this function can be nested, so this function is responsible for handling multiple "prepare" and "release" situations.
+
+#### Standard function
+
+If the verb indicates device preparation, the **Windows** version creates a device context (HDC), stores it into the `machine_ref` member of `device`, and does a `SaveDC()`; the **Macintosh** version saves the current `GrafPort`, then does a `SetPort()` with the `GrafPtr` in the `machine_var` field of device and saves all the `GrafPort` settings. If the `verb` indicates device release, the Windows version does a `RestoreDC()` and/or a `DeleteDC()` if appropriate; the Macintosh version restores the original settings of the port, then sets the previous `GrafPort`.
+
+Upon entry, the `verb` parameter will indicate one of the following:
+
+```
+set_pg_device, 	// Prepare the device
+unset_pg_device // Release the device
+```
+
+The device parameter points to the `graf_device` structure to prepare (this function alters that structure as necessary).
+
+If `bk_color` is non–`NULL`, the background color should be set to that value.
+
+#### Nested calls
+
+HERMES Paige will make frequent calls to this function, both `set_pg_device` and `unset_pg_device`, often nesting these pairs several levels deep. The standard `set_device_proc` handles this by incrementing/decrementing a counter in the `graf_device` structure, and handling the device accordingly.
+
+For example, when `verb == pg_set_device` the **Windows** version creates a new device context only if the counter is zero; otherwise it simply uses the previous DC (which is stored in the `graf_device`); then it increments the counter. Similarly, when `verb == pg_unset_device`, the counter is decremented, and only when it decrements to zero does the DC get deleted.
+
+### `page_modify_proc`
+
+```C
+PG_FN_PASCAL(void, page_modify_proc) (paige_rec_ptr pg, long page_num, rectangle_ptr margins);
+```
+
+This function is called for each repeating "page" during the text pagination process.
+
+#### Purpose
+
+Its intended purpose is to allow temporary modification(s) to any of the four sides of the page. A typical reason for doing this would be to add space for headers and footers, or extra "gutter" space based on document format and page number, etc.
+
+#### Standard function
+
+The default function does nothing.
+
+**NOTE:** This hook will not get called unless the `pg_ref` is set for a "repeating page shape". *Vide* section 13.3, [Repeating Shapes](#13.3-Repeating-shapes).
+
+Upon entry, `page_num` will indicate the page number of the "page" about to be paginated; the first page is 1 (not 0). At this time, no text lines will have been calculated for this page, so any modifications made to the page boundary will affect the placement of text.
+
+To "modify" the page boundary, this function should set margins to the desired amount of inset. For example, if `margins -> top_left.v` were set to 20, the text would paginate on this page beginning 20 pixels from the top; if `margins -> bot_right.h` were set to 50, text would wrap 50 pixels from the right side of the page, etc.
+
+While text is being paginated, HERMES Paige calls this function before it calculates the first line on a page. Each time this function is called, all four "margin" sides will be set to zero; hence if this function merely returns (does nothing), the page dimensions remain unchanged (they will retain their original dimensions as if you were not using this hook at all).
+
+##### Note
+
+The `page_modify_proc` also gets called when HERMES Paige is computing the clipping region.
+
+### `wordbreak_info_proc`
+
+```C
+PG_FN_PASCAL (long, wordbreak_info_proc) (paige_rec_ptr pg, pg_char_ptr the_char, short charsize, style_info_ptr style, font_info_ptr font, long current_settings);
+```
+
+This hook has been provided to allow special-case word breaking for various character sets, or multilingual scripts.
+
+#### Purpose
+
+HERMES Paige calls this hook in response to its internal `char_info` function to learn about the nature of a particular character.
+
+For example, in Japanese most characters can be considered "words" for purposes of breaking on a line, but there are several exceptions—certain characters must never end on a line and must stay grouped with character(s) that fall after them. Similarly there are characters that must never begin on a line and must stay grouped with character(s) before them. The purpose of this callback function is to determine of the character in question matches the application-defined table of these exceptions.
+
+#### Standard function
+
+The default function returns `current_settings`.
+
+Upon entry, `the_char` is a pointer to a character and `char_size` is the byte size of that character. The current style information is provided in the style parameter and the font parameter provides the current font information.
+
+The current_settings parameter contains a combination of bit settings that define what kind of character HERMES Paige already thinks is appropriate, which can be a combination of any of the bit settings for the char_info_proc function.
+
+##### Notes
+
+* On **Windows**, the current code page for `the_char` is available in the font parameter as `font -> code_page`; the language ID (in LCID format) is available in the `language` member of `font`.
+* On **Macintosh**, the script code is in `font -> char_type`.
+
+#### Function result
+
+The new character bit settings should be returned. If no change to the existing settings are required, return `current_settings`.
+
+### `key_insert_query`
+
+```C
+PG_FN_PASCAL (short, key_insert_query) (paige_rec_ptr pg, pg_char_ptr the_char, short charsize);
+```
+
+This function is called when `pgInsert()` is called but before anything is inserted into `pg`.
+
+#### Purpose
+
+Its intended purpose is to speed up keyboard entry by determining if a character should be inserted immediately and redrawn, or temporarily buffered and inserted later.
+
+#### Standard function
+
+The default function for **Macintosh** returns `key_insert_mode` (signifying the character should be inserted now). The **Windows** version checks for a pending `WM_CHAR` message and, if any, returns `key_buffer_mode` (so the character is buffered).
+
+Upon entry, `the_char` is the character to be inserted and `charsize` is the number of bytes for the character.
+
+#### Function result
+
+If the character should be inserted immediately, return `key_insert_mode`; otherwise, return `key_buffer_mode`.
+
+### `charclass_info_proc`
+
+```C
+PG_FN_PASCAL (pg_word, charclass_info_proc) (paige_rec_ptr pg, pg_char_ptr the_char, short charsize, style_info_ptr style, font_info_ptr font);
+```
+
+This function is called to determine the possible character subset or multilingual "class" of character.
+
+#### Purpose
+
+Its intended purpose is to determine a language or scripting break in the text for purposes of selection or wordwrapping. For all-Roman text, this functionality is not required (since HERMES Paige handles text selection and wordbreaking automatically). For special scripts, character classes can become more complex and demand further attention.
+
+#### Standard function
+
+The default function uses OS-specific functions to determine the character type of `the_char`. For Japanese, the function will determine which subset of the current script `the_char` belongs to.
+
+Upon entry, `the_char` will be a single or double byte character, charsize its byte size. The style and font parameters provide the current style_info and font_info for the character.
+
+#### Function result
+
+The character class type should be returned. This can be any value so long as each character of the same class return the same response. (HERMES Paige simply compares the responses to each other, and if one of them is different, that is considered a change in script type. This is used to select, *i.e.* highlight, "words" from double-clicks, *etc.*)
+
+#### Notes
+
+* On **Windows**, the current code page for the character in question is available in the font parameter as `font -> code_page`; the language ID (in `LCID` format) is available in the `language` member of `font`.
+* On **Macintosh**, the script code is in `font -> char_type`.
+
+## 27.9 Warning About "Reëntrant" Functions
+
+HERMES Paige functions are generally reëntrant and can therefore be called when you execute a custom hook. However, as a general rule, you should never call anything that tries to change the internal structure(s) of a `pg_ref`. While the code itself is reëntrant, data structures might be *locked* and therefore not able to be resized. A function such as `pgSetStyleInfo`, for instance, often needs to add a `style_info` record; if the array of styles is temporarily locked, a call to `pgSetStyleInfo` could crash!
+
+You should therefore restrict data changes to the parameters given to you in the low-level function itself or, if you absolutely must change something (and know what you are doing), change the structure(s) directly without resizing memory or adding/deleting records.
+
+## Note
+
+All the `Get` functions, however (`pgGetStyleInfo`, `pgGetParInfo`, etc.) are always safe to call.
+
+One exception: It is OK (often anticipated) to call `pgSetExtraStruct` while executing a low-level hook.
+
+## 27.10 Text Parsing \& Word Breaks
+
+A new callback "hook" has been provided to allow special-case word breaking for various character sets (code pages). HERMES Paige calls this hook in response to its internal `char_info` function to learn about the nature of a particular character.
+
+For example, in Japanese, most characters can be considered "words" for purposes of breaking on a line, but there are several exceptions - certain characters must never end on a line and must stay grouped with character(s) that fall after them. Similarly there are characters that must never begin on a line and must stay grouped with character(s) before them. The purpose of this callback function is to determine of the character in question matches the application-defined table of these exceptions. The prototype definition of this callback is as follows:
+
+```C
+PG_PASCAL (long) pgBreakInfoProc (paige_rec_ptr pg, pg_char_ptr the_char, short charsize, style_info_ptr style, font_info_ptr font, long current_settings);
+```
+
+When HERMES Paige is determining where to break a line (word-wrap), it calls this function to determine any special-case information that might influence the word breaking result. The default function (the one that exists if your application does not set its own) does not do anything other than use the defaults, which in the case of double-byte characters it assumes that all such characters are valid word breaks.
+
+Upon entry, `the_char` is a pointer to (usually) a double-byte character and charsize is the byte size of that character. The current style information is provided in the style parameter and the font parameter provides the current font information.
+
+**NOTE:** The current code page for the character in question is available in the font parameter as `font -> code_page`; the language ID (in LCID format) is available in the `language` member of `font`.
+
+The `current_settings` parameter contains a combination of bit settings that define what kind of character HERMES Paige already thinks is appropriate, which can be a combination of any of the following:
+
+```C
+#define BLANK_BIT						0x00000001	// Character is blank
+#define WORD_BREAK_BIT			0x00000002	// Word breaking char
+#define WORD_SEL_BIT				0x00000004	// Word select char
+#define SOFT_HYPHEN_BIT			0x00000008	// Soft hyphen char
+#define INCLUDE_BREAK_BIT		0x00000010	// Word break but include with word
+#define INCLUDE_SEL_BIT			0x00000020	// Select break but include with word
+#define CTL_BIT							0x00000040	// Char is a control code
+#define INVIS_ACTION_BIT		0x00000080	// Char is not a display char, but arrow, bksp, etc
+#define PAR_SEL_BIT					0x00000100	// Char breaks a paragraph
+#define LINE_SEL_BIT				0x00000200	// Char breaks a line (soft CR)
+#define TAB_BIT							0x00000400	// Char performs a TAB
+#define FIRST_HALF_BIT			0x00000800	// First half of a multi-byte char
+#define LAST_HALF_BIT				0x00001000	// Last half of a multi-byte char
+#define MIDDLE_CHAR_BIT			0x00002000	// Middle of a multi-byte char run
+#define CONTAINER_BRK_BIT		0x00004000	// Break-container bit
+#define PAGE_BRK_BIT				0x00008000	// Break-repeating-shape bit
+#define NON_BREAKAFTER_BIT	0x00010000	// Char must stay with char(s) after it
+#define NON_BREAKBEFORE_BIT	0x00020000	// Char must stay with char(s) before it
+#define NUMBER_BIT					0x00040000	// Char is numeric
+#define DECIMAL_CHAR_BIT		0x00080000	// Char is decimal mark (for decimal tab)
+#define UPPER_CASE_BIT			0x00100000	// Char is MAJUSCULE
+#define LOWER_CASE_BIT			0x00200000	// Char is minuscule
+#define SYMBOL_BIT					0x00400000	// Char is a symbol
+#define EUROPEAN_BIT				0x00800000	// Char is ASCII-European
+#define NON_ROMAN_BIT				0x01000000	// Char is not Roman script
+#define NON_TEXT_BIT				0x02000000	// Char is not really text
+#define FLAT_QUOTE_BIT			0x04000000	// Char is a typewriter quote
+#define SINGLE_QUOTE_BIT		0x08000000	// Quote char is single ' quote
+#define LEFT_QUOTE_BIT			0x10000000	// Char is a left quote
+#define RIGHT_QUOTE_BIT			0x20000000	// Char is a right quote
+#define PUNCT_NORMAL_BIT		0x40000000	// Char is normal punctuation
+#define OTHER_PUNCT_BIT 		0x80000000	// Char is other punctuation in multi-byte
+```
+
+For purposes of the `pgBreakInfoProc`, the following bits are usually the only settings you will care about:
+
+```
+WORD_BREAK_BIT
+INCLUDE_BREAK_BIT
+NON_BREAKAFTER_BIT
+NON_BREAKBEFORE_BIT
+```
+
+If `WORD_BREAK_BIT` is set that character delineates a word for wrapping (breaking) purposes; if `INCLUDE_BREAK_BIT` is also set, the character is part of the word.
+
+For example, in Roman text a space character would have `WORD_BREAK_BIT` set but not `INCLUDE_BREAK_BIT` (because the space is not part of a word). However, a “," (comma) character would have both `WORD_BREAK_BIT` and `INCLUDE_BREAK_BIT` set because it is a word break but must be included with the word.
+
+`NON_BREAKAFTER_BIT` causes the character to always stay with the character(s) immediately after its position in text; `NON_BREAKBEFORE` causes the character to always stay with the character(s) immediately before its position in text.
+
+**FUNCTION RESULT:** The callback function must return the new settings that HERMES Paige should use for the character. Often, this return value will simply be whatever is in `current_settings`.
+
+### Example
+
+```C
+PG_PASCAL (long) MyBreakInfoProc (paige_rec_ptr pg, pg_char_ptr the_char, short charsize, style_info_ptr style, font_info_ptr font, long current_settings)
+{
+if (SettingsOK(the_char, charsize))
+	return current_settings;
+}
+```
+
+Examples for changing the settings to something else are shown below.
+
+#### Setting the hook
+
+The callback ("hook") function is embedded in the `pg_ref` itself. If you want the same callback function to always get called from every `pg_ref` you should establish the function pointer into HERMES Paige globals early before any `pg_ref`s are created.
+
+```C
+pg_globals pgGlobals;	// HERMES Paige globals record
+void InitializePaige (void)
+{
+	pgInit(&paige_globals, &mem_globals);
+	mem_globals.def_hooks.wordbreak_proc = MyBreakInfoProc;
+}
+```
+
+In the example above, `MyBreakInfoProc` is the name of your callback function (note, for **16-bit Windows** you would need to call `MakeProcInstance()` to create a valid function pointer). By placing it in the `globals` structure, HERMES Paige will initialize the wordbreaking callback for all `pg_ref`s.
+
+### Examples of Parsing Multilingual Word Breaks
+
+A typical multilingual word parsing feature would be to check the code page in the word breaking callback, then compare the character to a predefined table for that code page to determine if the character has any additional word breaking attributes.
+
+In Japanese, for example, most characters can break on a line as a "word." In some cases, however, the character can break but must be included with the "word" immediately to the left or to the right. The following is an example of tagging these exceptions in "MyBreakInfoProc" (your application-defined word breaking callback):
+
+```C
+#define CP_JAPANESE 932 // Japanese code page
+#define CP_US 1252      // United States and Latin code page
+
+PG_PASCAL(long) MyBreakInfoProc(paige_rec_ptr pg, pg_char_ptr the_char, short charsize, style_info_ptr style, font_info_ptr font, long current_settings) {
+    long result = current_settings; // Initialize result with current settings
+    LPSTR keep_with_left_table = NULL;
+    LPSTR keep_with_right_table = NULL;
+
+    // Determine the code page and assign tables accordingly
+    switch (font->code_page) {
+        case CP_JAPANESE: {
+            // Assign lookup tables for Japanese
+            keep_with_left_table = jp_resource1;
+            keep_with_right_table = jp_resource2;
+            break;
+        }
+        case CP_US: {
+            // No special processing for US; trust defaults
+            break;
+        }
+        default: {
+            // Handle unsupported code pages if needed
+            break;
+        }
+    }
+
+    // Check if we have a table for comparison
+    if (keep_with_left_table != NULL) {
+        // If the character is found in the "keep-with-left" table,
+        // force it to stay with the word on the left
+        if (FindCharInTable(keep_with_left_table, the_char, charsize)) {
+            result |= NON_BREAKBEFORE_BIT;
+        } else {
+            result &= ~NON_BREAKBEFORE_BIT;
+        }
+    }
+
+    if (keep_with_right_table != NULL) {
+        // If the character is found in the "keep-with-right" table,
+        // force it to stay with the word on the right
+        if (FindCharInTable(keep_with_right_table, the_char, charsize)) {
+            result |= NON_BREAKAFTER_BIT;
+        } else {
+            result &= ~NON_BREAKAFTER_BIT;
+        }
+    }
+
+    return result;
+}
+```
+
+In the above example, the "table" variables can be simple resources that contain a list of characters. Usually you only care about double-byte characters (because HERMES Paige handles most single byte characters correctly using its defaults—but that might change with certain languages). The `FindCharInTable` function would simply be a function that returns `TRUE` if the character in question was in the table.
+
+## 27.11 Character/Language Subsets
+
+Certain languages can have "subsets" of characters that belong together as a group—at least for purposes of double-clicking for a word selection. In Japanese script, for instance, each double-byte character can be Katakana, Hiragana or Ideograph.
+
+Although HERMES Paige handles these subsets appropriately for word-selection purposes, should it become necessary to alter the subset differences or add new ones, the following callback hook is available:
+
+```
+PG_PASCAL (pg_word) pgCharClassProc (paige_rec_ptr pg, pg_char_ptr the_char, short charsize, style_info_ptr style, font_info_ptr font);
+```
+
+HERMES Paige calls this hook in addition (and after) the word break callback. The purpose of the function is to return the character class, or *subset*, of the language. Upon entry, `the_char` points to the first byte of the character and charsize is the size of the character, in bytes. The style and font parameters are the current style and font of the character. Note that `font -> code_page` and `font -> language` will contain the character's code page and LCID, respectively.
+
+The following is the default code that HERMES Paige executes for this function on **Windows** (*i.e.*, the function that gets called if you do not set your own):
+
+```
+PG_PASCAL (pg_word) pgCharClassProc (paige_rec_ptr pg, pg_char_ptr the_char, short charsize, style_info_ptr style, font_info_ptr font);
+{
+	WORD types[4];
+	GetStringTypeEx((LCID) font -> language, CT_CTYPE3, (LPCSTR) the_char, (int) charsize, types);
+	return (WORD)(types[0] & (C3_KATAKANA | C3_HIRAGANA | C3_IDEOGRAPH | C3_HALFWIDTH | C3_FULLWIDTH));
+}
+```
+
+### Note
+
+The default code uses `GetStringTypeEx` to determine the language subset of the character. HERMES Paige does not actually examine the value or contents of the function result; rather, this function is called for adjacent characters to determine if a word selection (highlight) should continue.
+
+For example, if the first five characters in a string returned `0x0000` from `pgCharClassProc`, then the sixth character returned `0x0001`, HERMES Paige would only highlight the word(s) within the first five characters if the user double-clicked.
 
 # 28 Embedding Non-Text Characters
 
 ## 28.1 Inserting graphics \& user items
 
-**DEFINITION:** A non-text character is a graphic display embedded into the text stream of an OpenPaige document, such as a picture, box or special string (such as a page number, footnote, etc.). It is not an ASCII byte as such, but otherwise looks and behaves like an ordinary character. It can be clicked, deleted, cut, copied, and pasted.
+**DEFINITION:** A non-text character is a graphic display embedded into the text stream of an HERMES Paige document, such as a picture, box or special string (such as a page number, footnote, etc.). It is not an ASCII byte as such, but otherwise looks and behaves like an ordinary character. It can be clicked, deleted, cut, copied, and pasted.
 
 The purpose of this chapter is to explain the built-in, high-level support for these special characters.
 
@@ -9532,9 +11892,9 @@ There are several undocumented references in `pgEmbed.h`. If anything in that he
 
 ### Description
 
-OpenPaige provides a certain degree of built-in support for graphic characters. For the Macintosh version, `PicHandle`s (pictures) can be inserted into the text stream with practically no support required from your application. For the Windows version, meta files can be inserted in the same way.
+HERMES Paige provides a certain degree of built-in support for graphic characters. For the Macintosh version, `PicHandle`s (pictures) can be inserted into the text stream with practically no support required from your application. For the Windows version, meta files can be inserted in the same way.
 
-For other graphic types and/or "user items" (custom characters), OpenPaige supports a variety of user-defined non-text character insertions; your application can then handle the display and other rendering through a single callback function.
+For other graphic types and/or "user items" (custom characters), HERMES Paige supports a variety of user-defined non-text character insertions; your application can then handle the display and other rendering through a single callback function.
 
 All the functions documented in this chapter are prototyped in pgEmbed.h. You therefore need to include this header file to use the structures, functions and callbacks.
 
@@ -9548,40 +11908,41 @@ This function returns a special `memory_ref` that can be subsequently inserted i
 
 * `mem_globals` — must be a pointer to your memory globals (same structure that was also given to `pgMemStartup` and `pgInit`).
 
-* `item_type` — indicates the kind of object you want to create. This value can be any value shown in "Embed_Ref Types”<!-- on page 28-583-->.
+* `item_type` — indicates the kind of object you want to create. This value can be any value shown in section 28.4, [`embed_ref` Types](#28.4-`embed_ref`-types).
 
 * `item_data`, `modifiers` — What you provide in `item_data` and `modifiers` depends on the item_type; these are also described in "Embed Reference Types."
 
-* `flags` — should be set to zero (with some unusual exceptions - "Special Cases"<!-- on page 28-599-->).
+* `flags` — should be set to zero (with some unusual exceptions, as detailed in section 28.11, [Special Cases](#28.11-Special-Cases)).
 
 * `vert_pos` — Its purpose is to indicate a descent value for the object you will be inserting. By *descent* is meant the amount the item should be offset vertically below the baseline.
+  
   If `vert_pos` is positive, it is considered to be a percent of the item's total height. If `vert_pos` is negative, it is considered to be a pixel value. Carefully note that in both cases, `vert_pos` is a `Fixed` value — the high-order word is the whole part and the low-order word is the fraction.
-
+  
   For example, if `vert_pos` is `0x000A0000`, the `embed_ref` will be offset 10% of its total height from the text baseline. If `vert_pos` is `0xFFFEFFFF` (negative `0x00020000`), the item will be offset 2 pixels below the text baseline, etc.
-
+  
   The following illustrations show a typical `embed_ref`'s descent values for different `vert_pos` values:
-
+  
   ![](https://cdn.mathpix.com/cropped/2024_04_30_f87dba95664e91f9803eg-581.jpg?height=210&width=1280&top_left_y=1108&top_left_x=440)
-
+  
   The above shows the result of an `embed_ref` with `vert_pos` = 0 (no descent from baseline).
-
+  
   ![](https://cdn.mathpix.com/cropped/2024_04_30_f87dba95664e91f9803eg-581.jpg?height=200&width=1290&top_left_y=1490&top_left_x=430)
-
+  
   The above shows the result of an `embed_ref` with `vert_pos` = 50.00 (descent is 50% of height).
-
+  
   ![](https://cdn.mathpix.com/cropped/2024_04_30_f87dba95664e91f9803eg-582.jpg?height=205&width=1280&top_left_y=180&top_left_x=440)
-
+  
   The above shows the result of an `embed_ref` with `vert_pos = -3` (descent is 3 pixels)
-
+  
 * `user_refcon` — is saved inside the `embed_ref` itself, and can be anything.
 
-* `keep_around` — indicates whether or not the `embed_ref` can be automatically disposed once it is no longer being used within any existing `pg_ref`. If this value is `FALSE` then OpenPaige is authorized to dispose of it once it is no longer being used by any `pg_ref`; a `TRUE` value tells OpenPaige it must never dispose it even if no `pg_ref` contains the embed_ref.
+* `keep_around` — indicates whether or not the `embed_ref` can be automatically disposed once it is no longer being used within any existing `pg_ref`. If this value is `FALSE` then HERMES Paige is authorized to dispose of it once it is no longer being used by any `pg_ref`; a `TRUE` value tells HERMES Paige it must never dispose it even if no `pg_ref` contains the embed_ref.
 
-  To understand the full meaning of `keep_around`, the deceloper should realise that an `embed_ref` can be "shared" by multiple positions in a document, and even between different documents. For example, if the user performs multiple copy/paste operations on a single `embed_ref`, OpenPaige won't actually duplicate the `embed_ref`; rather, it simply creates multiple pointers to its data.
+  To understand the full meaning of `keep_around`, the deceloper should realise that an `embed_ref` can be "shared" by multiple positions in a document, and even between different documents. For example, if the user performs multiple copy/paste operations on a single `embed_ref`, HERMES Paige won't actually duplicate the `embed_ref`; rather, it simply creates multiple pointers to its data.
 
-However, once the last remaining shared copy of the reference is deleted, OpenPaige will dispose the `memory_ref` (if `keep_around = TRUE`). Normally, this is what you would want.	
+However, once the last remaining shared copy of the reference is deleted, HERMES Paige will dispose the `memory_ref` (if `keep_around = TRUE`). Normally, this is what you would want.	
 
-**NOTE:** If `keep_around` is `FALSE` you should never dispose the `embed_ref` (OpenPaige will dispose of it at the appropriate time). If `keep_around` is TRUE then you need to eventually dispose the reference with `pgDisposeEmbedRef()`.
+**NOTE:** If `keep_around` is `FALSE` you should never dispose the `embed_ref` (HERMES Paige will dispose of it at the appropriate time). If `keep_around` is TRUE then you need to eventually dispose the reference with `pgDisposeEmbedRef()`.
 
 ## 28.3 Inserting the `embed_ref`
 
@@ -9591,13 +11952,13 @@ This function inserts an `embed_ref` as a "character" into `pg` at the specified
 
 * `stylesheet_option` — is an optional stylesheet ID that gets automatically applied to the `embed_ref` "character". If you merely want to use whatever style applies to the text position, pass zero for `stylesheet_option`, otherwise you need to create a new stylesheet and provide that stylesheet ID.
 
-* `callback` — is a pointer to a function (in your application) that will be called for various occurrences; the purpose of this callback is to handle custom characters and/or to modify the default behavior of standard `embed_ref`s. However, if you want OpenPaige to handle the `embed_ref` in the default way, pass `NULL` for `callback`.
+* `callback` — is a pointer to a function (in your application) that will be called for various occurrences; the purpose of this callback is to handle custom characters and/or to modify the default behavior of standard `embed_ref`s. However, if you want HERMES Paige to handle the `embed_ref` in the default way, pass `NULL` for `callback`.
 
-  **NOTE:** Only certain `embed_ref` types are supported with a "default behaviour", and therefore only those types will work correctly if you pass NULL for callback; see section 28.4, *Embed Ref Types*.<!-- on page 28-583--> below.
+  **NOTE:** Only certain `embed_ref` types are supported with a "default behaviour", and therefore only those types will work correctly if you pass `NULL` for `callback`; see section 28.4, [`embed_ref` Types](#28.4-`Embed_Ref`-Types).
 
 * `callback_refcon` — value can be anything you want; this same value will be given to your callback function. If you have not supplied a callback function (`callback = NULL`), this parameter does not matter.
 
-* `draw_mode` — indicates whether or not to redraw the text after the `embed_ref` is inserted; the value you pass for this parameter is identical to all other OpenPaige functions that accept a `draw_mode`.
+* `draw_mode` — indicates whether or not to redraw the text after the `embed_ref` is inserted; the value you pass for this parameter is identical to all other HERMES Paige functions that accept a `draw_mode`.
 
 #### Notes and Cautions
 
@@ -9606,9 +11967,9 @@ This function inserts an `embed_ref` as a "character" into `pg` at the specified
 
   The `user_refcon` will always be whatever value you passed to `pgInsertEmbedRef()` in the `callback_refcon` parameter except for `EMBED_READ_DATA` and `EMBED_WRITE_DATA`, in which case the `user_refcon` will be the original `user_refcon` value given to `pgNewEmbedRef()`.
 
-* Do not insert the same `embed_ref` more than once unless you have created it with `keep_around = TRUE`. Otherwise, OpenPaige can dispose it prematurely and your program will crash. Once it has been inserted, however, it is OK to copy and paste that character to as many documents as memory permits.
+* Do not insert the same `embed_ref` more than once unless you have created it with `keep_around = TRUE`. Otherwise, HERMES Paige can dispose it prematurely and your program will crash. Once it has been inserted, however, it is OK to copy and paste that character to as many documents as memory permits.
 
-* Once the `embed_ref` has been inserted, OpenPaige "owns" its memory, i.e. you *must not* dispose of it as long as it exists in any `pg_ref` (and, if you passed `FALSE` for `keep_around` in `pgNewEmbedRef()`, you *must not* dispose of it at all, at any time).
+* Once the `embed_ref` has been inserted, HERMES Paige "owns" its memory, i.e. you *must not* dispose of it as long as it exists in any `pg_ref` (and, if you passed `FALSE` for `keep_around` in `pgNewEmbedRef()`, you *must not* dispose of it at all, at any time).
 
 ### The Style Sheet Option
 
@@ -9616,7 +11977,7 @@ Any `embed_ref` has the option to alter the style and/or font of the text it app
 
 For example, a string-type `embed_ref` (`embed_alternate_char`) will normally assume the style and font of the text where it was embedded; however, by passing a non-zero `stylesheet_id` number in `stylesheet_option` in `pgInsertEmbedRef` or `pgSetEmbedRef`, the style or font can be overridden.
 
-A `stylesheet_id` is obtained by first creating a new `style_info` record and adding it to the `pg_ref` as a new style sheet (see chapter 31, "Style Sheets"<!-- on page 31-1-->). The `stylesheet_id` is then given to the `stylesheet_option` parameter, in which case the text for which the embed_ref applies will assume that style.
+A `stylesheet_id` is obtained by first creating a new `style_info` record and adding it to the `pg_ref` as a new style sheet (*vide* chapter 31, [Style Sheets](#31-style-sheets)). The `stylesheet_id` is then given to the `stylesheet_option` parameter, in which case the text for which the `embed_ref` applies will assume that style.
 
 However, a style sheet applied to an `embed_ref` works slightly differently than normal styles: only the non-zero items in the `style_info` record of the stylesheet are applied.
 
@@ -9639,9 +12000,9 @@ If you want to change only the font in the `embed_ref` text, use the same exampl
 
 ## 28.4 `embed_ref` Types
 
-The following table describes each possible `embed_ref` data type and what you should pass in the `item_data` and modifier parameters for `pgNewEmbedRef()`. The *Support* column indicates which OpenPaige platform supports the data type. All the items listed are supported to some extent; *i.e.*, none of them require a callback function to render a default behavior.
+The following table describes each possible `embed_ref` data type and what you should pass in the `item_data` and modifier parameters for `pgNewEmbedRef()`. The *Support* column indicates which HERMES Paige platform supports the data type. All the items listed are supported to some extent; *i.e.*, none of them require a callback function to render a default behavior.
 
-**NOTE:** *If the data type is not listed, there is no current OpenPaige support for the type.* (You can, of course, support your own using the callback function.)
+**NOTE:** *If the data type is not listed, there is no current HERMES Paige support for the type.* (You can, of course, support your own using the callback function.)
 
 #### Table 5. `embed_ref` data types
 
@@ -9686,7 +12047,7 @@ The following table describes each possible `embed_ref` data type and what you s
 
 * `points` — are represented by a series of `co_ordinate` pairs; the first pair is a line, the second pair is another line, etc.
 
-  1. The points array must therefore be in PAIRS.
+  1. The `points` array must therefore be *in pairs*.
 
   2. A Windows meta file must be represented by the following structure (pointed to by the item_data parameter);
 
@@ -9717,7 +12078,7 @@ The following table describes each possible `embed_ref` data type and what you s
 
 * `embed_alternate_char` and `embed_dynamic_string` — are treated as a single character and will therefore not wrap or word break in the middle.
 
-* `embed_user_data` — the item is considered custom (generally handled by your callback function), but OpenPaige will save and retrieve your data automatically when saving to files. The data is assumed to be a contiguous byte stream in `*item_data`.
+* `embed_user_data` — the item is considered custom (generally handled by your callback function), but HERMES Paige will save and retrieve your data automatically when saving to files. The data is assumed to be a contiguous byte stream in `*item_data`.
 
 * `item_data` for `embed_mac_vm_pict` — must be a `memory_ref` containing the data from a `PicHandle`. This type behaves exactly the same as `embed_mac_pict` except that the `memory_ref` provides virtual memory to the picture.
 
@@ -9731,7 +12092,7 @@ Each `embed_ref` you have inserted can have its own callback function (or they c
 
 **NOTE:** For *Windows 3.1*, you need to set a callback function that has been created with `MakeProcInstance()`.
 
-Upon entry, `pg` is the OpenPaige record structure that owns the `embed_ref`; the `embed_ptr` parameter is a pointer to the `embed_ref` record structure *infra*, and `embed_type` is the data type (same one you gave to `pgNewEmbedRef()` when it was initially created).
+Upon entry, `pg` is the HERMES Paige record structure that owns the `embed_ref`; the `embed_ptr` parameter is a pointer to the `embed_ref` record structure *infra*, and `embed_type` is the data type (same one you gave to `pgNewEmbedRef()` when it was initially created).
 
 * `command` — indicates why the function is being called, and `param1`/`param2` will contain different values depending on what value is in `command` (see "Command Messages” *infra*).
 
@@ -9739,11 +12100,11 @@ Upon entry, `pg` is the OpenPaige record structure that owns the `embed_ref`; th
 
 ### Command Messages
 
-When the `callback` function is called, the value in `command` will be one of the values below. Depending on the command, `param1` and `param2` contain additional data. In each case, the `embed_ptr` will point to the `embed_ref` structure (see "The Embed Record"<!-- on page 28-596-->).
+When the `callback` function is called, the value in `command` will be one of the values below. Depending on the command, `param1` and `param2` contain additional data. In each case, the `embed_ptr` will point to the `embed_ref` structure (*vide* section 28.8, [The Embed Record](#28.8-the-embed-record)).
 
-* `EMBED_INIT` — occurs during a `pgReadDoc()` function (file read). The purpose of this command is to initialize an `embed_ref` that has been read from a file (typically, to set a callback function specific to the associated text style). See `pgInitEmbedProcs`<!-- on page 604 this chapter--> regarding the first `pgReadDoc` callback function.
+* `EMBED_INIT` — occurs during a `pgReadDoc()` function (file read). The purpose of this command is to initialize an `embed_ref` that has been read from a file (typically, to set a callback function specific to the associated text style). For information about the first `pgReadDoc` callback function, *vide* `pgInitEmbedProcs` in section 28.16, [File Reading](#28.16-File-Reading). 
 
-  Upon entry, `param1` indicates the number of times `EMBED_INIT` has been sent to the `callback` function during `pgReadDoc` for this particular `embed_ref`. (Since the same `embed_ref` can be shared by many places in the text, your initialisation code might want to know this information so the `embed_ref` data is initialised only once). On the first callback for this `embed_ref`, `param1` is zero.
+* Upon entry, `param1` indicates the number of times `EMBED_INIT` has been sent to the `callback` function during `pgReadDoc` for this particular `embed_ref`. (Since the same `embed_ref` can be shared by many places in the text, your initialisation code might want to know this information so the `embed_ref` data is initialised only once). On the first callback for this `embed_ref`, `param1` is zero.
 
   The `param2` will be a `style_info` pointer that is associated to the `embed_ref`.
 
@@ -9751,9 +12112,9 @@ When the `callback` function is called, the value in `command` will be one of th
 
 * `EMBED_DRAW` — occurs when the `embed_ref` should be drawn.
 
-* `param1` — Upon entry, this is a `rectangle_ptr` (an OpenPaige rectangle) that defines the exact drawing bounds of the embedded item (which includes scrolled position and scaling).
+* `param1` — Upon entry, this is a `rectangle_ptr` (an HERMES Paige rectangle) that defines the exact drawing bounds of the embedded item (which includes scrolled position and scaling).
 
-* `param2` — is a `draw_points_ptr` containing additional information for drawing (see `draw_points_ptr` in OpenPaige manual and/or in `Paige.h`).
+* `param2` — is a `draw_points_ptr` containing additional information for drawing (see `draw_points_ptr` in HERMES Paige manual and/or in `Paige.h`).
 
   The `callback` function result is ignored.
 
@@ -9762,29 +12123,29 @@ When the `callback` function is called, the value in `command` will be one of th
   	HDC hdc;
   	hdc = (HDC)pg -> globals -> current_port.machine_ref;
 
-  Do not assume that OpenPaige is drawing to the current window (it can be drawing to a bitmap DC or a printer DC, etc.). When the `callback` is called, the above code is *guaranteed* to return a valid device context to use for drawing.
+  Do not assume that HERMES Paige is drawing to the current window (it can be drawing to a bitmap DC or a printer DC, etc.). When the `callback` is called, the above code is *guaranteed* to return a valid device context to use for drawing.
 
   **NOTE:** On *Macintosh*, the `GrafPort` you should draw to is set as the current port before the `callback` is called. Do not assume that drawing will occur to the `pg_ref` window (it can occur to an offscreen bitmap port).
 
-* `EMBED_MEASURE` — occurs when OpenPaige wants to know the character width(s) of the embedded item.
+* `EMBED_MEASURE` — occurs when HERMES Paige wants to know the character width(s) of the embedded item.
 
-  Upon entry, `param1` is a `pg_embed_measure_ptr` and `param2` is not used. (See “The Measure Record”<!-- on page 28-598-->).
+  Upon entry, `param1` is a `pg_embed_measure_ptr` and `param2` is not used. (*Vide* section 28.9, [The Measure Record](#28.9-the-measure-record)).
 
   **NOTE:** This `callback` is only used to obtain the object's width. Its height must be initialized either before inserting the `embed_ref` or in response to `EMBED_VMEASURE`.
 
   Before returning from this function, you should set the `embed_ptr -> width` to the `embed_ref`'s width, in pixels.
 
-  **NOTE:** OpenPaige will determine the width automatically for embed types that are fully supported (requiring no callback).
+  **NOTE:** HERMES Paige will determine the width automatically for embed types that are fully supported (requiring no callback).
 
   The function result from the `callback` function is ignored.
 
-* `EMBED_VMEASURE` — occurs when OpenPaige wants to know the height of the embedded item.
+* `EMBED_VMEASURE` — occurs when HERMES Paige wants to know the height of the embedded item.
 
   Upon entry, `param1` is the `style_info_ptr` that "owns" the `embed_ref` and `param2` is not used.
 
   Before returning from this function you should set the `embed_ptr -> height` to the `embed_ref`'s height, in pixels.
 
-  **NOTE:** OpenPaige will determine the height automatically for embed types that are fully supported (requiring no callback).
+  **NOTE:** HERMES Paige will determine the height automatically for embed types that are fully supported (requiring no callback).
 
   The function result from the `callback` function is ignored.
 
@@ -9806,13 +12167,13 @@ When the `callback` function is called, the value in `command` will be one of th
 
   Upon entry, `param1` is a pointer to a `pg_embed_click` record with additional info (see "Click Record" *infra*).
 
-  The function result from the `callback` should be any non-zero value if you want to continue tracking the `embed_ref` like a control button, otherwise return zero. (By tracking like a control button is meant that OpenPaige will not try to drag-select surrounding characters, rather subsequent mouse movements will be passed to your callback function with `EMBED_MOUSEMOVE` and `EMBED_MOUSEUP` commands.
+  The function result from the `callback` should be any non-zero value if you want to continue tracking the `embed_ref` like a control button, otherwise return zero. (By tracking like a control button is meant that HERMES Paige will not try to drag-select surrounding characters, rather subsequent mouse movements will be passed to your callback function with `EMBED_MOUSEMOVE` and `EMBED_MOUSEUP` commands.
 
-  **CAUTION:** To achieve a "push-button control" effect, mouse-click behaviour may not appear to work correctly unless you include `EMBED_CONTROL_FLAG` in the `flags` parameter for `pgNewEmbedRef()`. See "Acting Like a Control"<!-- on page 28-594--> in this chapter.
+  **CAUTION:** To achieve a "push-button control" effect, mouse-click behaviour may not appear to work correctly unless you include `EMBED_CONTROL_FLAG` in the `flags` parameter for `pgNewEmbedRef()`. *Vide* section 28.7, [Acting Like a Control](#28.7-Acting-like-a-control).
 
 * `EMBED_MOUSEMOVE` — occurs during a `pgDragSelect()` with `mouse_move` given as the `verb`, **if** you returned non-zero from the previous `callback` for `EMBED_MOUSEDOWN`. The parameters are identical to `EMBED_MOUSEDOWN`.
 
-  **CAUTION:** To achieve a "push-button control" effect, mouse-click behavior may not appear to work correctly unless you include `EMBED_CONTROL_FLAG` in the `flags` parameter for `pgNewEmbedRef()`. See "Acting Like a Control"<!-- on page ... in this chapter-->.
+  **CAUTION:** To achieve a "push-button control" effect, mouse-click behavior may not appear to work correctly unless you include `EMBED_CONTROL_FLAG` in the `flags` parameter for `pgNewEmbedRef()`. *Vide* section 28.7, [Acting Like a Control](#28.7-Acting-Like-a-Control). 
 
 * `EMBED_MOUSEUP` — occurs during a `pgDragSelect()` with `mouse_up` given as the verb, **if** you returned non-zero from the previous `callback` for `EMBED_MOUSEMOVE`.
 
@@ -9822,7 +12183,7 @@ When the `callback` function is called, the value in `command` will be one of th
 
 * `EMBED_DESTROY` — occurs when the `embed_ref` is about to be disposed. Upon entry, `param1` and `param2` are not used. The function result is ignored. 
 
-  NOTE: You will not receive this message if you dispose your own `embed_ref` (e.g., made a call to `pgEmbedDispose()`). The only time you will receive this `callback` command is when OpenPaige disposes the `embed_ref`; this happens when the last occurrence an `embed_ref` has been deleted (and you gave `FALSE` for `keep_around` when the `embed_ref` was created).
+  NOTE: You will not receive this message if you dispose your own `embed_ref` (e.g., made a call to `pgEmbedDispose()`). The only time you will receive this `callback` command is when HERMES Paige disposes the `embed_ref`; this happens when the last occurrence an `embed_ref` has been deleted (and you gave `FALSE` for `keep_around` when the `embed_ref` was created).
 
   **CAUTIONS:** 
 
@@ -9838,11 +12199,11 @@ When the `callback` function is called, the value in `command` will be one of th
 
 * `EMBED_WRITE_DATA` — Occurs when an embed_ref is saved during `pgSaveDoc()`.
 
-  When OpenPaige saves an `embed_ref` to a file, all the "default" information is saved before this command is given to your callback. The intended purpose of `EMBED_WRITE_DATA` is for you to prepare any additional data that needs to be written to the file; this same data will then be retrieved when the file is read and issued to your callback as `EMBED_READ_DATA`.
+  When HERMES Paige saves an `embed_ref` to a file, all the "default" information is saved before this command is given to your callback. The intended purpose of `EMBED_WRITE_DATA` is for you to prepare any additional data that needs to be written to the file; this same data will then be retrieved when the file is read and issued to your callback as `EMBED_READ_DATA`.
 
-  Essentially, when you get the `EMBED_WRITE_DATA` command, you don't need to do anything unless there is extra data you have stored in the `embed_ref` that OpenPaige won't know about; all the other `embed_ref` contents are saved otherwise.
+  Essentially, when you get the `EMBED_WRITE_DATA` command, you don't need to do anything unless there is extra data you have stored in the `embed_ref` that HERMES Paige won't know about; all the other `embed_ref` contents are saved otherwise.
 
-  Upon entry, `param1` is a `memory_ref` of zero byte size, and `param2` is not used. To save any additional data associated to the `embed_ref`, insert the bytes into this `memory_ref`. When the function returns, OpenPaige will write `GetMemorySize(param1)` bytes to the file; later when the file is opened, these same bytes will be read from the file and given to your callback with `EMBED_READ_DATA` as the command.
+  Upon entry, `param1` is a `memory_ref` of zero byte size, and `param2` is not used. To save any additional data associated to the `embed_ref`, insert the bytes into this `memory_ref`. When the function returns, HERMES Paige will write `GetMemorySize(param1)` bytes to the file; later when the file is opened, these same bytes will be read from the file and given to your callback with `EMBED_READ_DATA` as the command.
 
   When the `callback` returns, if the memory size of `(memory_ref) param1` is zero, no extra data is saved.
 
@@ -9934,7 +12295,7 @@ To make your embedded item behave this way, include the following value in the `
 		long				used_ctr;			// Count of shared access (maintained internally) 
 	};
 
-The above structure is what all `embed_ref`s look like internally. Most of the fields are maintained by OpenPaige and you must neither alter them nor assume they are valid at any time, except as further elucidated.
+The above structure is what all `embed_ref`s look like internally. Most of the fields are maintained by HERMES Paige and you must neither alter them nor assume they are valid at any time, except as further elucidated.
 
 The following fields can be altered (and in some cases need to be initialised) by your application:
 
@@ -9949,7 +12310,7 @@ The following fields can be altered (and in some cases need to be initialised) b
 * `data` - You may place whatever data your application requires into this member. However, please observe the following cautions:
   1. Do NOT alter the data field directly for `embed_user_data` type or any of the supported types listed above.
   2. If you place anything directly in the `data` member, do not call the default callback function when the command is `EMBED_DESTROY`.
-  3. You must dispose your own data, if appropriate. Letting OpenPaige handle it as a default can result in a crash.
+  3. You must dispose your own data, if appropriate. Letting HERMES Paige handle it as a default can result in a crash.
 
 ## 28.9 The Measure Record
 
@@ -9976,10 +12337,10 @@ The measure record is passed as a pointer in `param1` for `EMBED_MEASURE` comman
 	typedef struct
 	{
 		t_select_ptr first_select;	// Start of selection
-		t_select_ptr last_select;	// End of selection
-		co_ordinate point;			// Mouse point
-		rectangle bounds;			// Frame around the item
-		short modifiers;			// Modifiers from pgDragSelect
+		t_select_ptr last_select;		// End of selection
+		co_ordinate point;					// Mouse point
+		rectangle bounds;						// Frame around the item
+		short modifiers;						// Modifiers from pgDragSelect
 	}
 	pg_embed_click, PG_FAR *pg_embed_click_ptr;
 
@@ -9995,32 +12356,32 @@ The `flags` parameter for `pgNewEmbedRef` has been briefly mentioned earlier. No
 
   However, this may be undesirable in situations where copied `embed_ref`(s) must be unique (as opposed to pointer "clones" of the original). If this is the case, set `NOT_SHARED_FLAG`.
 
-* `EMBED_CONTROL_FLAG` — If this bit is set, the `embed_ref` responds like a control (such as a button). Otherwise, the `embed_ref` acts like a character. Note that the only significant difference between a *control* and a *character* is the way OpenPaige highlights the `embed_ref` when it is clicked. As a "control", the entire `embed_ref` is selected from a single click.
+* `EMBED_CONTROL_FLAG` — If this bit is set, the `embed_ref` responds like a control (such as a button). Otherwise, the `embed_ref` acts like a character. Note that the only significant difference between a *control* and a *character* is the way HERMES Paige highlights the `embed_ref` when it is clicked. As a "control", the entire `embed_ref` is selected from a single click.
 
-* `NO_FORCED_IDENTITY` — If this bit is set, when the `embed_ref` is inserted, OpenPaige scans the document for any `embed_ref` that matches its type, its width and height, and its `user_refcon` value. If such a match is found, the (new) `embed_ref` is discarded and the matching (older) `embed_ref` is used in its place.
+* `NO_FORCED_IDENTITY` — If this bit is set, when the `embed_ref` is inserted, HERMES Paige scans the document for any `embed_ref` that matches its type, its width and height, and its `user_refcon` value. If such a match is found, the (new) `embed_ref` is discarded and the matching (older) `embed_ref` is used in its place.
 
   The purpose of `NO_FORCED_IDENTITY` is to minimise the amount of memory used by repeated insertions of the same `embed_ref` type.
 
-  For example, suppose your application is designed to insert a mathematical symbol (that can't otherwise be represented by a text character). To achieve this, an `embed_ref` is created to draw the symbol and it is inserted in many different places. Normally (without `NO_FORCED_IDENTITY` set), OpenPaige will create a unique `style_info` record and `embed_ref` for every insertion. If `NO_FORCED_IDENTITY` is set, however, only one record of this symbol would exist even though it may be inserted and display in many different text positions.
+  For example, suppose your application is designed to insert a mathematical symbol (that can't otherwise be represented by a text character). To achieve this, an `embed_ref` is created to draw the symbol and it is inserted in many different places. Normally (without `NO_FORCED_IDENTITY` set), HERMES Paige will create a unique `style_info` record and `embed_ref` for every insertion. If `NO_FORCED_IDENTITY` is set, however, only one record of this symbol would exist even though it may be inserted and display in many different text positions.
 
 ## 28.12 Tips and Tricks
 
- For all user items and custom or non-supported `embed_ref`s, you must initialise at least the height of the `embed_ref` before you insert it. Otherwise, OpenPaige has no idea how tall the object is (but it will get the object's width from the `callback` function). To initialise the height, do the following:
+ For all user items and custom or non-supported `embed_ref`s, you must initialise at least the height of the `embed_ref` before you insert it. Otherwise, HERMES Paige has no idea how tall the object is (but it will get the object's width from the `callback` function). To initialise the height, do the following:
 
 	pg_embed_ptr embedPtr;
 	embedPtr = UseMemory(ref); // where "ref" is the newly created embed_ref
 	embedPtr -> height = HeightOfMyItem;
 	UnuseMemory(ref);
 
-**NOTE:** For supported types that require no special callback function, you do not need to initialise the height - OpenPaige initialises it for you. You would only need to change the height if you wanted something other than the default.
+**NOTE:** For supported types that require no special callback function, you do not need to initialise the height - HERMES Paige initialises it for you. You would only need to change the height if you wanted something other than the default.
 
-If you need to create a custom `embed_ref` that requires a block of data larger than a long word, the recommended choice is to use `embed_user_data` because OpenPaige will at least store the data, present a pointer to it for your `callback`, and save/read the data for files. This minimal support assumes that nothing in your data stream needs to be de-referenced, *i.e.*, if you have pointers inside of pointers, OpenPaige has no way of knowing how to save them.
+If you need to create a custom `embed_ref` that requires a block of data larger than a long word, the recommended choice is to use `embed_user_data` because HERMES Paige will at least store the data, present a pointer to it for your `callback`, and save/read the data for files. This minimal support assumes that nothing in your data stream needs to be de-referenced, *i.e.*, if you have pointers inside of pointers, HERMES Paige has no way of knowing how to save them.
 
-To create an `embed_ref` of type `embed_user_data`, pass a pointer to the data in `item_data` and the byte count in `modifier`; OpenPaige will then make a copy of the data (so you can then dispose the pointer, etc.).
+To create an `embed_ref` of type `embed_user_data`, pass a pointer to the data in `item_data` and the byte count in `modifier`; HERMES Paige will then make a copy of the data (so you can then dispose the pointer, etc.).
 
-**CAUTION:** If you let OpenPaige store the data, you should neither alter nor dispose it. Let the default `callback` function handle the dispose (see "The Callback Function”<!-- on page 28-587-->).
+**CAUTION:** If you let HERMES Paige store the data, you should neither alter nor dispose it. Let the default `callback` function handle the dispose (*vide* section 28.5, [The Callback Function](#28.5-the-callback-function)).
 
-For all `embed_ref`s (both supported items and custom/user items), OpenPaige normally keeps only one `embed_ref` around and creates pointers to the original when the text is copied/pasted. If this default behavior is unworkable for any particular feature, pass `NOT_SHARED_FLAG` for the flags field in `pgNewEmbedRef()` (see “Special Cases”<!-- on page 28-599-->).
+For all `embed_ref`s (both supported items and custom/user items), HERMES Paige normally keeps only one `embed_ref` around and creates pointers to the original when the text is copied/pasted. If this default behavior is unworkable for any particular feature, pass `NOT_SHARED_FLAG` for the flags field in `pgNewEmbedRef()` (see “Special Cases”<!-- on page 28-599-->).
 
 ## 28.13 Applying to Existing Text
 
@@ -10030,13 +12391,13 @@ In certain cases, you might want to apply an `embed_ref` to existing characters 
 
 This function's parameters are identical to `pgInsertEmbedRef()`, except the `embed_ref` is applied to existing text as a style. Hence, the `selection` parameter can be a pointer to a range of characters, or `NULL` if you want to apply the reference to the current text selection.
 
-**NOTE:** Relying on the default behaviour of the `embed_ref` in this case can render the text "invisible". This is because the text within the specified selection becomes literally a custom style and the standard text drawing function within OpenPaige will no longer get called for those characters.
+**NOTE:** Relying on the default behaviour of the `embed_ref` in this case can render the text "invisible". This is because the text within the specified selection becomes literally a custom style and the standard text drawing function within HERMES Paige will no longer get called for those characters.
 
 You can handle this by setting a callback function that responds to `EMBED_DRAW`, at which time you can call the standard text drawing function (see "The Callback Function"<!-- on page 28-587-->).
 
 ## 28.14 Non-sharing Embeds
 
-By default, multiple occurrences of the same `embed_ref` are shared. For example, if you created a single `embed_ref` and inserted it as a character, subsequent copy/paste operations might duplicate the reference several times; yet, only one `embed_ref` is maintained by OpenPaige. Each copy is merely a pointer to the same (shared) memory.
+By default, multiple occurrences of the same `embed_ref` are shared. For example, if you created a single `embed_ref` and inserted it as a character, subsequent copy/paste operations might duplicate the reference several times; yet, only one `embed_ref` is maintained by HERMES Paige. Each copy is merely a pointer to the same (shared) memory.
 
 In special cases, however, an application might need to force unique occurrences for each copy. For example, suppose the user is allowed to edit an embedded picture (such as changing its size or content). If multiple copies exist in the text, changing one of them would change the appearance of all—which may not be a desirable feature.
 
@@ -10044,19 +12405,19 @@ The work-around is to pass the following value in the `flags` parameter when `pg
 
 	#define NOT_SHARED_FLAG0x00080000 // Embed_ref not shared
 
-Setting flags to this value tells OpenPaige that for each copy/paste operation, the `embed_ref` needs to be newly created. Hence, each copy will be a unique reference and not shared.
+Setting flags to this value tells HERMES Paige that for each copy/paste operation, the `embed_ref` needs to be newly created. Hence, each copy will be a unique reference and not shared.
 
 ## 28.15 File Saving
 
-Unless you call the function below immediately after calling `pgSaveDoc`, `embed_ref`s contained in a document *do not* automatically get saved to an OpenPaige file:
+Unless you call the function below immediately after calling `pgSaveDoc`, `embed_ref`s contained in a document *do not* automatically get saved to an HERMES Paige file:
 
-	pg_error pgSaveAllEmbedRefs ( $\mathrm{pg}$ _ref pg, file_io_proc io_proc, file_io_proc data_io_proc, long PG_FAR *file_position, file_ref filemap);
+	pg_error pgSaveAllEmbedRefs (pg_ref pg, file_io_proc io_proc, file_io_proc data_io_proc, long PG_FAR *file_position, file_ref filemap);
 
 This function writes all `embed_ref`s in `pg` to the file specified. The `pg`, `io_proc`, `file_position` and `filemap` are the same parameters you just gave to `pgSaveDoc()` for `pg`, `write_proc`, `file_position`, and `filemap`, respectively. The `data_io_proc` should be `NULL` (it is only used in very specialised cases).
 
 This function is safe to call even if there are no `embed_ref`s contained in `pg` (if that is the case, nothing gets written to the file).
 
-The reason this function is separate, as opposed to OpenPaige saving `embed_ref`s automatically, is that some OpenPaige developers will not be using the `embed_ref` extension, so the required library to handle this feature might not exist in every application.
+The reason this function is separate, as opposed to HERMES Paige saving `embed_ref`s automatically, is that some HERMES Paige developers will not be using the `embed_ref` extension, so the required library to handle this feature might not exist in every application.
 
 For each `embed_ref` that is saved, the `callback` function will be called with `EMBED_WRITE_DATA` as the command.
 
@@ -10070,19 +12431,19 @@ The above function is similar to `pgSaveAllEmbedRefs` except a single `embed_ref
 
 ## 28.16 File Reading
 
-Since OpenPaige can not make the assumption that the `embed_ref` extension library is available in all applications, you must tell the file I/O mechanism that an OpenPaige file being read might contain `embed_ref`s. You do so by calling the following function at least once before calling `pgReadDoc`:
+Since HERMES Paige can not make the assumption that the `embed_ref` extension library is available in all applications, you must tell the file I/O mechanism that an HERMES Paige file being read might contain `embed_ref`s. You do so by calling the following function at least once before calling `pgReadDoc`:
 
 	void pgInitEmbedProcs (pg_globals_ptr globals, embed_callback callback, app_init_read init_proc);
 
 This initialises the `embed_ref` read handler so it can process any `embed_ref` within the text stream during `pgReadDoc`. You only need to call this function once, some time after `pgInit` and before the first `pgReadDoc`.
 
-The `callback` parameter should be a pointer to a callback function that you want to set, as the default callback, for all `embed_ref`s that are read. This function should either be `NULL` (for no callback) or a pointer to the same kind of function used for `callback` when inserting an `embed_ref`. The reason you need to provide this parameter when reading a file is the newly created `embed_ref`s won't have callback functions (hence there would be no way to examine the incoming data). Additionally, OpenPaige sets the `callback` given in `pgInitEmbedProcs` to become the callback for all the `embed_ref`s read from the file.
+The `callback` parameter should be a pointer to a callback function that you want to set, as the default callback, for all `embed_ref`s that are read. This function should either be `NULL` (for no callback) or a pointer to the same kind of function used for `callback` when inserting an `embed_ref`. The reason you need to provide this parameter when reading a file is the newly created `embed_ref`s won't have callback functions (hence there would be no way to examine the incoming data). Additionally, HERMES Paige sets the `callback` given in `pgInitEmbedProcs` to become the callback for all the `embed_ref`s read from the file.
 
 An `embed_ref` is read from the file and processed as follows:
 
 1. The `embed_ref` is created and the default contents are read;
 2. The callback function is called with `EMBED_READ_DATA`, giving your application a chance to append additional data that might have been saved;
-3. OpenPaige walks through all the `style_info` records and attaches the `embed_ref` to all appropriate elements; for each `style_info` that contains the `embed_ref`, the callback is called once more with `EMBED_INIT`.
+3. HERMES Paige walks through all the `style_info` records and attaches the `embed_ref` to all appropriate elements; for each `style_info` that contains the `embed_ref`, the callback is called once more with `EMBED_INIT`.
 
 The `init_proc` is an optional function pointer that will be called after an `embed_ref` is retrieved during file reading; the primary purpose for this function is to initialise an `embed_ref` that is not attached to the document. Normally you won't need to use this callback function so just pass `NULL`; but if for some reason you have saved an `embed_ref` discretely (using `pgSaveEmbedRef()`) and it is not applied to any character(s), the `init_proc` might be the only way you can get called back to initialise the `embed_ref` data.
 
@@ -10102,7 +12463,7 @@ This function returns an `embed_ref`, if any, that contains `point`. If no `embe
 
 If `text_offset` is non-`NULL` and an `embed_ref` containing `point` is found, `*text_offset` is set to the text position for that `ref`. Likewise, if `associated_style` is non-`NULL`, then `*associated_style` is initialised to the `style_info` for that `ref`.
 
-If `do_callback` is `TRUE`, the `callback` function for the `embed_ref` is called with `EMBED_CURSOR` command when and if the `point` is contained in an `embed_ref`. (See "The Callback Function"<!-- on page 28-587--> and `EMBED_CURSOR` command in "Command Messages"<!-- on page 28-588-->).
+If `do_callback` is `TRUE`, the `callback` function for the `embed_ref` is called with `EMBED_CURSOR` command when and if the `point` is contained in an `embed_ref`. (*Vide* section 28.5, [The Callback Function](#28.5-the-callback-function), as well as the `EMBED_CURSOR` command in "Command Messages"<!-- on page 28-588-->).
 
 	embed_ref pgGetEmbedJustClicked (pg_ref pg, long drag_select_result);
 
@@ -10144,13 +12505,13 @@ Once you know how many `embed_ref`s are present in the specified range of text, 
 
 Returns the *n*th `embed_ref` within the specified `selection`. If `selection` is a null pointer, the current selection is used.
 
-If `text_position` *is not* a null pointer, then `*text_position` gets set to the (zero-indexed) text position of the `embed_ref`.
+If `text_position` *is not* a null pointer, then `*text_position` gets set to the (*zero-indexed*) text position of the `embed_ref`.
 
 If `associated_style` is non-`NULL`, the `style_info` is initialised to the style the `embed_ref` is attached.
 
 If the `index` `embed_ref` does not exist, the function returns `MEM_NULL` (and neither `*text_position` nor `*associated_style` is set to anything).
 
-**NOTE:** The `index` value is *one-based*, i.e. the first `embed_ref` is 1 (not zero).
+**NOTE:** The `index` value is *one-indexed*, i.e. the first `embed_ref` is 1 (not zero).
 
 ## 28.18 Miscellaneous Support
 
@@ -10196,17 +12557,17 @@ Otherwise, there is no specific undo support required for `embed_ref` (because a
 
 ## 28.20 Relationship to Style Info
 
-OpenPaige stores `embed_ref`s directly in the `style_info` record. The following `style_info` fields contain `embed_ref` information (from `style_info` `struct`):
+HERMES Paige stores `embed_ref`s directly in the `style_info` record. The following `style_info` fields contain `embed_ref` information (from `style_info` `struct`):
 
-	long embed_entry; 			/* App callback rfunction for embed_refs */
-	long embed_style_refcon;	/* Used by embed object extension */
-	long embed_refcon;			/* Used by embedded object extension */
-	long embed_id;				/* Used by embedded object extension */
-	memory_ref embed_object;	/* Used by embedded object extension */
+	long embed_entry; 				// App callback function for embed_refs
+	long embed_style_refcon;	// Used by embedded object extension
+	long embed_refcon;				// Used by embedded object extension
+	long embed_id;						// Used by embedded object extension
+	memory_ref embed_object;	// Used by embedded object extension
 
-The callback function is stored in `embed_entry`; `embed_style_refcon` is the `callback` `refcon` and embed_refcon is the user `refcon` (see `refcon` values for `pgNewEmbedRef`<!-- on page 578--> and for  `pgInsertEmbedRef`<!-- on page 581-->).
+The callback function is stored in `embed_entry`; `embed_style_refcon` is the `callback` `refcon` and `embed_refcon` is the user `refcon` (see `refcon` values for `pgNewEmbedRef`<!-- on page 578--> and for  `pgInsertEmbedRef`<!-- on page 581-->).
 
-The `embed_id` will contain a unique ID number generated by OpenPaige; this value has no direct meaning except that it is created to keep `style_info`s and `embed_ref`s from running together.
+The `embed_id` will contain a unique ID number generated by HERMES Paige; this value has no direct meaning except that it is created to keep `style_info`s and `embed_ref`s from running together.
 
 The `embed_ref` itself is in `embed_object`.
 
@@ -10216,28 +12577,30 @@ The `embed_ref` itself is in `embed_object`.
 
 The following is an example of inserting a metafile as a "character" into a `pg_ref`. It also shows how to prepare for an `Undo`.
 
-	/* This function embeds a meta file into the text. The x and y extents are given in x_ext and y_ext. Note, the x and y extents should be given in device units. The user_refcon param is whatever you want it to be for application reference. The callback param will become the embed callback, or NULL if you want to use the default. */
+```C
+/* This function embeds a meta file into the text. The x and y extents are given in x_ext and y_ext. Note, the x and y extents should be given in device units. The user_refcon param is whatever you want it to be for application reference. The callback param will become the embed callback, or NULL if you want to use the default. */
+
+void InsertMetafile (pg_ref pgRef, HMETAFILE meta, int x_ext, int y_ext, long user_refcon, embed_callback callback)
+{
+	metafile_struct metafile;
+	embed_ref ref;
+	void PG_FAR *the_data;
 	
-	void InsertMetafile (pg_ref pgRef, HMETAFILE meta, int x_ext, int y_ext, long user_refcon, embed_callback callback)
-	{
-		metafile_struct metafile;
-		embed_ref ref;
-		void PG_FAR *the_data;
-		
-		/* It is a good idea to fill struct with zeros for future compatibility. */
-		
-		memset(&objData, '\O', sizeof(PAIGEOBJECTSTRUCT));
-		metafile. metafile = (long)meta;
-		metafile.bounds.top_left.h = metafile.bounds.top_left.v;
-		metafile.bounds.bot_right.h = x_ext;
-		metafile.bounds.bot_right.v = y_ext;
-		metafile.mapping_mode = MM_ANISOTROPIC;
-		metafile.x_ext = x_ext;
-		metafile.y_ext = y_ext;
-		the_data = (void PG_FAR *) &metafile;
-		ref = pgNewEmbedRef(&mem_globals, embed_meta_file, the_data, 0, 0, 0, user_refcon, FALSE);
-		pgInsertEmbedRef(pgRef, ref, CURRENT_POSITION, 0, callback, 0, best_way);
-	};
+	/* It is a good idea to fill struct with zeros for future compatibility. */
+	
+	memset(&objData, '\O', sizeof(PAIGEOBJECTSTRUCT));
+	metafile. metafile = (long)meta;
+	metafile.bounds.top_left.h = metafile.bounds.top_left.v;
+	metafile.bounds.bot_right.h = x_ext;
+	metafile.bounds.bot_right.v = y_ext;
+	metafile.mapping_mode = MM_ANISOTROPIC;
+	metafile.x_ext = x_ext;
+	metafile.y_ext = y_ext;
+	the_data = (void PG_FAR *) &metafile;
+	ref = pgNewEmbedRef(&mem_globals, embed_meta_file, the_data, 0, 0, 0, user_refcon, FALSE);
+	pgInsertEmbedRef(pgRef, ref, CURRENT_POSITION, 0, callback, 0, best_way);
+};
+```
 
 ### Macintosh Example
 
@@ -10258,21 +12621,21 @@ The following is an example of inserting a metafile as a "character" into a `pg_
 
 This example shows how to create and manipulate a custom `embed_ref`. In this case we are creating a simple box for which we draw a frame, and we respond in some way if the user double-clicks in this box.
 
-For purposes of demonstration, we also attach a data struct to the custom `embed_ref`. While this example doesn't do anything with that data, it shows how you would save and read your data to an OpenPaige file.
+For purposes of demonstration, we also attach a data struct to the custom `embed_ref`. While this example doesn't do anything with that data, it shows how you would save and read your data to an HERMES Paige file.
 
-```
-/* Insertion of a custom ref into a pg_ref "pg". Upon entry, width and height define the dimensions of the box; data is a pointer to some arbitrary data structure that gets attached to the ref (and eventually saved to the OpenPaige file) and dataSize is the size of that data. The callbackProc param is a pointer to our callback function (almost mandatory for any custom embeds). The refCon value becomes the callback refcon. */
+```C
+/* Insertion of a custom ref into a pg_ref "pg". Upon entry, width and height define the dimensions of the box; data is a pointer to some arbitrary data structure that gets attached to the ref (and eventually saved to the HERMES Paige file) and dataSize is the size of that data. The callbackProc param is a pointer to our callback function (almost mandatory for any custom embeds). The refCon value becomes the callback refcon. */
 
 void makeCustomRef (pg_ref pg, short width, short height, char *data, long dataSize, embed_callback callbackProc, long refCon)
 {
 	embed_ref ref;
 	pg_embed_ptr embed_ptr;
 	
-	/* Create a custom ref, but if we specify embed_user_data then OpenPaige will attach the data to the ref. */
+	/* Create a custom ref, but if we specify embed_user_data then HERMES Paige will attach the data to the ref. */
 	
 	ref = pgNewEmbedRef(&mem_globals, embed_user_data, (void*) data, dataSize, 0, 0, 0, FALSE);
 	
-	/* The following code is vital for a "custom" user type since OpenPaige has no idea how tall our embed item is, nor does it know how wide it is: */
+	/* The following code is vital for a "custom" user type since HERMES Paige has no idea how tall our embed item is, nor does it know how wide it is: */
 	
 	embed_ptr = UseMemory(ref); // Get the embed struct
 	embed_ptr -> height = height;
@@ -10283,7 +12646,7 @@ void makeCustomRef (pg_ref pg, short width, short height, char *data, long dataS
 	pgInsertEmbedRef(pg, ref, CURRENT_POSITION, 0, callBackProc, refCon, best_way);
 }
 
-/* The following code is the callback function for the embed_ref. OpenPaige calls this with various "messages". */
+/* The following code is the callback function for the embed_ref. HERMES Paige calls this with various "messages". */
 
 PG_PASCAL (long) callBackProc (paige_rec_ptr pg, pg_embed_ptr embed_ptr, long embed_type, short command, long user_refcon, long param1, long param2)
 {
@@ -10310,11 +12673,11 @@ PG_PASCAL (long) callBackProc (paige_rec_ptr pg, pg_embed_ptr embed_ptr, long em
 				// The "HandleMyDoubleClick() is whatever...
 				break;
 		case EMBED_DESTROY:
-			/* Important note: Since our embed_ref type is embed_user_data, we can let OpenPaige dispose the data. However if we attached our own data directly we would NOT call the standard callback, or we would crash! */
+			/* Important note: Since our embed_ref type is embed_user_data, we can let HERMES Paige dispose the data. However if we attached our own data directly we would NOT call the standard callback, or we would crash! */
 			result = pgDefaultEmbedCallback(paige_rec_ptr pg, pg_embed_ptr embed_ptr, long embed_type, short command, long user_refcon, long param1, long param2);
 			break;
 		case EMBED_WRITE_DATA:
-			/* NOTE, since our embed type is embed_user_data, OpenPaige will save that data automatically, so we don't need to do anything for this message. But purely for the sake of demonstration we will save two extra bytes to the file to show how it is done: */
+			/* NOTE, since our embed type is embed_user_data, HERMES Paige will save that data automatically, so we don't need to do anything for this message. But purely for the sake of demonstration we will save two extra bytes to the file to show how it is done: */
 			specialData = (memory_ref) param1;
 			SetMemorySize(specialData, sizeof(char) * 2); 
 			extraBytes = UseMemory(specialData);
@@ -10322,7 +12685,7 @@ PG_PASCAL (long) callBackProc (paige_rec_ptr pg, pg_embed_ptr embed_ptr, long em
 			extraBytes[1] = myCustomChar2;
 			UnuseMemory(specialData);
 			break;
-			/* NOTE, since our embed type is embed_user_data, OpenPaige will read that data automatically, so we don't need to do anything for this message. But purely for the sake of demonstration we will read the two extra bytes from the file that we saved in EMBED_READ_DATA: */
+			/* NOTE, since our embed type is embed_user_data, HERMES Paige will read that data automatically, so we don't need to do anything for this message. But purely for the sake of demonstration we will read the two extra bytes from the file that we saved in EMBED_READ_DATA: */
 			extraBytes = (char*) param1; // Pointer to data
 			myCustomChar1 = extraBytes[0]; 
 			myCustomChar2 = extraBytes[1]; 
@@ -10341,19 +12704,19 @@ PG_PASCAL (long) callBackProc (paige_rec_ptr pg, pg_embed_ptr embed_ptr, long em
 
 ## 29.1 How merging works
 
-In OpenPaige, merging is essentially a custom style. For more about custom styles in general see "Creating a simple custom style"<!-- on page 30-37--> and "Customizing OpenPaige"<!-- on page 27-1-->. Specifically, the merge feature is accomplished as follows:
+In HERMES Paige, merging is essentially a custom style. For more about custom styles in general, *vide* section 30.12, [Creating a Simple Custom Style](#30.12-Creating-a-simple-custom-style), and chapter 27, [Customising HERMES Paige](#27-customising-hermes-paige). Specifically, the *merge* feature is accomplished as follows:
 
 1. A merge "symbol" is simply a specific style (set by the application) which is applied to a portion of text. It differs from other styles simply by the existence of a merge_proc other than the default (see point 2 below). Otherwise, such "symbols" can be any kind of characters, words or phrases the application wishes to embed in the text stream to convey "merge fields".
 
-For the sake of discussion, we shall refer to this style attribute as a merge style.
+   For the sake of discussion, we shall refer to this style attribute as a merge style.
 
 2. A merge style must have the `merge_proc` function pointer set to an application-defined function (see "`merge_proc`"<!-- on page 27-13-->).
-3. By itself, a merge style does nothing and text set to a merge style remains unchanged until the application calls `pgMergeText` (below). OpenPaige will then call the appropriate `merge_proc`s, at which time the application makes the decision for substituting text (or not).
-4. When `pgMergeText` is called, the text for which all merge styles applied is temporarily *pushed* (saved) into an internal `memory_ref` within the OpenPaige object. Later, when the application wishes to revert from "merge mode", the document can be completely restored to its original state, prior to any text substitutions.
+3. By itself, a merge style does nothing and text set to a merge style remains unchanged until the application calls `pgMergeText` (below). HERMES Paige will then call the appropriate `merge_proc`s, at which time the application makes the decision for substituting text (or not).
+4. When `pgMergeText` is called, the text for which all merge styles applied is temporarily *pushed* (saved) into an internal `memory_ref` within the HERMES Paige object. Later, when the application wishes to revert from "merge mode", the document can be completely restored to its original state, prior to any text substitutions.
 
-## Sample merge text proc
+## Sample `merge_text_proc`
 
-This is called when the styles need to be initialized. Usually at the beginning of the program. This sets the merge style `proc`s and `user_id` and the mask makes it so only the two desired `proc`s, `merge_text_proc` and `setup_insert`, get set to our custom ones following:
+This is called when the styles need to be initialised (*i.e.*, usually at the beginning of the program). This sets the merge style `proc`s and `user_id` and the mask makes it so only the two desired `proc`s, `merge_text_proc` and `setup_insert`, get set to our custom ones following:
 
 ```
 void InitMergeStyles(pg_ref pg)
@@ -10419,7 +12782,7 @@ void insert_merge_fields (doc_rec *doc)
 ### Sample `setup_insert` hook for merging
 
 ```
-/* This is the hook that gets called when OpenPaige saves off the next style to apply from the next insert. The reason I need this for merge "characters" is because I don't want the user to "type" or extend text if the caret sits on one of my merge styles. Hence, this function must remove my own hooks from the style so it becomes just a regular style. */
+/* This is the hook that gets called when HERMES Paige saves off the next style to apply from the next insert. The reason I need this for merge "characters" is because I don't want the user to "type" or extend text if the caret sits on one of my merge styles. Hence, this function must remove my own hooks from the style so it becomes just a regular style. */
 
 static pascal short setup_insert (paige_rec_ptr pg, style_info_ptr style, long position)
 {
@@ -10457,7 +12820,7 @@ static pascal short merge_text_proc (paige_rec_ptr pg, style_info_ptr style, pg_
 
 ## 29.2 Merge mode
 
-Assuming all your merge styles have been set up (all the desired merge areas have a `merge_proc` set in their `style_info` record), placing the OpenPaige object in "merge mode" is accomplished by calling the following:
+Assuming all your merge styles have been set up (all the desired merge areas have a `merge_proc` set in their `style_info` record), placing the HERMES Paige object in "merge mode" is accomplished by calling the following:
 
 ```C
 (pg_boolean) pgMergeText (pg_ref pg, style_info_ptr matching_style, style_info_ptr mask, style_info_ptr AND_mask, long ref_con, short draw_mode);
@@ -10465,12 +12828,12 @@ Assuming all your merge styles have been set up (all the desired merge areas hav
 
 For every `style_info` that matches a specified criteria (based on the contents of `matching_style`, `mask` and `AND_mask` as described below), has its `merge_proc` called, at which time text can be substituted in place of the text that currently exists for each style involved.
 
-Before any text is substituted, however, the "old" text is saved temporarily within the OpenPaige object. This is intended to allow the application to "revert" to the original document at some later time.
+Before any text is substituted, however, the "old" text is saved temporarily within the HERMES Paige object. This is intended to allow the application to "revert" to the original document at some later time.
 
 Styles that are affected by this call (in which the `merge_proc` gets called) are determined on the following bases:
 
-- The fields in each `style_info` record in OpenPaige is compared to each field in `matching_style` if the corresponding field in `mask` is non–zero.
-- Before the comparison, the corresponding field in `AND_mask` is temporarily `AND`'d with the target `style_info` field in OpenPaige before it is compared.
+- The fields in each `style_info` record in HERMES Paige is compared to each field in `matching_style` if the corresponding field in `mask` is non–zero.
+- Before the comparison, the corresponding field in `AND_mask` is temporarily `AND`'d with the target `style_info` field in HERMES Paige before it is compared.
 - If all fields that are checked in this way match exactly, the style is "accepted" and the `merge_proc` gets called.
 
 Any of the three comparison styles — `matching_style`, `mask` and `AND_mask` can be null pointers to control the comparison procedure, in which case the following occurs:
@@ -10549,9 +12912,9 @@ NOTE: Even if you do not wish to revert the text, you should call `pgRestoreMerg
 
 > > I looked into your code and found that you are correct that setting up the `style_info` record is the problem. You need to *remove* the `class_bits` setting, `STYLE_IS_CUSTOM`. That's what is forcing the merge field to not draw.
 
-`STYLE_IS_CUSTOM` tells OpenPaige that only your app knows how to draw the style and measure its characters. Hence, if you call the standard draw/measure functions (which you are), they will *do nothing*. I not only noticed the fields were invisible, on my machine, but the char widths would result in random garbage text sizes (which is *correct* since the standard measuring does nothing for `STYLE_IS_CUSTOM`).
+`STYLE_IS_CUSTOM` tells HERMES Paige that only your app knows how to draw the style and measure its characters. Hence, if you call the standard draw/measure functions (which you are), they will *do nothing*. I not only noticed the fields were invisible, on my machine, but the char widths would result in random garbage text sizes (which is *correct* since the standard measuring does nothing for `STYLE_IS_CUSTOM`).
 
-Technically, the style is not "custom" at all—it has regular text chars and it draws like any other text. By strict definition, a `STYLE_IS_CUSTOM` means OpenPaige can't understand the "text" stream, such as an embedded `PicHandle` or `ControlHandle`, etc.
+Technically, the style is not "custom" at all—it has regular text chars and it draws like any other text. By strict definition, a `STYLE_IS_CUSTOM` means HERMES Paige can't understand the "text" stream, such as an embedded `PicHandle` or `ControlHandle`, etc.
 
 ### TECH NOTE: Merge fields and blank lines
 
@@ -10576,15 +12939,15 @@ Here are some precautions/hints:
 - To duplicate a whole document, simply use `pgCopy` with a selection parameter for whole text range. (Remember that `pgCopy` returns a new `pg_ref`—which is exactly what you want).
 - You might have a problem displaying the copied `pg_ref`; I do not believe the exact `vis` and `page` areas are copied. In that case you might need to set those shapes before drawing (or printing) the merged document. I would get the shape(s) from the master document then do `pgSetAreas` to the copy. Even faster would be to get the master shapes once at the beginning, with `pgGetAreas`, then set them for each merge.
 - I do know for sure that a copied `pg_ref`, from `pgCopy`, will have no `graf_device` associated with it. I do not know if this is a problem if you intend to print, since `pgPrintPage` accepts a `graf_device` (which would be a print port). But if you need to draw the merged doc to a window, you will need to set a window port using `pgSetDefaultDevice`, **or** you will need to specify a `graf_device_ptr` in `pgDisplay`. Otherwise, the drawing will be "invisible" and you will think you are going crazy. I believe our manual explains this (if not, I will be happy to provide more details).
-- In OpenPaige's current stage, I do not believe anyone has yet to display (or print) a copied `pg_ref` returned from `pgCopy`. Usually, they just paste with it. In that case, you may have unforeseen problems. However, all such cases (other than the precautions listed above) I would consider a bug, so be sure to let us know so the problem(s) can be corrected. We will make sure that a copied `pg_ref` displays correctly, one way or the other.
+- In HERMES Paige's current stage, I do not believe anyone has yet to display (or print) a copied `pg_ref` returned from `pgCopy`. Usually, they just paste with it. In that case, you may have unforeseen problems. However, all such cases (other than the precautions listed above) I would consider a bug, so be sure to let us know so the problem(s) can be corrected. We will make sure that a copied `pg_ref` displays correctly, one way or the other.
 - You may encounter some slowness with this work-around. However, that will probably improve during future updates.
 
 
 # 30 ADVANCED STYLES
 
-This chapter unveils all of the style and font setting abilities within OpenPaige. For easier and quicker implementation of style setting, you will want to look at "Style Basics"<!-- on page 8-1-->.
+This chapter unveils all of the style and font setting abilities within HERMES Paige. For easier and quicker implementation of style setting, you will want to look at chapter 8, [Style Basics](#8-Style-Basics).
 
-**NOTE:** As used in this chapter, the term *font* generally refers only to a typeface, or typeface name, unlike a Windows "font" that defines the whole composite format of text. OpenPaige considers a *font* to simply be a specific family such as Times, Courier, Helvetica, etc. while distinguishing other formatting properties such as bold, italic, underline, etc. as the text *style*.
+**NOTE:** As used in this chapter, the term *font* generally refers only to a typeface, or typeface name, unlike a Windows "font" that defines the whole composite format of text. HERMES Paige considers a *font* to simply be a specific family such as Times, Courier, Helvetica, etc. while distinguishing other formatting properties such as bold, italic, underline, etc. as the text *style*.
 
 ## 30.1 Data Structures
 
@@ -10599,18 +12962,18 @@ To understand the functions, however, let it suffice to declare the type for eac
 | `par_info`   | `par_info_ptr`          | Structure defining paragraph format |
 | `style_run`  | `style_run_ptr`         | Structure designating a style run.º |
 
-º A series of `style_run` records is maintained by OpenPaige to define all the style changes and associated text offsets. This record is much smaller than either `style_info` or `par_info`, thus requiring only one `style_info` record for every identical style change throughout the text and one `par_info` record for every identical paragraph format throughout the text. The `style_run` record is defined at the end of this section; most of the time you will not need to access `style_run`s.
+º A series of `style_run` records is maintained by HERMES Paige to define all the style changes and associated text offsets. This record is much smaller than either `style_info` or `par_info`, thus requiring only one `style_info` record for every identical style change throughout the text and one `par_info` record for every identical paragraph format throughout the text. The `style_run` record is defined at the end of this section; most of the time you will not need to access `style_run`s.
 
 
 ## 30.2 More About Style Runs
 
-For both `style_info` and `par_info` changes throughout the text, OpenPaige maintains a list of `style_run` records. There is one `style_run` array for `style_info` changes and one array for `par_info` changes.
+For both `style_info` and `par_info` changes throughout the text, HERMES Paige maintains a list of `style_run` records. There is one `style_run` array for `style_info` changes and one array for `par_info` changes.
 
 The last element in a `style_run` array is a "dummy" entry whose offset field will be greater than the total text size of the `pg_ref`. For example, if the total text size of a `pg_ref` is 100 bytes, the final element in the array of `style_run` records will contain a value in `style_run.offset` of > 100.
 
 ## 30.3 Style Basics
 
-To simply set a style, font, size or paragraph format, see "Style Basics"<!-- on page 8-1-->. The following information is for those developers wanting more precise control of style, font and paragraph format setting.
+If you simply want to set a style, font, size or paragraph format, refer to chapter 8, [Style Basics](#8-style-basics). The following information is for those developers wanting more precise control of style, font and paragraph format setting.
 
 ## 30.4 Changing Fonts and Styles together
 
@@ -10633,7 +12996,7 @@ typedef struct
 select_pair, *select_pair_ptr;
 ```
 
-* `begin` field of a `select_pair` — defines the beginning text offset and the end field defines the ending offset. Both offsets are byte offsets, not character offsets. Text offsets in OpenPaige are zero-indexed (first offset is zero).
+* `begin` field of a `select_pair` — defines the beginning text offset and the end field defines the ending offset. Both offsets are byte offsets, not character offsets. Text offsets in HERMES Paige are zero-indexed (first offset is zero).
 
 * `info` and `mask` — parameters must point to `style_info` records; `info` is the new style to apply to the text and `mask` defines which of the `info` fields to apply. For every non–zero field in `mask`, the corresponding field in `info` gets applied to the text.
 
@@ -10656,18 +13019,18 @@ select_pair, *select_pair_ptr;
   	bits_or,			// Copy offscreen in "OR" mode 
   	bits_xor			// Copy offscreen in "XOR" mode
 
-  OpenPaige will only re–draw the text, however, if it is appropriate: if nothing changed (same styles applied as already exist), the text is not drawn, nor is it drawn if the new style applies only to an insertion point.
+  HERMES Paige will only re–draw the text, however, if it is appropriate: if nothing changed (same styles applied as already exist), the text is not drawn, nor is it drawn if the new style applies only to an insertion point.
 
   **NOTE:** The `mask` fields that indicate what to change must be set to `-1` (all ones). The reason is that the internal comparison function—which checks the mask settings—does one word at a time, hence the fields longer than 16 bits will not change correctly.
 
-### Preparing OpenPaige formats from a `LOGFONT` (Windows)
+### Preparing HERMES Paige formats from a `LOGFONT` (Windows)
 
 ```C
 /* The following example function converts a LOGFONT into a font_info, style_info and "mask" record that can be given to pgSetStyleInfo(): */
 
 static void convert_log_font (pg_ref pg, pg_globals_ptr paige_globals, LOGFONT PG_FAR *log_font, font_info_ptr font, style_info_ptr style, style_info_ptr stylemask)
 {
-	// Initialise the style to OpenPaige default:
+	// Initialise the style to HERMES Paige default:
 	*style = paige_globals -> def_style;
 	// Initialise other structs to zeros or -1's, etc.:
 	pgFillBlock(font, sizeof(font_info), 0);
@@ -10675,7 +13038,7 @@ static void convert_log_font (pg_ref pg, pg_globals_ptr paige_globals, LOGFONT P
 	pgFillBlock(stylemask -> styles, MAX_STYLES * sizeof(short), -1);
 	stylemask -> point = (pg_fixed) - 1;
 	CToPString(log_font -> IfFaceName, font -> name);
-	// (OpenPaige wants a pascal string)
+	// (HERMES Paige wants a pascal string)
 	font -> family_id = log_font -> IfPitchAndFamily;
 	font -> machine_var[PG_OUT_PRECISION] = log_font -> IfOutPrecision;
 	font -> machine_var[PG_CLIP_PRECISION] = log_font -> IfClipPrecision;
@@ -10684,9 +13047,9 @@ static void convert_log_font (pg_ref pg, pg_globals_ptr paige_globals, LOGFONT P
 	
 	if ((style -> point = (pg_fixed)log_font -> IfHeight) < 0) 
 		style -> point = -style -> point;
-	style->point <<= 16; // Make sure point size is 0x000n0000
+	style -> point <<= 16; // Make sure point size is 0x000n0000
 	// Convert pointsize to fit the screen resolution 
-	style->point = pgScreenToPointsize (pg, style->point);
+	style -> point = pgScreenToPointsize (pg, style->point);
   if (log_font -> IfWeight == FW_BOLD)
     style -> styles[bold_var] = -1;
   if (log_font -> IfItalic)
@@ -10710,7 +13073,7 @@ The easiest way to initialise a `style_info`, `font_info`, or `par_info` record 
 (void) pgInitParMask (par_info_ptr mask, short filler);
 ```
 
-These function fill `mask` with `filler`.
+These functions fill `mask` with `filler`.
 
 To set a section of text to a style, call the following:
 
@@ -10731,7 +13094,7 @@ typedef struct
 select_pair, *select_pair_ptr;
 ```
 
-* `begin` and `end` fields of a `select_pair` — define the beginning and ending text position. Both values are byte positions (not necessarily character positions, e.g. multilingual text can have double-byte characters, etc.). Text positions in OpenPaige are zero-indexed (first offset is zero).
+* `begin` and `end` fields of a `select_pair` — define the beginning and ending text position. Both values are byte positions (not necessarily character positions, e.g. multilingual text can have double-byte characters, etc.). Text positions in HERMES Paige are zero-indexed (first offset is zero).
 
 * `info` and `mask` — must point to `style_info` records; `info` is the new style to apply to the text and `mask` defines which of the `info` fields to apply. For every non–zero field in `mask`, the corresponding field in `info` gets applied to the text.
 
@@ -10767,13 +13130,13 @@ void set_to_bold (pg_ref pg)
 	pgInitStyleMask(&mask, 0); // Sets all to zero
 	info.styles[bold_var] = -1; // sets styles[bold_var] to force bold
 	mask.styles[bold_var] = -1;
-	pgSetStyleInfo(pg, NULL, \&info, \&mask, best_way);
+	pgSetStyleInfo(pg, NULL, &info, &mask, best_way);
 }
 ```
 
 <!-- Talk about OpenType Variations here -->
 
-While the styles each contain `short`s to indicate bold, italic, etc., this is generally done for future expansion. When OpenPaige was designed, new fonts were being created which would use "degrees of boldness", etc. Generally, this is not implemented in OpenPaige 1.0 for Mac and Windows except for the following style elements:
+While the styles each contain `short`s to indicate bold, italic, etc., this is generally done for future expansion. When HERMES Paige was designed, new fonts were being created which would use "degrees of boldness", etc. Generally, this is not implemented in HERMES Paige 1.0 for Mac and Windows except for the following style elements:
 
 * `style_info -> styles[small_caps_var]` — The value in this style element indicates a percentage of the original point size to display lower case characters that get converted to ALL CAPS. Or, if this value is -1 , the default is used (which is 75% of the original style).
 
@@ -10789,11 +13152,11 @@ While the styles each contain `short`s to indicate bold, italic, etc., this is g
 
   For example, if `style_info -> styles[super_impose_var]` record had all fields set to zero *except for* the `bold_var` element, the resulting style would be whatever the original `style_info` contained but with **boldface** text.
 
-  `style_info->styles[super_impose_var]` can only be zero or a positive number representing a stylesheet ID that actually exists in the `pg_ref`.
+  `style_info -> styles[super_impose_var]` can only be zero or a positive number representing a stylesheet ID that actually exists in the `pg_ref`.
 
-See the chapter "Style Sheets"<!-- on page 31-1--> for more information.
+For more information, *vide* chapter 31, [Style Sheets](#31-style-sheets).
 
-## Insertion Point Changes
+### Insertion Point Changes
 
 If `pgSetStyleInfo` is called and the specified selection is a single insertion point, the style change occurs on the next `pgInsert`. Furthermore, a processed mouse-click for change of selection invalidates the style_info set to the previous insertion point (i.e., the new style setting is lost).
 
@@ -10801,11 +13164,107 @@ If `pgSetStyleInfo` is called and the specified selection is a single insertion 
 
 The point field in `style_info` is a `Fixed` type value, i.e. the integral part of the point size is the high-order word and the fractional part is the low-order word. For example, 12 point is `(pg_fixed) (12<<16)` or `0x000C0000`.
 
+## 30.6 Changing Styles
+
+To set a section of text to a style, call the following:
+
+```
+(void) pgSetStyleInfo (pg_ref pg, select_pair_ptr selection, style_info_ptr info, style_info_ptr mask, short draw_mode);
+```
+
+`selection` defines the range of text that should be changed; if you pass a null pointer, the current selection range (or insertion point) in `pg` is changed.
+
+If you do give a pointer to `selection`, it must point to the following structure:
+
+```
+typedef struct
+{
+    long begin;
+/* Beginning offset of some text portion */
+    long end;
+/* Ending offset of some text portion */
+}
+select_pair, *select_pair_ptr;
+```
+
+* `begin` and `end` fields of a `select_pair` — defines the beginning and ending text position, respectively. Both values are byte positions (not necessarily character positions, e.g. multilingual text can have double-byte characters, etc.). Text positions in OpenPaige are *zero-indexed* (first offset is zero).
+
+* `info` and `mask` — must point to `style_info` records; `info` is the new style to apply to the text and `mask` defines which of the info fields to apply. For every non-zero field in `mask`, the corresponding field in `info` gets applied to the text.
+
+* `mask` — allows only partial style changes, which is almost always what you want to accomplish. For instance, if the user highlighted some text and changed it to **bold**, all you want to change in the text range is the "bold" attribute, not anything else such as color, leading, or any other formatting. To do so, you would set `info`'s style element for bold and the same field in `mask` to non-zero.
+
+  Neither `info` nor `mask` can be a null pointer.
+
+* draw_mode - indicates whether or not to redraw the text once the style has changed: if draw_mode is nonzero, that drawing mode is used to redisplay the text. `draw_mode` can be the values as described in [Draw Modes](#draw-modes) under section 2.11:
+
+  ```C
+  draw_none,		// Do not draw at all 
+  best_way,			// Use most efficient method(s) 
+  direct_copy,	// Directly to screen, overwrite 
+  direct_or,		// Directly to screen, "OR" 
+  direct_xor,		// Directly to screen, "XOR" 
+  bits_copy,		// Copy offscreen 
+  bits_or,			// Copy offscreen in "OR" mode 
+  bits_xor			// Copy offscreen in "XOR" mode
+  ```
+
+  However, OpenPaige will only redraw the text if it is appropriate: if nothing changed (same styles applied as already exist), the text is not drawn, nor is it drawn if the new style applies only to an insertion point.
+
+  **NOTE:** The `mask` fields that indicate what to change must be set to `-1` (all ones). The reason is that the internal comparison function (which checks the mask settings) does one word at a time. Hence, the fields longer than 16 bits will not change correctly.
+
+  **NOTE:** To convert a `LOGFONT` into a `style_info` and `mask` on *Windows*, see code example earlier in this chapter.
+
+  ```C
+  /* This function sets the current selection to Bold (Macintosh)*/
+  void set_to_bold (pg_ref pg)
+  {
+      style_info mask, info;
+      pgInitStyleMask(&info, 0);	// Sets all to zero
+      pgInitStyleMask(&mask, 0);	// Sets all to zero
+      info.styles[bold_var] = -1;	// sets styles[bold_var] to force bold
+      mask.styles[bold_var] = -1;
+      pgSetStyleInfo(pg, NULL, &info, &mask, best_way);
+  }
+  ```
+
+  While the styles each contain `short`s to indicate bold, italic, etc., this is generally done for future expansion. <!-- revise to take note of OpenType Variations --> When OpenPaige was designed, new fonts were being created which would use "degrees of boldness", etc. Generally, this is not implemented in OpenPaige for Mac and Windows 1.0 except for the following style elements:
+
+* `style_info -> styles[small_caps_var]` — The value in this style element indicates a percentage of the original point size to display lower case characters that get converted to ALL CAPS. Or, if this value is `-1` (all ones), the default is used (which is 75% of the original style).
+
+  For example, if `style_info -> styles[small_caps_var]` is 50 and `style_info` point size is 24, the lower case text is converted to uppercase 12 point; if `style_info -> styles[small_caps_var]` is -1 , the lower case text is converted to 18 (which is 75% of 24).
+
+* `style_info -> styles[relative_point_var]` — The value in this style element indicates a point size to display the text, in the form of a ratio relative to 12 point times the original point size. The ratio is computed as:
+
+  ```
+  style_info -> styles[relative_point_var] / 12
+  ```
+
+  The "original point size" is taken from the `point` field in `style_info`.
+
+  For example, if `style_info -> styles[relative_point_var]` is `6` and the original point size is `12`, the point size that displays is `12 * (6 / 12) = 6` point. If `style_info -> styles[relative_point_var]` is `6` and the original point size is `24`, the point size that displays is `24 * (6 / 12) = 12` point.
+
+  **NOTE:** The `relative_point_var` element must not be `-1` as there is no default.
+
+* `style_info -> styles[super_impose_var]` — If non-zero, the value represents a stylesheet ID that gets "superimposed" over the existing style. What this means is all fields in the stylesheet `style_info -> styles[super_impose_var]` that are non–zero are temporarily forced into `style_info` to form a composite style of both.
+
+  For example, if `style_info -> styles[super_impose_var]` record had all fields set to zero *except* for the `bold_var` element, the resulting style would be whatever the original `style_info` contained, but with **boldface** text.
+  **NOTE:** `style_info -> styles[super_impose_var]` can only be zero or a positive number representing a stylesheet ID that actually exists in the `pg_ref`.
+
+See the chapter "Style Sheets" on page 31-1 for more information.
+
+### Insertion Point Changes
+
+If `pgSetStyleInfo` is called and the specified selection is a single insertion point, the style change occurs on the next `pgInsert`. Furthermore, a processed mouse-click for change of selection invalidates the `style_info` set to the previous insertion point (i.e., the new style setting is lost).
+
+**Exception:** Applying a style to a completely empty `pg_ref` forces that `style_info` to become the default style for that `pg_ref`.
+
+The `point` field in `style_info` is a `Fixed` fraction; *i.e.*, the whole integer for the point size is the high-order word. For example, 12 point is `(pg_fixed) (12<<16)` or `0x000C0000`
+
 ### TECH NOTE: Changing point size
 
-> I am having some difficulty in setting the point size of the font within OpenPaige.
+> I am having some difficulty in setting the point size of the font within HERMES Paige.
 
-Your code doesn't work because the point size in `style_info` is a `Fixed` value, which means the whole-number point size needs to be in the high-order word—and you're just setting a long integer (which is putting it in the low-order word). You must have skipped quite a few OpenPaige versions because that change has been there for a while.
+Your code doesn't work because the point size in `style_info` is a `Fixed` value, which means the whole-number point size needs to be in the high-order word—and you're just setting a long integer (which is putting it in the low-order word). You must have skipped quite a few HERMES Paige versions because that change has been there for a while.
 
 So, your code is fine *except* you need to put the point size in the high-order word, and it will work. Something like:
 
@@ -10814,13 +13273,13 @@ theStyle. point = fontSize;
 theStyle.point <<= 16;
 ```
 
-In case you're curious, OpenPaige only looks at the high-word of the point size, so setting only the low word results in "zero point", i.e., the default—12 point—which is why it never changed.
+In case you're curious, HERMES Paige only looks at the high-word of the point size, so setting only the low word results in "zero point", i.e., the default—12 point—which is why it never changed.
 
 ## 30.7 Changing Fonts
 
 Changing the font applied to text range(s) requires a separate function call since fonts are maintained separate from text styles within a `pg_ref`.
 
-**NOTE:** As used in this chapter, the term *font* generally refers only to a typeface, or typeface name, unlike a Windows "font" that defines the whole composite format of text. OpenPaige considers a *font* simply to be a specific family such as Times, Courier, Helvetica, etc. while distinguishing other formatting properties such as bold, italic, underline, etc. as the text *style*.
+**NOTE:** As used in this chapter, the term *font* generally refers only to a typeface, or typeface name, unlike a Windows "font" that defines the whole composite format of text. HERMES Paige considers a *font* simply to be a specific family such as Times, Courier, Helvetica, etc. while distinguishing other formatting properties such as bold, italic, underline, etc. as the text *style*.
 
 To set a section of text to a new font, call the following:
 
@@ -10847,13 +13306,13 @@ This function is almost identical to `pgSetStyleInfo` except in that a `font_inf
 
 Detailed information on `font_info` records—and what fields you should set up—is available at the end of this section. There is one important one you should be sure to set correctly, however: `environs`.
 
-When you set a `font_info` record, only the `name` and `environs` fields should be changed; this is because OpenPaige initialises all the other fields when the font is applied to a `pg_ref`.
+When you set a `font_info` record, only the `name` and `environs` fields should be changed; this is because HERMES Paige initialises all the other fields when the font is applied to a `pg_ref`.
 
 For **Macintosh** version, the `font_info.name` should be a `pascal` string terminated with the remaining bytes in `font_info.name` set to zero; the `font_info.environs` field should likewise be set to zero. For an example, read on.
 
 For **Windows** version, the `font_info.name` can be initially set to either a `pascal` string or a `cstring`, with all remaining bytes in `font_info.name` set to zero. Usually, due to Windows programming conventions, you will set the name to a `cstring`. In this case, before passing the `font_info` record to `pgSetFontInfo`, you must set `font_info.environs` to `NAME_IS_CSTR` (see following example).
 
-**CAUTION:** On Windows, OpenPaige converts `font_info.name` to a `pascal` string and clears the `NAME_IS_CSTR` bit when the font is stored in the `pg_ref`. This is done purely for cross-platform portability. This is important to remember, because if you examine the font thereafter with `pgGetFontInfo`, the font name will now be a `pascal` string (the first byte indicating the string length), not a `cstring`.
+**CAUTION:** On Windows, HERMES Paige converts `font_info.name` to a `pascal` string and clears the `NAME_IS_CSTR` bit when the font is stored in the `pg_ref`. This is done purely for cross-platform portability. This is important to remember, because if you examine the font thereafter with `pgGetFontInfo`, the font name will now be a `pascal` string (the first byte indicating the string length), not a `cstring`.
 
 ### Setting font_info (Windows)
 
@@ -10897,7 +13356,7 @@ pgSetFontInfo(pg, NULL, &font, &mask, best_way);
 
 The three functions above return information for a specific range of text about its style or paragraph format, or font, respectively.
 
-For all functions, if selection is a null pointer, the information that is returned applies to the current selection range in `pg` (or the current insertion point); if selection is non–null, pointing to `select_pair` record, information is returned that applies to that selection range (see "Copying and Deleting"<!-- on page 5-1--> for information about `select_pair` pointer under `pgGetStyleInfo`).
+For all functions, if selection is a null pointer, the information that is returned applies to the current selection range in `pg` (or the current insertion point); if selection is non–null, pointing to `select_pair` record, information is returned that applies to that selection range (For more information about `select_pair` pointer under `pgGetStyleInfo`, *vide* chapter 5, [Copying and Deleting](#5-copying-and-deleting)).
 
 Both `info` and `mask` must point to a `style_info`, `par_info`, or `font_info` record; neither of the former can be a null pointer. When the function returns, both `info` and `mask` will be filled with information you can examine to determine which style(s), paragraph format(s) or font(s) exist throughout the selected text, and/or which do not.
 
@@ -10915,7 +13374,7 @@ If `set_any_mask` is `TRUE`, all fields in mask get set to nonzero if the corres
 
 The purpose for setting `set_any_mask` to `TRUE` is to find out what item(s) in `info` exist anywhere in the selected text (as opposed to finding out what items are the same *throughout* the text).
 
-**NOTE:** If you pass `FALSE` for `set_any_mask`, OpenPaige sets the `info_fields`; if you pass `TRUE` for `set_any_mask`, you set the `info_fields` before calling `pgGetStyleInfo`, `pgGetParInfo` or `pgGetFontInfo`. This is a *significant* difference.
+**NOTE:** If you pass `FALSE` for `set_any_mask`, HERMES Paige sets the `info_fields`; if you pass `TRUE` for `set_any_mask`, you set the `info_fields` before calling `pgGetStyleInfo`, `pgGetParInfo` or `pgGetFontInfo`. This is a *significant* difference.
 
 For example, suppose you want to find out if **bold** exists anywhere in the selected text. To do so, you would set `info.styles[bold_var]` to a non–zero value, then call `pgGetStyleInfo()` passing `TRUE` for `set_any_mask`. Upon return, if `mask.styles[bold_var]` is `TRUE` (non–zero), that means **bold** exists *somewhere* in the selected text. On the other hand, had the function returned and `mask.styles[bold_var]` was `FALSE`, that would have meant that **bold** exists *nowhere* in the text.
 
@@ -10923,7 +13382,7 @@ Usually, the reason you would want to pass `TRUE` for `set_any_mask` is to make 
 
 **FUNCTION RESULT:** Each function returns the text offset (which is a byte offset) of the first text that is examined. For example, if the current selection range in `pg` was offsets 100–500, `pgGetStyleInfo` would return 100; for the same selection range `pgGetParInfo` would return the text offset of the beginning of the first paragraph (which would often be less than 100).
 
-**NOTE:** If you want to get information about tabs, it is more efficient (and less code) to use the functions in the section below, See also, "Tab Support"<!-- on page 9-1-->.
+**NOTE:** If you want to get information about tabs, it is more efficient (and less code) to use the functions in the section below. *Vide* chapter 9, [Tab Support](#9-tab-support).
 
 ## 30.9 Getting Info Recs
 
@@ -10946,7 +13405,7 @@ Styles and fonts have the same functions that will fill in the appropriate recor
 
 These functions take the `style_item` value from a `style_run` record and return a `par_info` or `style_info` record.
 
-NOTE: This is a low-level function that you will rarely need but has been provided for documentation purposes. See `style_run` information at "More About Style Runs"<!-- on page 30-632-->.
+**NOTE:** While this is a low-level function that you will rarely need, it has been documented here for completeness. For more information about `style_run`s, *vide* section 30.2 [More About Style Runs](#30.2-more-about-style-runs).
 
 ### Obtaining a font record
 
@@ -11012,7 +13471,7 @@ When this function returns, if is non-null it gets set to the range of text for 
 
 FUNCTION RESULT: This function returns the memory allocation in $p g$ that contains all the fonts used for the text. The memory_ref will contain an array or one or more font_info records.
 
-NOTE: The actual memory_ref that OpenPaige used for this `pg_ref` is returned, not a copy. Therefore do not dispose this allocation and do not delete any records it contains.
+NOTE: The actual memory_ref that HERMES Paige used for this `pg_ref` is returned, not a copy. Therefore do not dispose this allocation and do not delete any records it contains.
 
 To learn how to access a memory_ref, see "The Allocation Mgr" on page 25-1.
 
@@ -11068,11 +13527,11 @@ style_info, PG_FAR *style_info_ptr;
 
 * `font_index` — The record number of the font that goes along with this style. (To obtain the actual font, see "Getting Info Recs"<!-- on page 30-647--> for information about `pgGetFontInfoRec`).
 
-  **NOTE:** Do not change the `font_index` using `pgSetStyleInfo`. Instead, use `pgSetFontInfo` and the font_index values will be handled by OpenPaige appropriately.
+  **NOTE:** Do not change the `font_index` using `pgSetStyleInfo`. Instead, use `pgSetFontInfo` and the font_index values will be handled by HERMES Paige appropriately.
 
 * `styles` — An array of `short`s that correspond to 32 possible "standard" styles. Each element of `styles`, if non–zero, implies that style be applied to the text. An overall style of "plain" generally means all style elements are zero.
 
-  The standard styles supported by OpenPaige are defined by the following enumerates (each corresponding to one of the array elements):
+  The standard styles supported by HERMES Paige are defined by the following enumerates (each corresponding to one of the array elements):
 
   ```
   enum
@@ -11124,7 +13583,7 @@ style_info, PG_FAR *style_info_ptr;
 
   **NOTE:** `style_info -> styles[super_impose_var]` can only be zero or a positive number representing a stylesheet ID that actually exists in the `pg_ref`.
 
-  See "Style Sheets"<!-- on page 31-1--> for more information.
+  For more information, *vide* chapter 31, [Style Sheets](#31-style-sheets).
 
 * `char_bytes` — Defines the number of bytes per character minus 1. For "normal" text, this field will be zero.
 
@@ -11136,7 +13595,7 @@ style_info, PG_FAR *style_info_ptr;
 
   **NOTES:** 
 
-  1. You do not need to set these fields for "normal" (non-custom) styles because the machine-specific portion of OpenPaige will initialise these fields according to the composite style and font. 
+  1. You do not need to set these fields for "normal" (non-custom) styles because the machine-specific portion of HERMES Paige will initialise these fields according to the composite style and font. 
   2. If you need to implement a "set extra leading" feature, use `top_extra` and `bot_extra` *infra*.
 
 * `shift_verb` — This value is used only if `styles[sub_script_var]` or `styles[subscript_var]` are non–zero. The `shift_verb` can be one of two values:
@@ -11151,7 +13610,7 @@ style_info, PG_FAR *style_info_ptr;
 
   For `baseline_relative`, values in `styles[sub_script_var]` or `styles[subscript_var]` are considered to be point (pixel) values; for `percent_of_style`, the super/subscript point values are computed as a percent (value of `styles[sub_script_var]` or `styles[subscript_var]`) of the `style`'s total height (ascent + descent + leading). Example: If `style`'s total height is 32 and `styles[subscript_var]` contained 50, the point value to shift the text will be `32 * 0.50`, or 16.
 
-* `class_bits` — Contains a set of bits defining specific attributes and behaviors for this style. The current attributes supported by OpenPaige are as follows:
+* `class_bits` — Contains a set of bits defining specific attributes and behaviors for this style. The current attributes supported by HERMES Paige are as follows:
 
   ```
   #define CANNOT_HILITE_BIT		0x00000000	// Can not highlight text of this style
@@ -11183,14 +13642,14 @@ style_info, PG_FAR *style_info_ptr;
 
   * `CANNOT_HILITE_BIT` causes highlighting *not* to show for the characters; even if the user does a "Select All", text with this style attribute will not highlight.
   * `CANNOT_BREAK` is essentially a "non-breaking" style; characters with this attribute will not break in the middle (unless the line is too large).
-  * `STYLE_IS_CONTROL` causes the track-control low-level function to be called when a "mouse" click is received (see "Customizing OpenPaige" <!-- on page 27-1-->).
+  * `STYLE_IS_CONTROL` causes the track-control low-level function to be called when a "mouse" click is received (*vide* chapter 27, [Customising HERMES Paige](#27-Customising-HERMES-Paige)).
   * `GROUP_CHARS_BIT` causes all text in this style to be highlighted as one, i.e. a single click selects the whole group.
-  * `STYLE_MERGE_BIT` gets set by OpenPaige in "mail merge mode"; *do not* set this bit yourself.
+  * `STYLE_MERGE_BIT` gets set by HERMES Paige in "mail merge mode"; *do not* set this bit yourself.
   * `STYLE_IS_CUSTOM` causes the text to be invisible *if* the standard display function is used. In other words, all text with this attribute will only display if you have provided your own display function.
   * `HILITE_RESTRICT_BIT` forces a click/drag on this style to stay inside the boundaries of the style.
   * `CANNOT_WRAP_BIT` causes text *not* to wrap regardless of width.
-  * `IS_NOT_TEXT_BIT` tells OpenPaige the character(s) aren't really text. If this is set, the standard text measuring and drawing functions do nothing (hence you would need to set your own hooks for both functions).
-  * `REQUIRES_COPY_BIT` causes the `copy_text_proc` (hook) to get called for these character(s); otherwise OpenPaige does not call this hook.
+  * `IS_NOT_TEXT_BIT` tells HERMES Paige the character(s) aren't really text. If this is set, the standard text measuring and drawing functions do nothing (hence you would need to set your own hooks for both functions).
+  * `REQUIRES_COPY_BIT` causes the `copy_text_proc` (hook) to get called for these character(s); otherwise HERMES Paige does not call this hook.
   * `NO_SMART_DRAW_BIT` disables the "second-guessing" for fast character display. If this bit is set, the whole text line is drawn (instead of a partial line).
   * `ACTIVATE_ENABLE_BIT` causes the `style_activate_proc` to get called, otherwise that hook is ignored.
   * `CANT_UNDERLINE_BIT` informs the text drawing function that the OS will not display an underline style (used for Kanji characters in Macintosh). **Obsolete!**
@@ -11198,9 +13657,9 @@ style_info, PG_FAR *style_info_ptr;
   * `RIGHTLEFT_BIT` indicates the writing direction for the text is right-to-left.
   * `NO_SAVEDOC_BIT` causes this `style_info` not to be included in `pgSaveDoc()`. One reason you might want to do this is for special applications that want to construct their own styles or stylesheets without saving `style_info` to each file.
 
-* `style_sheet_id` — Contains a unique ID used by style sheet support (see "Style Sheets"<!-- on page 31-1-->).
+* `style_sheet_id` — Contains a unique ID used by style sheet support (*vide* chapter 31, [Style Sheets](#31-style-sheets)).
 
-* `small_caps_index` — You should not alter this field; it is used by OpenPaige when `small_caps_var` style is set.
+* `small_caps_index` — *Do not* alter this field; it is used by HERMES Paige when `small_caps_var` style is set.
 
 * `fg_color`, `bk_color` — Define the foreground and background color of the text. Both fields are structured as follows:
 
@@ -11220,11 +13679,11 @@ style_info, PG_FAR *style_info_ptr;
 
 * `char_width` — On **Windows**, this becomes the `ffWidth` value when setting up a `LOGFONT` for font selection.
 
-* `point` — The point size for this style. This field is a `Fixed` type, i.e., the high-order word of the field is the integral part and the low-order word the fractional part of the value, if any. For more on setting point, see "Setting / Getting Point Size"<!-- on page 8-5--> and "Changing point size"<!-- on page 30-641-->.
+* `point` — The point size for this style. This field is a `Fixed` type, i.e., the high-order word of the field is the integral part and the low-order word the fractional part of the value, if any. For more on setting `point`, *vide* section 8.4, [Setting/Getting Point Size](#8.4-setting/getting-point-size), and "Changing point size"<!-- on page 30-641-->.
 
 * `left_overhang`, `right_overhang` — These are a form of indent for characters. These fields control how far a style overhangs to the left and/or right, the best example being italic that can overhang to the right.
 
-  **NOTE:** OpenPaige sets the default for these values when the style is initialised.
+  **NOTE:** HERMES Paige sets the default for these values when the style is initialised.
 
 * `top_extra`, `bot_extra` — Contains extra leading, in pixels, to add to the top or bottom of the style.
 
@@ -11232,20 +13691,20 @@ style_info, PG_FAR *style_info_ptr;
 
 * `space_extra` — The fractional amount to add to each space width. This value is a `Fixed` value (high order word is the integral part and low order word the fractional part).
 
-* `char_extra` — The fractional amount to add to each non-space character. This value is a "fixed" fraction (high order word is the whole part and low order word the fraction part) and can be used for kerning.
+* `char_extra` — The fractional amount to add to each non-space character. This value takes the form of a `Fixed` fraction, with the high-order word used as the integer part and the low-order word used as the fractional part, and can be used for kerning.
 
   **NOTE:** This field is only supported on **Macintosh** if **Color QuickDraw** exists.
 
 * `user_id`, `user_data`, `user_data2` — Use these fields for an arbitrary setting. These are of particular utility for customising styles.
 * `future` - an `array` of `long`s reserved for future enhancement. Do not use these fields.
-* `embed_entry`, `embed_style_refcon`, `embed_refcon`, `embed_id`, `embed_object` — Do not alter these values; they are used by the TEXT-embed extension. See chapter on "Embedding Non-Text Characters"<!-- on page 28-1-->.
+* `embed_entry`, `embed_style_refcon`, `embed_refcon`, `embed_id`, `embed_object` — Do not alter these values; they are used by the TEXT-embed extension. *Vide* chapter 28, [Embedding Non-Text Characters](#28-embedding-non-text-characters).
 * `user_var` — This can be used for anything. It is intended mainly, however, for source code users who want to append to the `style_info` record.
-* `procs` — This is a record of many function pointers that get called by OpenPaige for drawing, text measuring, etc. The array of functions literally define the way this style behaves (OpenPaige will always call one of these functions to obtain information and/or to display text in this style). These are the essence and key to implementing special styles and text types. See "Customizing OpenPaige"<!-- on page 27-1-->.
-* `maintenance`, `used_ctr` — Both of these are used only by OpenPaige for internal maintenance and must not be altered (actually, you cannot alter them anyway; when calling `pgSetStyleInfo`, bOpenPaige ignores anything you put into these two fields).
+* `procs` — This is a record of many function pointers that get called by HERMES Paige for drawing, text measuring, etc. The array of functions literally define the way this style behaves (HERMES Paige will always call one of these functions to obtain information and/or to display text in this style). These are the essence and key to implementing special styles and text types. *Vide* chapter 27, [Customising HERMES Paige](#27-customising-hermes-paige).
+* `maintenance`, `used_ctr` — Both of these are used only by HERMES Paige for internal maintenance and must not be altered (actually, you cannot alter them anyway; when calling `pgSetStyleInfo`, HERMES Paige ignores anything you put into these two fields).
 
 ### User-defined styles, setting "invisible markers"
 
-A `style_info` is said to be *user-defined* if one or more fields contain information understood only by the application. Usually, in all other respects the style looks and feels like any other OpenPaige style.
+A `style_info` is said to be *user-defined* if one or more fields contain information understood only by the application. Usually, in all other respects the style looks and feels like any other HERMES Paige style.
 
 For example, your application might want to "mark" various sections of text with some special attribute, but invisibly to the (human) user. You can set invisible "marks" for various sections of text by merely applying a `style_info` to the desired text with any of the user fields set to something your app will understand. The user fields are `user_id`, `user_data` and `user_data2`, each usable for any purpose whatsoever.
 
@@ -11271,19 +13730,19 @@ font_info, PG_FAR *font_info_ptr;
 
 The `font_info` record is somewhat machine-dependent and what should be placed in each field may depend on the platform you are running.
 
-When you set a `font_info` record, usually only the `name`, `alternate_name`, and `environs` fields need be changed; this is because OpenPaige will initialise all the other fields to their defaults when the font is applied to a `pg_ref`.
+When you set a `font_info` record, usually only the `name`, `alternate_name`, and `environs` fields need be changed; this is because HERMES Paige will initialise all the other fields to their defaults when the font is applied to a `pg_ref`.
 
 One exception to this is setting a Windows font and you require a special character set and/or special precision information (see "Additional Font Info for Windows" below).
 
-**NOTE:** On **Macintosh**, the `font_info.name` should be a pascal string terminated with the remaining bytes in `font_info.name` set to zero; the `font_info.environs` field should also be set to zero. For an example see "Responding to font menu (Macintosh)"<!-- on page 30-644-->.
+**NOTE:** On **Macintosh**, the `font_info.name` should be a `pascal` string terminated with the remaining bytes in `font_info.name` set to zero; the `font_info.environs` field should also be set to zero. For an example, *vide* "Responding to font menu (Macintosh)" under section 30.7, [Changing Fonts](#30.7-changing-fonts).
 
 **NOTE:** On **Windows**, the `font_info.name` can be initially set to either a `pascal` string or a `cstring`, with all remaining bytes in `font_info.name` set to zero. Usually, due to Windows programming conventions, you will set the name to a `cstring`. In this case, before passing the `font_info` record to `pgSetFontInfo`, you must set `font_info.environs` to `NAME_IS_CSTR`.
 
-**CAUTION:** On **Windows**, OpenPaige converts `font_info.name` to a `pascal` string and clears the `NAME_IS_CSTR` bit when the font is stored in the `pg_ref`. This is done purely for cross-platform portability. This is important to remember, because if you examine the font thereafter with `pgGetFontInfo`, the font name will now be a `pascal` string (the first byte indicating the string length), not a `cstring`.
+**CAUTION:** On **Windows**, HERMES Paige converts `font_info.name` to a `pascal` string and clears the `NAME_IS_CSTR` bit when the font is stored in the `pg_ref`. This is done purely for cross-platform portability. This is important to remember, because if you examine the font thereafter with `pgGetFontInfo`, the font name will now be a `pascal` string (the first byte indicating the string length), not a `cstring`.
 
-* `name` - This should contain the name of the font. This can either be a `pascal` string (first byte is the length) or a `cstring` (terminated with zero). However, the assumption is made by OpenPaige that the string is a `pascal` string. Hence, you need to set the `environs` field accordingly if name is a `cstring` (see below).
+* `name` - This should contain the name of the font. This can either be a `pascal` string (first byte is the length) or a `cstring` (terminated with zero). However, the assumption is made by HERMES Paige that the string is a `pascal` string. Hence, you need to set the `environs` field accordingly if name is a `cstring` (see below).
 
-* `alternate_name` — This should contain a font name to use as a second choice if the font defined in `name` does not exist. If OpenPaige can't find the first font, it will try using `alternate_name`. If you do not have an alternative, set `alternate_name` to all zeros.
+* `alternate_name` — This should contain a font name to use as a second choice if the font defined in `name` does not exist. If HERMES Paige can't find the first font, it will try using `alternate_name`. If you do not have an alternative, set `alternate_name` to all zeros.
 
 * `environs` - Additional information about the font, which contains the following bit (or not):
 
@@ -11291,13 +13750,13 @@ One exception to this is setting a Windows font and you require a special charac
   #define NAME_IS_CSTR 1 // Font name is a cstring
   ```
 
-  All the other fields in `font_info` are initialised by OpenPaige when you set a font.
+  All the other fields in `font_info` are initialised by HERMES Paige when you set a font.
 
   **NOTE:** Fill the font name with all zeros before setting the string. This will allow applications more easily to shift between `pascal` strings and `cstring`s (because a `pascal` string will also be terminated with a zero).
 
   **NOTE:** For your reference, on **Macintosh**, the `family_id` will get initialised to the font ID and `char_type` will get set to the font script code (e.g., Roman, Kanji, etc.).
 
-* `language` — This will contain the language ID for the font. In Windows NT and 95, this contains the langID and code page.
+* `language` — This will contain the language ID for the font. In Windows NT and 95, this contains the `langID` and code page.
 
 The remaining fields are not supported for any particular purpose and might be used for future enhancements.
 
@@ -11390,15 +13849,15 @@ par_info, PG_FAR *par_info_ptr;
   #define NO_SAVEDOC_PAR			0x0200	// Don't save par_info in pgSaveDoc()
   ```
 
-* `num_tabs`, `tabs` — Define the tab stop(s). The tabs field contains an array of `tab_stop` records and `num_tabs` contains the number of valid elements. Tabs are described in "Tab Support"<!-- on page 9-1-->.
+* `num_tabs`, `tabs` — Define the tab stop(s). The tabs field contains an array of `tab_stop` records and `num_tabs` contains the number of valid elements. Tabs are described in chapter 9, [Tab Support](#9-tab-support).
 
-* `style_sheet_id` — Contains a unique ID for paragraph style sheets (see "Style Sheets"<!-- on page 31-1-->).
+* `style_sheet_id` — Contains a unique ID for paragraph style sheets (*vide* chapter 31, [Style Sheets](#31-style-sheets).
 
 * `def_tab_space` — Defines the default tab spacing (when no preset tab stops exist). You can set this to anything.
 
-  **NOTE:** The initial (default) setting is taken from `pg_globals` (see "Changing Globals" <!-- on page 3-21-->for more information about `pg_globals`).
+  **NOTE:** The initial (default) setting is taken from `pg_globals`. For more information about `pg_globals`, *vide* section 3.8, [Changing Globals](#3.8-changing-globals).
 
-* `indents` — These are the paragraph indentations; for information about indents see "Set Indents"<!-- on page 9-11--> and “Get Indents”<!-- on page 9-12-->.
+* `indents` — These are the paragraph indentations; for information about indents see "Setting Indents" and "Getting Indents" under section 9.4, [Indentation Support](#9.4-indentation-support).
 
 * `spacing` — Defines the line spacing for the paragraph. This value is a mixed-number `Fixed` type in which the integral part is in the high-order word and the fractional part in the low-order word. This value is multiplied times the current line height (ascent + descent) and the result becomes the new height.
 
@@ -11416,23 +13875,23 @@ par_info, PG_FAR *par_info_ptr;
 
 * `partial_just`, `future` — These are reserved for future enhancement. Do not alter these fields. <!-- TO DO: flesh this out -->
 
-* `procs` - This is a record of many function pointers that get called by OpenPaige for paragraph formatting. The array of functions literally define the way this format behaves. See "Customizing OpenPaige"<!-- on page 27-1-->.
+* `procs` - This is a record of many function pointers that get called by HERMES Paige for paragraph formatting. The array of functions literally define the way this format behaves. *Vide* chapter 27, [Customising HERMES Paige](27-customising-hermes-paige).
 * `user_var` — This can be used for anything. It is intended mainly, however, for source code users who want to append to the `par_info` record.
-* `maintenance`, `used_ctr` — Both of these are used only by OpenPaige for internal maintenance and must not be altered (actually, you can't alter them anyway with pgSetParInfo - OpenPaige simply ignores anything you put into these two fields)
+* `maintenance`, `used_ctr` — Both of these are used only by HERMES Paige for internal maintenance and must not be altered (actually, you can't alter them anyway with `pgSetParInfo` - HERMES Paige simply ignores anything you put into these two fields)
 
-## 30.12 Creating a simple custom style
+## 30.12 Creating a Simple Custom Style
 
-One of the most important features of OpenPaige is the ability to create custom styles. There are several issues to be understood when doing custom styles. They involve customising how OpenPaige draws and measures the text. This is accomplished by using hooks, described in "Customizing OpenPaige"<!-- on page 27-1-->.
+One of the most important features of HERMES Paige is the ability to create custom styles. There are several issues to be understood when doing custom styles. They involve customising how HERMES Paige draws and measures the text. This is accomplished by using hooks, described in chapter 27, [Customising HERMES Paige](#27-customising-hermes-paige).
 
 However, here simple custom styles can be created by changing just a few functions. The following example shows how to create a custom style that draws a box around some text. In this case, the only thing changing is how the text is drawn.
 
-First of all, I must set the text to my custom style and install the hooks I will need. Second, I show how to initialize my style and my drawing hook. I even get to use the default OpenPaige functions for simply drawing the characters.
+First of all, I must set the text to my custom style and install the hooks I will need. Second, I show how to initialize my style and my drawing hook. I even get to use the default HERMES Paige functions for simply drawing the characters.
 
 Other custom styles may have to use other custom hooks, including `measure_proc`, but nearly every custom style can be built changing only three:
 
-1. The `measure_proc`. The (replaced) function must not only measure the character widths correctly, it must also fill in the `types` pointer (see "measure_proc"<!-- on page 27-9-->).
-2. The `text_draw_proc`. The (replaced) function must be able to draw the text on demand (see "text_draw_proc"<!-- on page 27-17-->).
-3. The `style_init_proc`. The (replaced) function probably needs to determine the style's ascent, descent and leading if that functionality for the character set in question does not already exist inherently in the OS. (See "style_init_proc"<!-- on page 27-7-->).
+1. The `measure_proc`. The (replaced) function must not only measure the character widths correctly, it must also fill in the `types` pointer (*vide* "`measure_proc`" under section 27.6, [Function Definitions](#27.6-function-definitions)).
+2. The `text_draw_proc`. The (replaced) function must be able to draw the text on demand (*vide* "`text_draw_proc`" under section 27.6, [Function Definitions](#27.6-function-definitions)).
+3. The `style_init_proc`. The (replaced) function probably needs to determine the style's ascent, descent and leading if that functionality for the character set in question does not already exist inherently in the OS. (See "`style_init_proc`" under section 27.6, [Function Definitions](#27.6-function-definitions)).
 
 **NOTE:** Many improvements could be made to this code, such as drawing a single box around the text when boxes are adjacent, setting the box so the offset on the left and right of the style is not right next to the first and last character, using the `styles[var]` amount for various offsets or widths of the line or both, and implement scaling.
 
@@ -11472,7 +13931,7 @@ Point start_pt;
 Point end_pt;
 
 pgDrawProc(pg, walker, data, offset, length, draw_position, extra, draw_mode); 
-/* OpenPaige's standard draw */
+/* HERMES Paige's standard draw */
 start_pt.h = pgLongToShort(draw_position -> from.h);
 start_pt.v = pgLongToShort(draw_position -> from.v);
 end_pt.h = pgLongToShort(draw_position -> to.h);
@@ -11508,9 +13967,9 @@ static PG_PASCAL (void) box_init_proc (paige_rec_ptr pg, style_info_ptr style, f
 
 A style sheet in HERMES Paige is a text and/or paragraph format that is "shared" by various characters in a document. Although a style sheet contains the same info as regular formats, affected text essentially "points" to these styles. A change to a single style sheet will change every place in the text that uses that style.
 
-**NOTE:** The `style_info` record structure is described in "`style_info`"<!-- on page 30-21-->.
+**NOTE:** The `style_info` record structure is described in "`style_info`" under section 30.11, [Record Structures](#30.11-record-structures).
 
-## 31.1 New sheets
+## 31.1 New Sheets
 
 	(short) pgNewStyle (pg_ref pg, style_info_ptr new_style, font_info_ptr style_font);
 
@@ -11520,7 +13979,7 @@ Establishes a new style sheet and returns a unique ID code for that style.
 
 `new_style` can contain anything that a regular text style contains.
 
-## 31.2 Remove style
+## 31.2 Remove Style
 
 	(void) pgRemoveStyle (pg_ref pg, short style_id);
 
@@ -12853,7 +15312,7 @@ If you examined any array of `point_start` records, a `point_start`'s `flags` fi
 #define LINE_BREAK_BIT			0x8000 // Line ends here
 #define TERMINATOR_BITS			0xFFFF // Flagged only as terminator record
 
-#defube HARD_BREAK_BITS (PAR_BREAK_BIT | SOFT_PAR_BIT | BREAK_CONTAINER_BIT | BREAK_PAGE_BIT)
+#define HARD_BREAK_BITS (PAR_BREAK_BIT | SOFT_PAR_BIT | BREAK_CONTAINER_BIT | BREAK_PAGE_BIT)
 ```
 
 As mentioned, every `array` of `point_start` records has at least one dummy "record" as a terminator. This record will always have the value `TERMINATOR_BITS` in the `flags` field.

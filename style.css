@@ -1,4 +1,6 @@
-
+/* ------------------------------------------------------------
+   FONT FACES
+------------------------------------------------------------ */
 
 @font-face {
     font-family: "Monaspace Argon Var";
@@ -8,21 +10,41 @@
     font-family: "Monaspace Krypton Var";
     src: url(./FONTS/KRYPTON.TTF);
 }
-
 @font-face {
     font-family: "Monaspace Neon Var";
     src: url(./FONTS/NEON.TTF);
 }
-
 @font-face {
     font-family: "Monaspace Radon Var";
     src: url(./FONTS/RADON.TTF);
 }
-
 @font-face {
     font-family: "Monaspace Xenon Var";
     src: url(./FONTS/XENON.TTF);
 }
+
+/* ------------------------------------------------------------
+   COLOURS
+------------------------------------------------------------ */
+
+:root {
+    --base3:   #fdf6e3;
+    --base2:   #eee8d5;
+    --base1:   #93a1a1;
+    --base00:  #657b83;
+    --yellow:  #b58900;
+    --orange:  #cb4b16;
+    --red:     #dc322f;
+    --magenta: #d33682;
+    --blue:    #268bd2;
+    --cyan:    #2aa198;
+    --green:   #859900;
+}
+
+/* ------------------------------------------------------------
+   BASIC RESET / HTML5
+------------------------------------------------------------ */
+
 article,
 aside,
 details,
@@ -34,323 +56,844 @@ hgroup,
 nav,
 section,
 summary {
-  display: block;
+    display: block;
 }
+
 audio,
 canvas,
 video {
-  display: inline-block;
+    display: inline-block;
 }
+
 audio:not([controls]) {
-  display: none;
-  height: 0;
+    display: none;
+    height: 0;
 }
+
 [hidden] {
-  display: none;
+    display: none;
 }
-html {
-  font-family: "Monaspace Xenon Var";
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-}
+
 body {
-  margin: 0;
+    margin: 0;
 }
+
 a:focus {
-  outline: thin dotted;
+    outline: thin dotted;
 }
+
 a:active,
 a:hover {
-  outline: 0;
+    outline: 0;
 }
-h1 {
-  font-size: 2em;
-}
+
 abbr[title] {
-  border-bottom: 1px dotted;
+    border-bottom: 1px dotted;
 }
+
 dfn {
-  font-style: italic;
+    font-style: italic;
 }
+
 mark {
-  background: #ff0;
-  color: #000;
+    background: #ff0;
+    color: #000;
 }
-code,
-kbd,
-pre,
-samp {
-  font-family: 'Monaspace Krypton Var';
-  font-size: 1em;
-  tab-size: 4;
-}
-pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
+
 q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+    quotes: "\201C" "\201D" "\2018" "\2019";
 }
+
 small {
-  font-size: 80%;
+    font-size: 80%;
 }
+
 sub,
 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
 }
+
 sup {
-  top: -0.5em;
+    top: -0.5em;
 }
+
 sub {
-  bottom: -0.25em;
+    bottom: -0.25em;
 }
+
 img {
-  border: 0;
+    border: 0;
+    max-width: 100%;
+    height: auto;
 }
+
 svg:not(:root) {
-  overflow: hidden;
+    overflow: hidden;
 }
+
 figure {
-  margin: 0;
+    margin: 0;
 }
+
 fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
 }
+
 legend {
-  border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
 }
+
 button,
 input,
 select,
 textarea {
-  font-family: inherit;
-  font-size: 100%;
-  margin: 0;
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
 }
+
 button,
 input {
-  line-height: normal;
+    line-height: normal;
 }
+
 button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
+    -webkit-appearance: button;
+    cursor: pointer;
 }
+
 button[disabled],
 input[disabled] {
-  cursor: default;
+    cursor: default;
 }
+
 input[type="checkbox"],
 input[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
+    box-sizing: border-box;
+    padding: 0;
 }
+
 input[type="search"] {
-  -webkit-appearance: textfield;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
+    -webkit-appearance: textfield;
+    box-sizing: content-box;
 }
+
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
+    border: 0;
+    padding: 0;
 }
-textarea {
-  overflow: auto;
-  vertical-align: top;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-html {
-  font-family: 'Monaspace Xenon Var', sans-serif;
-  font-weight: 200;
-  font-feature-settings: 'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga' on;
-}
-pre,
-code {
-  font-family: 'Monaspace Krypton Var', sans-serif;
-  font-weight: 200;
-  font-size: 16px;
-  line-height: 19.2px;
-  font-feature-settings: 'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga' on;
 
+textarea {
+    overflow: auto;
+    vertical-align: top;
 }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* ------------------------------------------------------------
+   PAGE BREAKS
+------------------------------------------------------------ */
+
+@media print, (overflow-block: paged) or (overflow-block: optional-paged) {
+    h1 {
+        page-break-before: right;
+        break-before: recto;
+    }
+
+    h1:first-of-type,
+    section > h1:first-child {
+        page-break-before: avoid;
+        break-before: avoid;
+    }
+
+    h2 {
+        break-before: column;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+
+    h1 + h2,
+    h2 + h3,
+    h3 + h4,
+    h4 + h5,
+    h5 + h6 {
+        page-break-before: avoid;
+    }
+}
+
+/* ------------------------------------------------------------
+   GLOBAL
+------------------------------------------------------------ */
+
+html {
+    font-size: 100%;
+    font-family: "Monaspace Xenon Var", sans-serif;
+    font-weight: 300;
+    font-feature-settings:
+        "calt" 1,
+        "ss01" 1,
+        "ss02" 1,
+        "ss03" 1,
+        "ss04" 1,
+        "ss05" 1,
+        "ss06" 1,
+        "ss07" 1,
+        "ss08" 1,
+        "ss09" 1,
+        "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    background-color: var(--base2);
+    color: var(--base00);
+    margin: 1em;
+}
+
+@media print {
+    html {
+        font-size: 12pt;
+        margin: 0;
+        background: #fff;
+    }
+}
+
+html,
+body {
+    color: var(--base00);
+}
+
+body {
+    background-color: var(--base3);
+    margin: 0 auto;
+    max-width: 23cm;
+    border: 1pt solid var(--base1);
+    padding: 1em;
+    line-height: 1.5;
+    text-align: justify;
+    font-family: "Monaspace Xenon Var", sans-serif;
+    font-weight: 300;
+}
+
+@media print {
+    body {
+        max-width: none;
+        border: 0;
+        padding: 0;
+        background: #fff;
+    }
+}
+
+/* Page container */
+#write {
+    max-width: 60rem;
+    margin: 0 auto 2em;
+    padding-top: 2.5rem;
+    line-height: 1.53;
+}
+
+@media only screen and (min-width: 1400px) {
+    #write {
+        max-width: 68.75rem;
+    }
+}
+
+@media print {
+    #write {
+        max-width: none;
+        margin: 0;
+        padding-top: 0;
+    }
+}
+
+/* ------------------------------------------------------------
+   HEADINGS
+------------------------------------------------------------ */
+
 h1,
-h2,
-h3 {
-  font-family: 'Monaspace Radon Var', sans-serif;
-  font-weight: 500;
+h4 {
+    font-family: "Monaspace Radon Var", sans-serif;
+    font-weight: 500;
+    text-align: center;
 }
-h4,
-h5,
+
+h2,
+h5 {
+    font-family: "Monaspace Argon Var", sans-serif;
+    font-weight: 500;
+    text-align: center;
+}
+
+h3,
 h6 {
-    font-family: 'Monaspace Argon Var', sans-serif;
+    font-family: "Monaspace Krypton Var", sans-serif;
+    font-weight: 500;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 1.6em;
+    font-size: 3em;
+    color: var(--magenta);
     font-weight: 500;
 }
-b, strong {
-    font-family: 'Monaspace Argon Var', sans-serif;
-    font-weight: 350;
+
+h2 {
+    margin-top: 2em;
+    font-size: 1.5em;
+    color: var(--green);
+    font-weight: 500;
 }
-i, em {
-    font-family: 'Monaspace Radon Var';
-    font-weight: 200;
+
+h2:after {
+    border-bottom: 1px solid var(--base1);
+    content: "";
+    width: 6.25rem;
+    display: block;
+    margin: 0.4em auto 0;
+    height: 1px;
+}
+
+h3 {
+    margin-top: 3em;
+    font-size: 1.2em;
+    color: var(--green);
+    font-weight: 500;
+}
+
+h4 {
+    margin-top: 2em;
+    font-size: 1.2em;
+    color: var(--green);
+    font-weight: 500;
+}
+
+h5 {
+    margin-top: 1.6em;
+    font-size: 1em;
+    color: var(--green);
+    font-weight: 500;
+}
+
+h6 {
+    margin-top: 1.4em;
+    font-size: 1em;
+    color: var(--green);
+    font-weight: 500;
+}
+
+/* ------------------------------------------------------------
+   TEXT & INLINE
+------------------------------------------------------------ */
+
+p,
+.mathjax-block {
+    margin-top: 0;
+    margin-bottom: 1em;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+b,
+strong {
+    font-family: "Monaspace Xenon Var", sans-serif;
+    font-weight: 300;
+    font-style: oblique -11deg;
+}
+
+i,
+em {
+    font-family: "Monaspace Radon Var", sans-serif;
+    font-weight: 300;
     font-style: normal;
 }
-html {
-  background-color: #eee8d5;
-  color: #657b83;
-  margin: 1em;
+
+strong em,
+em strong,
+strong i,
+i strong,
+em b,
+b em,
+b i,
+i b {
+    font-family: "Monaspace Krypton Var", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
-body {
-  background-color: #fdf6e3;
-  margin: 0 auto;
-  max-width: 23cm;
-  border: 1pt solid #93a1a1;
-  padding: 1em;
+
+/* ------------------------------------------------------------
+   LISTS
+------------------------------------------------------------ */
+
+ul {
+    list-style: square;
+    padding-left: 1.2em;
 }
+
+ol {
+    padding-left: 1.2em;
+}
+
+li > p {
+    margin-bottom: 0.5em;
+}
+
+@media print {
+    ol {
+        padding-left: 2.5rem;
+    }
+}
+
+/* ------------------------------------------------------------
+   BLOCKQUOTE
+------------------------------------------------------------ */
+
+blockquote {
+    margin-left: 1em;
+    padding-left: 1em;
+    border-left: 1px solid var(--base1);
+    color: var(--base00);
+}
+
+/* ------------------------------------------------------------
+   CODE
+------------------------------------------------------------ */
+
+code,
+pre,
+kbd,
+samp {
+    font-family: "Monaspace Krypton Var", monospace;
+    font-weight: 300;
+    font-size: 0.9em;
+    line-height: 1.3;
+    background: var(--base3);
+    tab-size: 4;
+    font-feature-settings:
+        "calt" 1,
+        "ss01" 1,
+        "ss02" 1,
+        "ss03" 1,
+        "ss04" 1,
+        "ss05" 1,
+        "ss06" 1,
+        "ss07" 1,
+        "ss08" 1,
+        "ss09" 1,
+        "liga" 1;
+}
+
 code {
-  background-color: #eee8d5;
-  padding: 2px;
+    background-color: var(--base2);
+    padding: 2px;
 }
-a {
-    font-family: 'Monaspace Radon Var', sans-serif;
-    font-weight: 300;
-    color: #b58900;
-}
-a:visited {
-    font-family: 'Monaspace Radon Var', sans-serif;
-    font-weight: 300;
-  color: #cb4b16;
-}
-a:hover {
-    font-family: 'Monaspace Radon Var', sans-serif;
-    font-weight: 300;
-  color: #cb4b16;
-}
-h1 {
-  color: #d33682;
-  page-break-before: always;
-}
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #859900;
-}
+
 pre {
-  background-color: #fdf6e3;
-  color: #657b83;
-  border: 1pt solid #93a1a1;
-  padding: 1em;
+    margin-left: 1em;
+    padding: 1em;
+    border: 1px solid var(--base1);
+    margin-bottom: 1.5em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: var(--base3);
+    color: var(--base00);
 }
+
 pre code {
-  background-color: #fdf6e3;
+    background: none;
+    padding: 0;
 }
-h1 {
-    align: center;
-  font-size: 1.5em;
+
+/* meta blocks */
+#write pre.md-meta-block {
+    min-height: 2.1875rem;
+    padding: 0.5em 1em;
+    white-space: pre;
+    background: var(--base2);
+    border: 0;
+    color: var(--base1);
+    width: 100vw;
+    max-width: calc(100% + 3.75rem);
+    margin-left: -1.875rem;
+    border-left: 1.875rem var(--base2) solid;
+    border-right: 1.875rem var(--base2) solid;
+    margin-bottom: 2em;
+    margin-top: -1.333333rem;
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+    line-height: 1.8em;
+    font-size: 0.76em;
+    padding-left: 0;
 }
-h2 {
-    align: center;
-  font-size: 1.5em;
+
+/* ------------------------------------------------------------
+   LINKS
+------------------------------------------------------------ */
+
+a {
+    font-family: "Monaspace Xenon Var", sans-serif;
+    font-weight: 300;
+    font-style: oblique -11deg;
+    color: var(--yellow);
+    text-decoration: none;
 }
-h3 {
-    align: center;
-  font-size: 1.2em;
+
+a:visited {
+    color: var(--orange);
 }
-h4 {
-    align: center;
-  font-size: 1.2em;
+
+a:hover {
+    color: var(--orange);
+    text-decoration: underline;
 }
-h5 {
-    align:center;
-  font-size: 1em;
+
+h1 a,
+h1 a:hover {
+    color: inherit;
+    text-decoration: none;
 }
-h6 {
-    align:center;
-  font-size: 1em;
+
+/* ------------------------------------------------------------
+   FOOTNOTES / ENDNOTES / REFERENCES
+------------------------------------------------------------ */
+
+/* In-text footnote reference marks */
+sup.md-footnote,
+a.md-footnote,
+sup.md-footnote a,
+#write sup.md-footnote,
+#write a.md-footnote {
+    font-family: "Monaspace Krypton Var", monospace;
+    font-size: 0.75em;
+    line-height: 0;
+    color: var(--base00);
+    text-decoration: none;
+    vertical-align: super;
+    position: static;
 }
+
+sup.md-footnote:hover,
+a.md-footnote:hover,
+sup.md-footnote a:hover,
+#write sup.md-footnote:hover,
+#write a.md-footnote:hover {
+    color: var(--green);
+    text-decoration: none;
+}
+
+/* Footnote block */
+.footnotes,
+#write .footnotes,
+.md-def-footnote {
+    font-family: "Monaspace Krypton Var", monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--base00);
+}
+
+/* Kill automatic separator rules */
+.footnotes hr,
+#write .footnotes hr,
+.footnotes-sep {
+    display: none;
+    border: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Footnote list layout */
+.footnotes {
+    margin-top: 2em;
+    padding-top: 0;
+}
+
+.footnotes ol {
+    margin: 0.5em 0 0;
+    padding-left: 1.4em;
+}
+
+.footnotes li {
+    margin: 0.35em 0;
+}
+
+/* Typora footnote definition rows */
+.md-def-footnote {
+    margin-top: 0.4em;
+}
+
+.md-def-footnote p {
+    margin: 0.25em 0;
+}
+
+/* Footnote definition labels / numbers */
+.md-def-footnote .md-def-name,
+.md-def-name {
+    font-family: "Monaspace Krypton Var", monospace;
+    font-size: 1em;
+    line-height: 1;
+    color: var(--green);
+    vertical-align: baseline;
+    position: static;
+}
+
+/* Backrefs / links inside notes */
+.footnotes a,
+.md-def-footnote a {
+    color: var(--yellow);
+    font-style: normal;
+    text-decoration: none;
+    font-family: "Monaspace Krypton Var", monospace;
+    font-weight: 300;
+}
+
+.footnotes a:visited,
+.md-def-footnote a:visited {
+    color: var(--orange);
+}
+
+.footnotes a:hover,
+.md-def-footnote a:hover {
+    color: var(--orange);
+    text-decoration: underline;
+}
+
+@media print {
+    .footnotes,
+    #write .footnotes,
+    .md-def-footnote {
+        font-size: 10pt;
+        line-height: 1.45;
+        color: #555;
+    }
+
+    sup.md-footnote,
+    a.md-footnote,
+    sup.md-footnote a,
+    #write sup.md-footnote,
+    #write a.md-footnote {
+        font-size: 0.75em;
+        line-height: 0;
+        vertical-align: super;
+        position: static;
+        color: #555;
+    }
+}
+
+/* ------------------------------------------------------------
+   HORIZONTAL RULE
+------------------------------------------------------------ */
+
+hr {
+    color: var(--base1);
+    height: 1px;
+    margin: 2em 0;
+    border-top: solid 1px var(--base1);
+    border-bottom: none;
+    border-left: 0;
+    border-right: 0;
+}
+
+/* ------------------------------------------------------------
+   TABLES
+------------------------------------------------------------ */
+
+table {
+    margin-bottom: 1.333333rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table th,
+table td {
+    padding: 0.5rem;
+    line-height: 1.333333rem;
+    vertical-align: top;
+    border-top: 1px solid var(--base1);
+}
+
+table th {
+    font-weight: bold;
+}
+
+table thead th {
+    vertical-align: bottom;
+}
+
+table tbody + tbody {
+    border-top: 2px solid var(--base1);
+}
+
+.ty-table-edit {
+    background: var(--base2);
+    padding-top: 0.25rem;
+}
+
+/* ------------------------------------------------------------
+   TASK LISTS / TAGS
+------------------------------------------------------------ */
+
+.task-list {
+    padding: 0;
+}
+
+.md-task-list-item {
+    padding-left: 1.6rem;
+}
+
+.md-task-list-item > input:before {
+    content: "\221A";
+    display: inline-block;
+    width: 1.3333rem;
+    height: 1.6rem;
+    vertical-align: middle;
+    text-align: center;
+    color: var(--base1);
+    background-color: var(--base3);
+}
+
+.md-task-list-item > input:checked:before {
+    color: inherit;
+}
+
 .tag {
-  background-color: #eee8d5;
-  color: #d33682;
-  padding: 0 0.2em;
+    background-color: var(--base2);
+    color: var(--magenta);
+    padding: 0 0.2em;
+    border-radius: 0.35em;
 }
+
 .todo,
 .next,
 .done {
-  color: #fdf6e3;
-  background-color: #dc322f;
-  padding: 0 0.2em;
+    color: var(--base3);
+    background-color: var(--red);
+    padding: 0 0.2em;
 }
-.tag {
-  -webkit-border-radius: 0.35em;
-  -moz-border-radius: 0.35em;
-  border-radius: 0.35em;
+
+.TODO,
+.NEXT,
+.ACTIVE,
+.DONE,
+.WAITING,
+.HOLD,
+.NOTE,
+.CANCELLED {
+    border-radius: 0.2em;
 }
+
 .TODO {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #2aa198;
+    background-color: var(--cyan);
 }
-.NEXT {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #268bd2;
-}
+.NEXT,
 .ACTIVE {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #268bd2;
+    background-color: var(--blue);
 }
-.DONE {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #859900;
+.DONE,
+.CANCELLED {
+    background-color: var(--green);
 }
 .WAITING {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #cb4b16;
+    background-color: var(--orange);
 }
-.HOLD {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #d33682;
-}
+.HOLD,
 .NOTE {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #d33682;
+    background-color: var(--magenta);
 }
-.CANCELLED {
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  background-color: #859900;
+
+/* ------------------------------------------------------------
+   TOC
+------------------------------------------------------------ */
+
+.md-toc {
+    margin-top: 2.5rem;
 }
+
+.md-toc-content {
+    padding-bottom: 1.25rem;
+}
+
+.outline-expander:before {
+    color: inherit;
+    font-size: 0.875rem;
+    content: "\f0da";
+    font-family: FontAwesome;
+}
+
+.outline-expander:hover:before,
+.outline-item-open > .outline-item > .outline-expander:before {
+    content: "\f0d7";
+}
+
+/* ------------------------------------------------------------
+   SOURCE MODE
+------------------------------------------------------------ */
+
+#typora-source {
+    font-family: "Monaspace Krypton Var", monospace;
+    font-weight: 300;
+    color: var(--base00);
+}
+
+/* ------------------------------------------------------------
+   MATHJAX
+------------------------------------------------------------ */
+
+.md-mathjax-midline {
+    background: var(--base2);
+}
+
+/* ------------------------------------------------------------
+   IMAGES
+------------------------------------------------------------ */
+
 img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1em auto;
+}
+
+/* Raster images: constrain, but do not forcibly upscale unless their own width allows it */
+img:not([src$=".svg"]):not([src$=".SVG"]) {
+    width: auto;
+}
+
+/* SVGs: fill the text frame, centred */
+img[src$=".svg"],
+img[src$=".SVG"] {
     width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 1em auto;
+    object-fit: contain;
+}
+
+/* Inline SVG elements */
+svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 1em auto;
 }
